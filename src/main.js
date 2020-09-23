@@ -1,5 +1,14 @@
-// Este es el punto de entrada de tu aplicacion
+//  Import firebase initialize
+import { firebaseInit } from './lib/firebase/firebase-init.js' 
+import { changeTemplate } from './lib/template-controller/router.js'
 
-import { myFunction } from './lib/index.js';
+// Webpage load and reload function 
 
-myFunction();
+const init = () => {
+  firebaseInit();
+  changeTemplate(window.location.hash);
+  window.addEventListener('hashchange', () => changeTemplate(window.location.hash));
+
+}
+
+window.addEventListener('load', init)

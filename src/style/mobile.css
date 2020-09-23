@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  margin-top: 5%;
+  text-align: center;
+  color: green;
+  font-size: 30px;
+}
+.user-image {
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}
+.poxi {
+  display: flex;
+  margin: auto;
+}
+h3{
+  text-align: center;
+  padding-top: 7%;
+}
+#alert-txt-email,
+#alert-txt-password {
+  color: red;
+  padding-top: 0%;
+}
+
+form {
+  margin: auto;
+  width: 70%;
+  max-width: 500px;
+  padding: 10px;
+}
+
+.input {
+  display: block;
+  padding: 10px;
+  width: 100%;
+  margin: 8px 0;
+  text-align: center;
+  border: 0;
+  border-radius: 50px;
+  background: #f3f3f3;
+  font-size: 16px;
+}
+
+.login-form {
+  display: block;
+}
+.ocultar {
+  display: none;
+}
+.btn-main {
+  color: black;
+  border: 0;
+  cursor: pointer;
+  opacity: 0.8;
+  display: block;
+  padding: 10px;
+  width: 100%;
+  margin: 12px 0;
+  text-align: center;
+  border: 0;
+  border-radius: 50px;
+  background: #71e171;
+}
+
+/*Register Template*/
+
+.input-register{
+    display: block;
+    padding: 10px;
+    width: 100%;
+    margin: 30px 0 40px 0;
+    text-align: center;
+    border: 0;
+    border-radius: 50px;
+    background: #f3f3f3;
+    font-size: 16px;
+}
+
+.btn-submit{
+    color: black;
+    cursor: pointer;
+    opacity: 0.8;
+    display: block;
+    padding: 10px 0;
+    width: 100%;
+    margin: 80px 0;
+    text-align: center;
+    border: 0;
+    border-radius: 50px;
+    background: #6FCF97;
+    font-size: 20px;
+
+}
+
+.centro{
+  display:block;
+  text-align: center;
+  margin: auto;
+}
+
+.btn-image{
+  border: transparent;
+
+}
+p{
+  text-align: center;
+  padding-top: 2%;
+  margin: revert;
+}
