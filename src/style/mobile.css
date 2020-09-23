@@ -71,9 +71,30 @@ form {
   background: #71e171;
 }
 
+.btn-google-facebook{
+  display:block;
+  text-align: center;
+  margin: auto;
+}
+
+.btn-image{
+  border: transparent;
+  background: none;
+
+}
+p{
+  text-align: center;
+  padding-top: 2%;
+  margin: revert;
+}
+
+.btn-register{
+  text-decoration: none;
+}
+
 /*Register Template*/
 
-.input-register{
+.signup-form{
     display: block;
     padding: 10px;
     width: 100%;
@@ -85,7 +106,7 @@ form {
     font-size: 16px;
 }
 
-.btn-submit{
+.submit-form{
     color: black;
     cursor: pointer;
     opacity: 0.8;
@@ -101,18 +122,3 @@ form {
 
 }
 
-.centro{
-  display:block;
-  text-align: center;
-  margin: auto;
-}
-
-.btn-image{
-  border: transparent;
-
-}
-p{
-  text-align: center;
-  padding-top: 2%;
-  margin: revert;
-}

@@ -16,11 +16,11 @@ export default () => {
         <button type="submit" class="btn-main" id="btn-enter" >Iniciar Sesión</button>
       </form>
       <p>O bien ingresa con..</p>
-    <section>
+    <section class="btn-google-facebook">
       <button id="btn-google" class="btn-image"><img src="./img/icon-google.png"></button>
       <button id ="btn-facebook"class="btn-image"><img src="./img/icon-facebook.png"></button>
     </section>
-    <p>¿No tienes una cuenta?<a href="#/signup" id = "btn-web" class="btn-web">Regístrate</a></p>
+    <p>¿No tienes una cuenta?<a href="#/signup" id = "btn-register" class="btn-register">Regístrate</a></p>
     </section>
     `;
     /*
