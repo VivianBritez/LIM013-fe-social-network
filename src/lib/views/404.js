@@ -1,4 +1,5 @@
-export const errorPage = () => {
+// export const errorPage = 
+export default () => {
   const viewPageNotFound = document.createElement('section');
   viewPageNotFound.setAttribute('id','message');
   viewPageNotFound.innerHTML = `

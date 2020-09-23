@@ -1,4 +1,6 @@
-export const signUpTemplate = () => {
+
+// export const signUpTemplate = 
+export default () => {
   const viewSignUp = document.createElement('section');
   viewSignUp.innerHTML = `
     <h1>Regístrate</h1>
@@ -12,16 +14,15 @@ export const signUpTemplate = () => {
       <button type="submit" id="signup-submit">Enviar</button>
     </form>
     `;
-
+    
+    /*
     // Start grabbing our DOM Element
     const signUpEmail = viewSignUp.getElemntById('signup-email');
     const signUpPassword = viewSignUp.getElemntById('signup-password');
     const signUpForm = viewSignUp.getElemntById('signup-form');
-
+    */
     // Start ...
-
-
-
 
     return viewSignUp;
 };
+

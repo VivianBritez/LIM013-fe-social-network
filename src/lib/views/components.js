@@ -1,15 +1,15 @@
-import { loginTemplate } from './login.js'
-import { signUpTemplate } from './signup'
-import { profileTemplate } from './home'
-import { errorPage } from './404.js'
+import LoginTemplate from './login.js';
+import SignUpTemplate from './signup.js'
+import ProfileTemplate from './home.js';
+import ErrorPage from './404.js';
 
 // Create object
 
 const components = {
-  loginTemplateProp: loginTemplate,
-  signUpTemplateProp: signUpTemplate,
-  profileTemplateProp: profileTemplate,
-  errorPageProp: errorPage
+  loginTemplateProp: LoginTemplate,
+  signUpTemplateProp: SignUpTemplate,
+  profileTemplateProp: ProfileTemplate,
+  errorPageProp: ErrorPage
 }
 
-export {components}
+export { components };

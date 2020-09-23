@@ -1,6 +1,7 @@
 // import { changeTemplate } from '../template-controller/router.js';
 
-export const loginTemplate = () => {
+// export const loginTemplate 
+export default () => {
   const viewLogin = document.createElement('main');
     viewLogin.innerHTML = `
     <img src="img/energy.png" class="poxi" alt="icono">
@@ -22,15 +23,14 @@ export const loginTemplate = () => {
     <p>¿No tienes una cuenta?<a href="#/signup" id = "btn-web" class="btn-web">Regístrate</a></p>
     </section>
     `;
-
+    /*
     // Start grabbing our DOM Element
     const txtEmail = viewLogin.querySelector('#txt-email');
     const txtpassword = viewLogin.querySelector('#txt-password');
     const loginForm = viewLogin.querySelector('#login-form');
-
+    */
     // Start ...
-
-
 
     return viewLogin;
 };
+

@@ -1,5 +1,15 @@
-import { logOut } from '../lib/firebase/data.js';
+// import { logOut } from '../lib/firebase/data.js';
+// export const profileTemplate = 
+export default () => {
+  const viewProfile = document.createElement('section')
+  viewProfile.innerHTML=`
+    Hola
+  `;
+  
+  return viewProfile;
+}
 
+/*
 export const profileTemplate = (user) => {
   // console.log('user', user);
   const viewProfile = document.createElement('section');
@@ -14,16 +24,15 @@ export const profileTemplate = (user) => {
       </section>
     </form>
   `;
-
-
   
   // Event 
-
+  
   document.getElementById('btn-logout').addEventListener('click', () => {
     logOut();
     //viewSignin();
     window.location.hash = '#/Signin';
   });
-
+  
   return viewProfile;
 };
+*/
