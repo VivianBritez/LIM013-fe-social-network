@@ -1,5 +1,8 @@
 // import { changeTemplate } from '../template-controller/router.js';
 
+import { changeTemplate } from '../view-controller/router.js';
+import { singInGoogle, singInFacebook } from '../firebase/data.js';
+
 // export const loginTemplate 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -30,6 +33,26 @@ export default () => {
     const loginForm = viewLogin.querySelector('#login-form');
   */
   // Start ...
+  // Sign in with google
+  viewLogin.querySelector('#btn-google').addEventListener('click', (event) => {
+    event.preventDefault();
+    console.log("hola entre aqui");
+    singInGoogle()
+      .then(() => {
+        changeTemplate('#/home');
+      })
+      .catch(error => console.log(error));
+  });
+  // Sign in with facebook
+  viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
+    event.preventDefault();
+    console.log("Hola ingresaste a Facebook");
+    singInFacebook()
+      .then(() => {
+        changeTemplate('#/home');
+      })
+      .catch(error => console.log(error));
+  });
   return viewLogin;
 };
 

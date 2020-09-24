@@ -1,16 +1,7 @@
-// import { logOut } from '../lib/firebase/data.js';
-// export const profileTemplate = 
-export default () => {
-  const viewProfile = document.createElement('section');
-  viewProfile.innerHTML = `
-    Hola
-  `;
-  
-  return viewProfile;
-};
+import { logOut } from '../lib/firebase/data.js';
+import { changeTemplate } from "../view-controller/router.js";
 
-/*
-export const profileTemplate = (user) => {
+export default (user) => {
   // console.log('user', user);
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
@@ -24,15 +15,15 @@ export const profileTemplate = (user) => {
       </section>
     </form>
   `;
-  
-  // Event 
-  
-  document.getElementById('btn-logout').addEventListener('click', () => {
-    logOut();
-    //viewSignin();
-    window.location.hash = '#/Signin';
+  // Log out  
+  viewProfile.querySelector('#btn-logout').addEventListener('click', () => {
+    logOut()
+    .then(() => {
+    changeTemplate ('#/home');
+    })
+    .catch((error) => {
+      if (error) throw error;
+    });
   });
-  
   return viewProfile;
 };
-*/
