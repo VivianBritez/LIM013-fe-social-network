@@ -1,35 +1,34 @@
 export const singInGoogle = () => {
-  console.log('entro google');
+  // console.log('entro google');
   const provider = new firebase.auth.GoogleAuthProvider();
-  console.log(provider);
+  // console.log(provider);
   return firebase.auth().signInWithPopup(provider);
 };
 
 export const userSesionActive = (callback) => {
   const userCurrent = firebase.auth().currentUser;
-  if (userCurrent) {
-    return callback(userCurrent)
-  } else {
-    const unsubscribe = firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        return callback(user)
-        // User is signed in.
-      } else {
-        // No user is signed in.
-        return callback(null);
-      }
-    });
-    unsubscribe()
-  }
-}
+  return callback(userCurrent);
+};
 
 export const singInFacebook = () => {
-  console.log('sign in facebook');
+  // console.log('sign in facebook');
   const provider = new firebase.auth.FacebookAuthProvider();
-  console.log(provider);
+  // console.log(provider);
   return firebase.auth().signInWithPopup(provider);
 };
 
 export const logOut = () => firebase.auth().signOut();
 
+export const getUser = () => firebase.auth().currentUser;
 
+// Authentication email and password with Firebase
+
+export const emailAndPasswordAuth = (email, password) => {
+  firebase.auth().createUserWithEmailAndPassword(email, password);
+};
+
+// Login with valid email and password
+
+export const loginEmailAndPassword = (email, password) => {
+  firebase.auth().signInWithEmailAndPassword(email, password);
+};

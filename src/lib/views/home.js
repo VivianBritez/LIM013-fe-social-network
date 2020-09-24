@@ -1,8 +1,8 @@
-import { logOut } from '../lib/firebase/data.js';
-import { changeTemplate } from "../view-controller/router.js";
+import { logOut, getUser } from '../firebase/data.js';
 
-export default (user) => {
+export const profileTemplate = () => {
   // console.log('user', user);
+  const user = getUser();
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <form action="">
@@ -15,15 +15,17 @@ export default (user) => {
       </section>
     </form>
   `;
-  // Log out  
+
+  // Log out
+
   viewProfile.querySelector('#btn-logout').addEventListener('click', () => {
     logOut()
-    .then(() => {
-    changeTemplate ('#/home');
-    })
-    .catch((error) => {
-      if (error) throw error;
-    });
+      .then(() => {
+        window.location.hash = '#/login';
+      })
+      .catch((error) => {
+        if (error) throw error;
+      });
   });
   return viewProfile;
 };

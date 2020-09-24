@@ -1,4 +1,5 @@
-// export const signUpTemplate = 
+import { emailAndPasswordAuth } from '../firebase/data.js';
+
 export default () => {
   const viewSignUp = document.createElement('section');
   viewSignUp.innerHTML = `
@@ -12,14 +13,27 @@ export default () => {
       <input type="password" id="signup-confirm-password" class="signup-form" placeholder="Confirmar contraseña">
       <button type="submit" id="signup-submit" class="submit-form">Enviar</button>
     </form>
-    `; 
-  /*
-    // Start grabbing our DOM Element
-    const signUpEmail = viewSignUp.getElemntById('signup-email');
-    const signUpPassword = viewSignUp.getElemntById('signup-password');
-    const signUpForm = viewSignUp.getElemntById('signup-form');
-  */
-  // Start ...
+    `;
+
+  // Start grabbing our DOM Element
+  const signUpEmail = viewSignUp.querySelector('#signup-email');
+  const signupConfirmPassword = viewSignUp.querySelector('#signup-confirm-password');
+  const signUpForm = viewSignUp.querySelector('#signup-form');
+
+  // Event submit to register email and password with Firebase
+  signUpForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const signUpEmailVal = signUpEmail.value;
+    const signupConfirmPasswordVal = signupConfirmPassword.value;
+
+    emailAndPasswordAuth(signUpEmailVal, signupConfirmPasswordVal);
+
+    // Clear the form
+    signUpForm.reset();
+
+    // Open view profile
+    window.location.hash = '#/home';
+  });
   return viewSignUp;
 };
-
