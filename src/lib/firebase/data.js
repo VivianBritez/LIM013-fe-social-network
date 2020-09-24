@@ -33,3 +33,4 @@ export const singInFacebook = () => {
 export const logOut = () => firebase.auth().signOut();
 
 
+export const getUser = () => firebase.auth().currentUser;

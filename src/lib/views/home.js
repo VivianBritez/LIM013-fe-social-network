@@ -1,8 +1,9 @@
-import { logOut } from '../lib/firebase/data.js';
+import { logOut ,getUser } from '../firebase/data.js';
 import { changeTemplate } from "../view-controller/router.js";
 
-export default (user) => {
+export default () => {
   // console.log('user', user);
+  const user = getUser();
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <form action="">
@@ -19,7 +20,7 @@ export default (user) => {
   viewProfile.querySelector('#btn-logout').addEventListener('click', () => {
     logOut()
     .then(() => {
-    changeTemplate ('#/home');
+    changeTemplate('#/login');
     })
     .catch((error) => {
       if (error) throw error;
