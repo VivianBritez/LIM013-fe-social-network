@@ -3,7 +3,7 @@
 // export const loginTemplate 
 export default () => {
   const viewLogin = document.createElement('main');
-    viewLogin.innerHTML = `
+  viewLogin.innerHTML = `
     <img src="img/energy.png" class="poxi" alt="icono">
     <section class="login-style">
       <h1>Energía Verde</h1>
@@ -11,7 +11,7 @@ export default () => {
       <form id="login-form" class="login-form">
         <input type="text" id="txt-email" class="input" placeholder="Nombre de usuario o Email">
         <p id="alert-txt-email"></p>
-        <input type="password" id="txt-password" class="input" placeholder="contraseña">
+        <input type="password" id="txt-password" class="input" placeholder="Contraseña">
         <p id="alert-txt-password"></p>
         <button type="submit" class="btn-main" id="btn-enter" >Iniciar Sesión</button>
       </form>
@@ -23,14 +23,13 @@ export default () => {
     <p>¿No tienes una cuenta?<a href="#/signup" id = "btn-register" class="btn-register">Regístrate</a></p>
     </section>
     `;
-    /*
+  /*
     // Start grabbing our DOM Element
     const txtEmail = viewLogin.querySelector('#txt-email');
     const txtpassword = viewLogin.querySelector('#txt-password');
     const loginForm = viewLogin.querySelector('#login-form');
-    */
-    // Start ...
-
-    return viewLogin;
+  */
+  // Start ...
+  return viewLogin;
 };
 

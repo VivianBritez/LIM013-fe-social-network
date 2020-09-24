@@ -1,5 +1,5 @@
 import LoginTemplate from './login.js';
-import SignUpTemplate from './signup.js'
+import SignUpTemplate from './signup.js';
 import ProfileTemplate from './home.js';
 import ErrorPage from './404.js';
 
@@ -9,7 +9,7 @@ const components = {
   loginTemplateProp: LoginTemplate,
   signUpTemplateProp: SignUpTemplate,
   profileTemplateProp: ProfileTemplate,
-  errorPageProp: ErrorPage
-}
+  errorPageProp: ErrorPage,
+};
 
 export { components };

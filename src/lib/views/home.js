@@ -1,13 +1,13 @@
 // import { logOut } from '../lib/firebase/data.js';
 // export const profileTemplate = 
 export default () => {
-  const viewProfile = document.createElement('section')
-  viewProfile.innerHTML=`
+  const viewProfile = document.createElement('section');
+  viewProfile.innerHTML = `
     Hola
   `;
   
   return viewProfile;
-}
+};
 
 /*
 export const profileTemplate = (user) => {

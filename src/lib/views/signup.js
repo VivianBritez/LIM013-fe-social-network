@@ -1,4 +1,3 @@
-
 // export const signUpTemplate = 
 export default () => {
   const viewSignUp = document.createElement('section');
@@ -13,16 +12,14 @@ export default () => {
       <input type="password" id="signup-confirm-password" class="signup-form" placeholder="Confirmar contraseña">
       <button type="submit" id="signup-submit" class="submit-form">Enviar</button>
     </form>
-    `;
-    
-    /*
+    `; 
+  /*
     // Start grabbing our DOM Element
     const signUpEmail = viewSignUp.getElemntById('signup-email');
     const signUpPassword = viewSignUp.getElemntById('signup-password');
     const signUpForm = viewSignUp.getElemntById('signup-form');
-    */
-    // Start ...
-
-    return viewSignUp;
+  */
+  // Start ...
+  return viewSignUp;
 };
 

@@ -1,7 +1,7 @@
 // export const errorPage = 
 export default () => {
   const viewPageNotFound = document.createElement('section');
-  viewPageNotFound.setAttribute('id','message');
+  viewPageNotFound.setAttribute('id', 'message');
   viewPageNotFound.innerHTML = `
     <h2>404</h2>
     <h1>Página no encontrada</h1>
@@ -9,4 +9,4 @@ export default () => {
     `;
 
   return viewPageNotFound;
-}
+};
