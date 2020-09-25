@@ -5,11 +5,6 @@ export const singInGoogle = () => {
   return firebase.auth().signInWithPopup(provider);
 };
 
-export const userSesionActive = (callback) => {
-  const userCurrent = firebase.auth().currentUser;
-  return callback(userCurrent);
-};
-
 export const singInFacebook = () => {
   // console.log('sign in facebook');
   const provider = new firebase.auth.FacebookAuthProvider();
@@ -23,9 +18,7 @@ export const getUser = () => firebase.auth().currentUser;
 
 // Authentication email and password with Firebase
 
-export const emailAndPasswordAuth = (email, password) => {
-  firebase.auth().createUserWithEmailAndPassword(email, password);
-};
+export const eP = (email, pass) => firebase.auth().createUserWithEmailAndPassword(email, pass);
 
 // Login with valid email and password
-export const lp = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password);
+export const lp = (email, pass) => firebase.auth().signInWithEmailAndPassword(email, pass);

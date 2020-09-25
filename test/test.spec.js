@@ -68,10 +68,9 @@ describe('lp', () => {
 });
 
 describe('getUser', () => {
-  it('Debería poder observar si un usuario está logueado o no', (done) => {
+  it('Debería poder observar si un usuario está logueado o no', () => {
     const callback = (result) => {
       expect(result).toBe(true);
-      done();
     };
     getUser(callback);
   });
