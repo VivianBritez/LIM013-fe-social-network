@@ -1,12 +1,11 @@
-import { logOut ,getUser } from '../firebase/data.js';
-import { changeTemplate } from "../view-controller/router.js";
+import { logOut, getUser } from '../firebase/data.js';
 
-export default () => {
-  // console.log('user', user);
+export const profileTemplate = () => {
+  // console.log('user', user);npm
   const user = getUser();
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
-    <form action="">
+    <form action="" class="container-perfil">
       <h2>Perfil</h2>
       <img class="user-image" src="${user.photoURL}">
       <p>${user.displayName}</p>
@@ -16,15 +15,17 @@ export default () => {
       </section>
     </form>
   `;
-  // Log out  
+
+  // Log out
+
   viewProfile.querySelector('#btn-logout').addEventListener('click', () => {
     logOut()
-    .then(() => {
-    changeTemplate('#/login');
-    })
-    .catch((error) => {
-      if (error) throw error;
-    });
+      .then(() => {
+        window.location.hash = '#/login';
+      })
+      .catch((error) => {
+        if (error) throw error;
+      });
   });
   return viewProfile;
 };

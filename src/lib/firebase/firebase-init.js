@@ -9,6 +9,7 @@ export const firebaseInit = () => {
     appId: '1:352014947754:web:cf433cb5a4869a9e36c7d3',
     measurementId: 'G-R2NB3F2FJM',
   };
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 };

@@ -1,9 +1,5 @@
-// import { changeTemplate } from '../template-controller/router.js';
+import { singInGoogle, singInFacebook, lp } from '../firebase/data.js';
 
-import { changeTemplate } from '../view-controller/router.js';
-import { singInGoogle, singInFacebook } from '../firebase/data.js';
-
-// export const loginTemplate 
 export default () => {
   const viewLogin = document.createElement('main');
   viewLogin.innerHTML = `
@@ -16,7 +12,7 @@ export default () => {
         <p id="alert-txt-email"></p>
         <input type="password" id="txt-password" class="input" placeholder="Contraseña">
         <p id="alert-txt-password"></p>
-        <button type="submit" class="btn-main" id="btn-enter" >Iniciar Sesión</button>
+        <button type="submit" class="btn-login" id="btn-login" >Iniciar Sesión</button>
       </form>
       <p>O bien ingresa con..</p>
     <section class="btn-google-facebook">
@@ -26,33 +22,49 @@ export default () => {
     <p>¿No tienes una cuenta?<a href="#/signup" id = "btn-register" class="btn-register">Regístrate</a></p>
     </section>
     `;
-  /*
-    // Start grabbing our DOM Element
-    const txtEmail = viewLogin.querySelector('#txt-email');
-    const txtpassword = viewLogin.querySelector('#txt-password');
-    const loginForm = viewLogin.querySelector('#login-form');
-  */
-  // Start ...
+
+  // Start grabbing our DOM Element
+  const txtEmail = viewLogin.querySelector('#txt-email');
+  const txtpassword = viewLogin.querySelector('#txt-password');
+  const loginForm = viewLogin.querySelector('#login-form');
+
+  // Event submit with email and password
+  loginForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    lp(txtEmail, txtpassword);
+
+    // Clear the form
+    loginForm.reset();
+
+    // Open green-energy template
+    window.location.hash = '#/home';
+  });
+
   // Sign in with google
   viewLogin.querySelector('#btn-google').addEventListener('click', (event) => {
     event.preventDefault();
-    console.log("hola entre aqui");
+    // console.log('hola entre aqui');
     singInGoogle()
       .then(() => {
-        changeTemplate('#/home');
+        window.location.hash = '#/home';
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        if (error) throw error;
+      });
   });
+
   // Sign in with facebook
   viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
     event.preventDefault();
-    console.log("Hola ingresaste a Facebook");
+    // console.log("Hola ingresaste a Facebook");
     singInFacebook()
       .then(() => {
-        changeTemplate('#/home');
+        window.location.hash = '#/home';
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        if (error) throw error;
+      });
   });
   return viewLogin;
 };
-

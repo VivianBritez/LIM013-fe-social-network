@@ -1,4 +1,6 @@
 import { components } from '../views/components.js';
+
+
 // Change Template
 
 const changeTemplate = (hash) => {
@@ -9,12 +11,12 @@ const changeTemplate = (hash) => {
   switch (hash) {
     case '':
     case '#':
-    case '#/': 
+    case '#/':
     { return container.appendChild(components.loginTemplateProp()); }
-    case '#/login': 
-    { return container.appendChild(components.loginTemplateProp()); }  
+    case '#/login':
+    { return container.appendChild(components.loginTemplateProp()); }
     case '#/signup':
-    { return container.appendChild(components.signUpTemplateProp()); } 
+    { return container.appendChild(components.signUpTemplateProp()); }
     case '#/home':
     { return container.appendChild(components.profileTemplateProp()); }
     default:
