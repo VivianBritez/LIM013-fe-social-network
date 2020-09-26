@@ -1,7 +1,5 @@
 import { components } from '../views/components.js';
 
-import { userSesionActive } from '../firebase/data.js';
-
 // Change Template
 
 const changeTemplate = (hash) => {
@@ -19,7 +17,7 @@ const changeTemplate = (hash) => {
     case '#/signup':
     { return container.appendChild(components.signUpTemplateProp()); }
     case '#/home':
-    { return userSesionActive(container.appendChild(components.profileTemplateProp())); }
+    { return container.appendChild(components.profileTemplateProp()); }
     default:
       return container.appendChild(components.errorPageProp());
   }

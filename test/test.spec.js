@@ -1,6 +1,29 @@
 // importamos la funcion que vamos a testear
-// import { mockauth } from '../test/firebase-mock.js'
-import { loginEmailAndPassword, singInGoogle } from '../src/lib/firebase/data.js';
+import { mocksdk } from './firebase-mock.js';
+// import MockFirebase from 'mock-cloud-firestore';
+import { emailAndPasswordAuth, loginEmailAndPassword, singInGoogle } from '../src/lib/firebase/data.js';
+
+emailAndPasswordAuth.create({
+  email: 'sheillyrlp@gmial.com',
+  password: '12345678',
+});
+
+mocksdk.auth().flush();
+
+describe('Users create their account', () => {
+  it('Should be able to create an account', (done) => {
+    return emailAndPasswordAuth('sheillyrlp@gmial.com', '12345678')
+      .then(() => {
+        mocksdk.auth.getUserByEmail('sheillyrlp@gmial.com')
+          .then((user) => {
+            console('sheilly user was created');
+            expect(emailAndPasswordAuth.email).toBe(user);
+            done();
+          });
+      });
+  });
+});
+
 
 describe('Login de Usuarios', () => {
   it('loginEmailAndPassword deberia ser una funcion', () => {
