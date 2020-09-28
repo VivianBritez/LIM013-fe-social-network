@@ -21,6 +21,7 @@ h2 {
 .poxi {
   display: flex;
   margin: auto;
+  display: none;
 }
 h3{
   text-align: center;
@@ -123,11 +124,5 @@ p{
 
 }
 
-.container-perfil{
-  margin: auto;
-  width: 70%;
-  max-width: 500px;
-  padding: 10px;
-}
 
 

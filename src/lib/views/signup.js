@@ -1,4 +1,4 @@
-import { eP } from '../firebase/data.js';
+import { eP, logOut } from '../firebase/data.js';
 
 export default () => {
   const viewSignUp = document.createElement('section');
@@ -12,6 +12,7 @@ export default () => {
       <input type="password" id="signup-password" class="signup-form" placeholder="Contraseña" required>
       <input type="password" id="signup-confirm-password" class="signup-form" placeholder="Confirmar contraseña">
       <button type="submit" id="signup-submit" class="submit-form">Enviar</button>
+      <button type="button" id="btn-logout">Volver</button>
     </form>
     `;
 
@@ -19,6 +20,7 @@ export default () => {
   const signUpEmail = viewSignUp.querySelector('#signup-email');
   const signupConfirmPassword = viewSignUp.querySelector('#signup-confirm-password');
   const signUpForm = viewSignUp.querySelector('#signup-form');
+  const sigOut = viewSignUp.querySelector('#btn-logout');
 
   // Event submit to register email and password with Firebase
   signUpForm.addEventListener('submit', (event) => {
@@ -35,5 +37,15 @@ export default () => {
     // Open view profile
     window.location.hash = '#/home';
   });
+  sigOut.addEventListener('click', () => {
+    logOut()
+      .then(() => {
+        window.location.hash = '#/login';
+      })
+      .catch((error) => {
+        if (error) throw error;
+      });
+  });
   return viewSignUp;
 };
+

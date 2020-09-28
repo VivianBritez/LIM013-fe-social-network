@@ -1,1 +1,55 @@
-/* hola esto aqui deja el fastidio */
+@media screen and (max-width: 900px){
+    .bombilla{
+        display: none;
+    }
+    .poxi{
+        display: block;
+    }
+    .login-style{
+        margin-left: 0px;
+    }
+    body{
+        background: white;
+    }
+    label #btn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.8);
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    #check:checked ~ ul{
+        left:0;
+    }
+    #check:checked ~ label #btn{
+        display: none;
+    }
+    #check:checked ~ label #cancel{
+        display: block;
+    }
+    .container-perfil{
+        display: contents;
+    }
+
+    
+}
+@media screem and (max-width: 1000px){
+    form{
+        width: 290px;
+    }
+    nav ul li a{
+        font-size: 17px;
+    }
+
+}

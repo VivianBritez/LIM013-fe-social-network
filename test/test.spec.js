@@ -4,6 +4,7 @@ import {
   singInGoogle,
   singInFacebook,
   getUser,
+  eP,
 } from '../src/lib/firebase/data.js';
 
 // configurando firebase mock
@@ -64,6 +65,13 @@ describe('lp', () => {
   it('Debería poder iniciar sesion', () => lp('gatitosbonitos@gmail.com', '123456')
     .then((user) => {
       expect(user.email).toBe('gatitosbonitos@gmail.com');
+    }));
+});
+
+describe('eP', () => {
+  it('Debería poder crear una cuenta', () => eP('bombilla@gmail.com', '123456')
+    .then((user) => {
+      expect(user.email).toBe('bombilla@gmail.com');
     }));
 });
 
