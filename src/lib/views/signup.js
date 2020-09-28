@@ -9,7 +9,7 @@ export default () => {
       <input type="text" id="signup-last-name" class="signup-form" placeholder="Apellidos" >
       <input type="email" id="signup-email" class="signup-form" placeholder="Email" required>
       <input type="text" id="signup-user-name" class="signup-form" placeholder="Nombre de usuario">
-      <input type="password" id="signup-password" class="signup-form" placeholder="Contraseña" required>
+      <input type="password" id="signup-password" class="signup-form" placeholder="Contraseña">
       <input type="password" id="signup-confirm-password" class="signup-form" placeholder="Confirmar contraseña" required>
       <button type="submit" id="signup-submit" class="submit-form">Enviar</button>
     </form>
