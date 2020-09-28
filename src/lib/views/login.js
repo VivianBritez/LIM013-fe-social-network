@@ -3,7 +3,10 @@ import { singInGoogle, singInFacebook, loginUser } from '../firebase/data.js';
 export default () => {
   const viewLogin = document.createElement('main');
   viewLogin.innerHTML = `
-    <img src="img/energy.png" class="poxi" alt="icono">
+    <section class="bulb-container">
+    <img src="img/light-bulb.png" class="light-bulb" alt="icono">
+    </section>
+    <img src="img/light-bulb-mobile.png" class="light-bulb-mobile" alt="icono">
     <section class="login-style">
       <h1>Energía Verde</h1>
       <h3>¡Bienvenid@, Energía Verde!</h3>

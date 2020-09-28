@@ -16,10 +16,12 @@ h2 {
   border-radius: 50%;
   display: block;
   margin: auto;
+  width: 100px;
 }
-.poxi {
+.light-bulb-mobile {
   display: flex;
   margin: auto;
+  visibility: hidden;
 }
 h3 {
   text-align: center;
@@ -53,9 +55,7 @@ form {
 .login-form {
   display: block;
 }
-.ocultar {
-  display: none;
-}
+
 .btn-login {
   color: black;
   border: 0;
