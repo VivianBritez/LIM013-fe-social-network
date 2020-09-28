@@ -19,7 +19,6 @@ export default () => {
   const signUpEmail = viewSignUp.querySelector('#signup-email');
   const signupConfirmPassword = viewSignUp.querySelector('#signup-confirm-password');
   const signUpForm = viewSignUp.querySelector('#signup-form');
-  // console.log(createUserAccount('sheillyrolo@gmial.com', '12345678'));
 
   // Event submit to create a user account
   signUpForm.addEventListener('submit', (event) => {

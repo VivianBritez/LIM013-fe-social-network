@@ -1,15 +1,11 @@
-// import { logOut, getUser } from '../firebase/data.js';
+import { logOut, getUser } from '../firebase/data.js';
 
 export const profileTemplate = () => {
   // console.log('user', user);
-  // const user = getUser();
+  const user = getUser();
   const viewProfile = document.createElement('section');
-  viewProfile.innerHTML = `
-  Hola
-  `;
-  /*
-  viewProfile.innerHTML = `
-    <form>
+  viewProfile.innerHTML = ` 
+    <form action="">
       <h2>Perfil</h2>
       <img class="user-image" src="${user.photoURL}">
       <p>${user.displayName}</p>
@@ -31,6 +27,5 @@ export const profileTemplate = () => {
         if (error) throw error;
       });
   });
-  */
   return viewProfile;
 };

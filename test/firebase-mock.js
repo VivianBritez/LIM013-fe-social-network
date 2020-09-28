@@ -9,6 +9,7 @@ mockauth.autoFlush();
 
 global.firebase = firebasemock.MockFirebaseSdk(
   // path => (path ? mockdatabase.child(path) : null),
+  () => null,
   () => mockauth,
   () => mockfirestore,
   () => mocksdk,
