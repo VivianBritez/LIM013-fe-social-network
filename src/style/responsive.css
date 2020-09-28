@@ -1,8 +1,8 @@
 @media screen and (max-width: 900px){
-    .bombilla{
+    .light-bulb{
         display: none;
     }
-    .poxi{
+    .light-bulb-mobile{
         display: block;
     }
     .login-style{
@@ -11,7 +11,7 @@
     body{
         background: white;
     }
-    label #btn{
+    label #hamburger{
         display: block;
     }
     ul{
@@ -29,16 +29,16 @@
         margin: 50px 0;
         line-height: 30px;
     }
-    #check:checked ~ ul{
+    #check-and-uncheck:checked ~ ul{
         left:0;
     }
-    #check:checked ~ label #btn{
+    #check-and-uncheck:checked ~ label #hamburger{
         display: none;
     }
-    #check:checked ~ label #cancel{
+    #check-and-uncheck:checked ~ label #cross{
         display: block;
     }
-    .container-perfil{
+    .container-profile{
         display: contents;
     }
 
