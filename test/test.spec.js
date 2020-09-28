@@ -19,18 +19,11 @@ describe('createUserAccount', () => {
   it('should be a function', () => {
     expect(typeof myModule.createUserAccount).toBe('function');
   });
-  it('should be able to create an account', (done) => {
-<<<<<<< HEAD
-    myModule
-      .createUserAccount('sheillyrlp@gmial.com', '12345678')
-=======
-    myModule.createUserAccount('sheillyrlp@gmial.com', '12345678')
->>>>>>> 45a56a7aeb212dc5399501cf75228be951865ca0
-      .then((user) => {
-        expect(user.email).toBe('sheillyrlp@gmial.com');
-        done();
-      });
-  });
+  it('should be able to create an account', done => myModule.createUserAccount('sheillyrlp@gmial.com', '12345678')
+    .then((user) => {
+      expect(user.email).toBe('sheillyrlp@gmial.com');
+      done();
+    }));
 });
 
 // Testing loginUser function
@@ -43,18 +36,6 @@ describe('loginUser', () => {
         done();
       });
   });
-<<<<<<< HEAD
-  it('should be able to login', done => myModule.loginUser('sheillyrlp@gmial.com', '12345678').then((user) => {
-    expect(user.email).toBe('sheillyrlp@gmial.com');
-    done();
-  }));
-});
-
-//  sing in with Facebook
-describe('Shoul be a function ', () => {
-  it('function sign in', () => {
-    expect(typeof myModule.singInFacebook).toBe('function');
-=======
 });
 
 // sign in with google
@@ -68,7 +49,6 @@ describe('login with Google', () => {
         expect(user.providerData[0].providerId).toBe('google.com');
         done();
       });
->>>>>>> 45a56a7aeb212dc5399501cf75228be951865ca0
   });
 });
 

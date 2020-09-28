@@ -21,7 +21,7 @@ h2 {
 .light-bulb-mobile {
   display: flex;
   margin: auto;
-  visibility: hidden;
+  display: none;
 }
 h3 {
   text-align: center;
