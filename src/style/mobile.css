@@ -19,10 +19,13 @@ h2 {
   width: 100px;
 }
 .light-bulb-mobile {
-  display: flex;
   margin: auto;
   display: none;
 }
+.bulb-mobile{
+  display: flex;
+}
+
 h3 {
   text-align: center;
   padding-top: 7%;
