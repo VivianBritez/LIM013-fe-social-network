@@ -29,7 +29,7 @@ export default () => {
     const signupConfirmPasswordVal = signupConfirmPassword.value;
     createUserAccount(signUpEmailVal, signupConfirmPasswordVal)
       .then(() => {
-        // Open green-energy template
+        // Open home template
         window.location.hash = '#/home';
         // Clear the form
         signUpForm.reset();

@@ -37,7 +37,7 @@ export default () => {
 
     loginUser(txtEmailVal, txtpasswordVal)
       .then(() => {
-        // Open green-energy template
+        // Open home template
         window.location.hash = '#/home';
         // Clear the form
         loginForm.reset();
