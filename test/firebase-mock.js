@@ -1,5 +1,3 @@
-// importamos la funcion que vamos a testear
-
 // configurando firebase mock
 const firebasemock = require('firebase-mock');
 

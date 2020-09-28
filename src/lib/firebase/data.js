@@ -23,13 +23,10 @@ export const getUser = () => firebase.auth().currentUser;
 
 // Authentication email and password with Firebase
 
-export const createUserAccount = (email, password) => {
-  const auth = firebase.auth();
-  return auth.createUserWithEmailAndPassword(email, password);
-};
+export const usersAccount = (email, password) => firebase.auth()
+  .createUserWithEmailAndPassword(email, password);
+
 // Login with valid email and password
 
-export const login = (email, password) => {
-  const auth = firebase.auth();
-  return auth.signInWithEmailAndPassword(email, password);
-};
+export const loginUser = (email, password) => firebase.auth()
+  .signInWithEmailAndPassword(email, password);

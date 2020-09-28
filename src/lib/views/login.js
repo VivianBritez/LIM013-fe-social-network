@@ -1,4 +1,4 @@
-import { singInGoogle, singInFacebook, login } from '../firebase/data.js';
+import { singInGoogle, singInFacebook, loginUser } from '../firebase/data.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -28,14 +28,14 @@ export default () => {
   const txtpassword = viewLogin.querySelector('#txt-password');
   const loginForm = viewLogin.querySelector('#login-form');
 
-  // Event submit with email and password
+  // Event submit to user login
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const txtEmailVal = txtEmail.value;
     const txtpasswordVal = txtpassword.value;
 
-    login(txtEmailVal, txtpasswordVal)
+    loginUser(txtEmailVal, txtpasswordVal)
       .then(() => {
         // Open green-energy template
         window.location.hash = '#/home';
