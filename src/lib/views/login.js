@@ -1,4 +1,4 @@
-import { singInGoogle, singInFacebook, loginEmailAndPassword } from '../firebase/data.js';
+import { singInGoogle, singInFacebook, loginUser } from '../firebase/data.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -31,17 +31,27 @@ export default () => {
   const txtpassword = viewLogin.querySelector('#txt-password');
   const loginForm = viewLogin.querySelector('#login-form');
 
-  // Event submit with email and password
+  // Event submit to user login
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    loginEmailAndPassword(txtEmail, txtpassword);
+    const txtEmailVal = txtEmail.value;
+    const txtpasswordVal = txtpassword.value;
 
-    // Clear the form
-    loginForm.reset();
-
-    // Open green-energy template
-    window.location.hash = '#/home';
+    loginUser(txtEmailVal, txtpasswordVal)
+      .then(() => {
+        // Open home template
+        window.location.hash = '#/home';
+        // Clear the form
+        loginForm.reset();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
+          throw errorMessage;
+        }
+      });
   });
 
   // Sign in with google

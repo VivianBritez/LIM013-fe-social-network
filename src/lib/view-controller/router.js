@@ -1,6 +1,5 @@
 import { components } from '../views/components.js';
 
-
 // Change Template
 
 const changeTemplate = (hash) => {

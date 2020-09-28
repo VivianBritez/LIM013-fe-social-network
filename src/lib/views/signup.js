@@ -1,4 +1,4 @@
-import { emailAndPasswordAuth, logOut } from '../firebase/data.js';
+import { createUserAccount, logOut } from '../firebase/data.js';
 
 export default () => {
   const viewSignUp = document.createElement('section');
@@ -8,9 +8,9 @@ export default () => {
       <input type="text" id="signup-name" class="signup-form" placeholder="Nombre" >
       <input type="text" id="signup-last-name" class="signup-form" placeholder="Apellidos" >
       <input type="email" id="signup-email" class="signup-form" placeholder="Email" required>
-      <input type="text" id="signup-user-name" class="signup-form" placeholder="Nombre de usuario" >
-      <input type="password" id="signup-password" class="signup-form" placeholder="Contraseña" required>
-      <input type="password" id="signup-confirm-password" class="signup-form" placeholder="Confirmar contraseña">
+      <input type="text" id="signup-user-name" class="signup-form" placeholder="Nombre de usuario">
+      <input type="password" id="signup-password" class="signup-form" placeholder="Contraseña">
+      <input type="password" id="signup-confirm-password" class="signup-form" placeholder="Confirmar contraseña" required>
       <button type="submit" id="signup-submit" class="submit-form">Enviar</button>
       <button type="button" id="btn-logout">Volver</button>
     </form>
@@ -22,20 +22,26 @@ export default () => {
   const signUpForm = viewSignUp.querySelector('#signup-form');
   const sigOut = viewSignUp.querySelector('#btn-logout');
 
-  // Event submit to register email and password with Firebase
+  // Event submit to create a user account
   signUpForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const signUpEmailVal = signUpEmail.value;
     const signupConfirmPasswordVal = signupConfirmPassword.value;
-
-    emailAndPasswordAuth(signUpEmailVal, signupConfirmPasswordVal);
-
-    // Clear the form
-    signUpForm.reset();
-
-    // Open view profile
-    window.location.hash = '#/home';
+    createUserAccount(signUpEmailVal, signupConfirmPasswordVal)
+      .then(() => {
+        // Open home template
+        window.location.hash = '#/home';
+        // Clear the form
+        signUpForm.reset();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode === 'auth/invalid-email' || errorCode === 'auth/weak-password') {
+          throw errorMessage;
+        }
+      });
   });
   sigOut.addEventListener('click', () => {
     logOut()
@@ -48,4 +54,3 @@ export default () => {
   });
   return viewSignUp;
 };
-

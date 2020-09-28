@@ -1,13 +1,5 @@
-import {
-  logOut,
-  lp,
-  singInGoogle,
-  singInFacebook,
-  getUser,
-  eP,
-} from '../src/lib/firebase/data.js';
+import * as myModule from '../src/lib/firebase/data.js';
 
-// configurando firebase mock
 const firebasemock = require('firebase-mock');
 
 const mockauth = new firebasemock.MockFirebase();
@@ -16,17 +8,45 @@ mockfirestore.autoFlush();
 mockauth.autoFlush();
 
 global.firebase = firebasemock.MockFirebaseSdk(
+  //  use null if your code does not use RTDB
   () => null,
   () => mockauth,
   () => mockfirestore,
 );
 
-describe('Login de Usuarios con Google', () => {
-  it('deberia ser una funcion', () => {
-    expect(typeof singInGoogle).toBe('function');
+// Testing createUserAccount function
+describe('createUserAccount', () => {
+  it('should be a function', () => {
+    expect(typeof myModule.createUserAccount).toBe('function');
   });
-  it('Deberia poder iniciar sesion con Google', (done) => {
-    singInGoogle()
+  it('should be able to create an account', (done) => {
+    myModule.createUserAccount('sheillyrlp@gmial.com', '12345678')
+      .then((user) => {
+        expect(user.email).toBe('sheillyrlp@gmial.com');
+        done();
+      });
+  });
+});
+
+// Testing loginUser function
+describe('loginUser', () => {
+  it('should be a function', () => expect(typeof myModule.loginUser).toBe('function'));
+  it('should be able to login', (done) => {
+    myModule.loginUser('sheillyrlp@gmial.com', '12345678')
+      .then((user) => {
+        expect(user.email).toBe('sheillyrlp@gmial.com');
+        done();
+      });
+  });
+});
+
+// sign in with google
+describe('login with Google', () => {
+  it('Should be a function', () => {
+    expect(typeof myModule.singInGoogle).toBe('function');
+  });
+  it('Should be able to login with Google', (done) => {
+    myModule.singInGoogle()
       .then((user) => {
         expect(user.providerData[0].providerId).toBe('google.com');
         done();
@@ -34,11 +54,31 @@ describe('Login de Usuarios con Google', () => {
   });
 });
 
+// Sign in with Facebook
+describe('Should be a function ', () => {
+  it('function signin', () => expect(typeof myModule.singInFacebook).toBe('function'));
+});
+describe('logInFacebook', () => {
+  it('login with Facebook', () => myModule.singInFacebook().then((user) => {
+    expect(myModule.getUser).not.toBe(null);
+    expect(user.isAnonymous).toBe(false);
+    expect(user.providerData).toEqual([{ providerId: 'facebook.com' }]);
+  }));
+});
+
+// getUser
 describe('getUser', () => {
-  it('Debería poder observar si un usuario está logueado o no', () => {
+  it('You should be able to see if a user is logged in or not', () => {
     const callback = (result) => {
       expect(result).toBe(true);
     };
-    getUser(callback);
+    myModule.getUser(callback);
   });
+});
+
+// Logout
+describe('logout', () => {
+  it('Shoul be able to log out', () => myModule.logOut().then((user) => {
+    expect(user).toBe(undefined);
+  }));
 });
