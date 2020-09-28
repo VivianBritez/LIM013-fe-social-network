@@ -30,21 +30,33 @@ describe('createUserAccount', () => {
 
 // Testing loginUser function
 describe('loginUser', () => {
-  it('should be a function', () => {
-    expect(typeof myModule.loginUser).toBe('function');
+  it('should be a function', () => expect(typeof myModule.loginUser).toBe('function'));
+  it('should be able to login', (done) => {
+    myModule.loginUser('sheillyrlp@gmial.com', '12345678')
+      .then((user) => {
+        expect(user.email).toBe('sheillyrlp@gmial.com');
+        done();
+      });
   });
-  it('should be able to login', (done) => myModule.loginUser('sheillyrlp@gmial.com', '12345678')
-    .then((user) => {
-      expect(user.email).toBe('sheillyrlp@gmial.com');
-      done();
-    }));
 });
 
-// Sing in with Facebook
-describe('Shoul be a function ', () => {
-  it('function sigin', () => {
-    expect(typeof myModule.singInFacebook).toBe('function');
+// sign in with google
+describe('login with Google', () => {
+  it('Should be a function', () => {
+    expect(typeof myModule.singInGoogle).toBe('function');
   });
+  it('Should be able to login with Google', (done) => {
+    myModule.singInGoogle()
+      .then((user) => {
+        expect(user.providerData[0].providerId).toBe('google.com');
+        done();
+      });
+  });
+});
+
+// Sign in with Facebook
+describe('Should be a function ', () => {
+  it('function signin', () => expect(typeof myModule.singInFacebook).toBe('function'));
 });
 describe('logInFacebook', () => {
   it('login with Facebook', () => myModule.singInFacebook().then((user) => {
@@ -52,6 +64,16 @@ describe('logInFacebook', () => {
     expect(user.isAnonymous).toBe(false);
     expect(user.providerData).toEqual([{ providerId: 'facebook.com' }]);
   }));
+});
+
+// getUser
+describe('getUser', () => {
+  it('You should be able to see if a user is logged in or not', () => {
+    const callback = (result) => {
+      expect(result).toBe(true);
+    };
+    myModule.getUser(callback);
+  });
 });
 
 // Logout
