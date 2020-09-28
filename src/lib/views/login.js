@@ -1,4 +1,4 @@
-import { singInGoogle, singInFacebook, loginEmailAndPassword } from '../firebase/data.js';
+import { singInGoogle, singInFacebook, signInWithEmailAndPassword } from '../firebase/data.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -32,7 +32,7 @@ export default () => {
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    loginEmailAndPassword(txtEmail, txtpassword);
+    signInWithEmailAndPassword(txtEmail, txtpassword);
 
     // Clear the form
     loginForm.reset();
