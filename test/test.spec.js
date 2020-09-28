@@ -20,11 +20,13 @@ describe('createUserAccount', () => {
     expect(typeof myModule.createUserAccount).toBe('function');
   });
   it('should be able to create an account', (done) => {
-    myModule.createUserAccount('sheillyrlp@gmial.com', '12345678')
-    .then((user) => {
-      expect(user.email).toBe('sheillyrlp@gmial.com');
-      done();
-    });
+    myModule
+      .createUserAccount('sheillyrlp@gmial.com', '12345678')
+      .then((user) => {
+        expect(user.email).toBe('sheillyrlp@gmial.com');
+        done();
+      });
+  });
 });
 
 // Testing loginUser function
@@ -32,18 +34,15 @@ describe('loginUser', () => {
   it('should be a function', () => {
     expect(typeof myModule.loginUser).toBe('function');
   });
-  it('should be able to login', (done) => myModule.loginUser('sheillyrlp@gmial.com', '12345678')
-    .then((user) => {
-      expect(user.email).toBe('sheillyrlp@gmial.com');
-      done();
-    }));
+  it('should be able to login', done => myModule.loginUser('sheillyrlp@gmial.com', '12345678').then((user) => {
+    expect(user.email).toBe('sheillyrlp@gmial.com');
+    done();
+  }));
 });
-
-
 
 //  sing in with Facebook
 describe('Shoul be a function ', () => {
-  it('function sigin', () => {
+  it('function sign in', () => {
     expect(typeof myModule.singInFacebook).toBe('function');
   });
 });
