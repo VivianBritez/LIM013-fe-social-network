@@ -21,20 +21,6 @@ global.firebase = firebasemock.MockFirebaseSdk(
   () => mockfirestore,
 );
 
-describe('Cerrar sesión', () => {
-  it('debería ser una función', () => {
-    expect(typeof logOut).toBe('function');
-  });
-  it('Deberia poder cerrar sesion', (done) => {
-    logOut()
-      .then((user) => {
-        expect(user).toBe(undefined);
-        done();
-      });
-  });
-});
-
-
 describe('Login de Usuarios con Google', () => {
   it('deberia ser una funcion', () => {
     expect(typeof singInGoogle).toBe('function');
@@ -46,33 +32,6 @@ describe('Login de Usuarios con Google', () => {
         done();
       });
   });
-});
-
-describe('Login de Usuarios con Facebook', () => {
-  it('deberia ser una funcion', () => {
-    expect(typeof singInFacebook).toBe('function');
-  });
-  it('Deberia poder iniciar sesion con Facebook', (done) => {
-    singInFacebook()
-      .then((user) => {
-        expect(user.providerData[0].providerId).toBe('facebook.com');
-        done();
-      });
-  });
-});
-
-describe('lp', () => {
-  it('Debería poder iniciar sesion', () => lp('gatitosbonitos@gmail.com', '123456')
-    .then((user) => {
-      expect(user.email).toBe('gatitosbonitos@gmail.com');
-    }));
-});
-
-describe('eP', () => {
-  it('Debería poder crear una cuenta', () => eP('bombilla@gmail.com', '123456')
-    .then((user) => {
-      expect(user.email).toBe('bombilla@gmail.com');
-    }));
 });
 
 describe('getUser', () => {
