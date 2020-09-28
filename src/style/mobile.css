@@ -18,7 +18,7 @@ h2 {
   margin: auto;
   width: 100px;
 }
-.poxi {
+.light-bulb-mobile {
   display: flex;
   margin: auto;
   display: none;
@@ -55,9 +55,7 @@ form {
 .login-form {
   display: block;
 }
-.ocultar {
-  display: none;
-}
+
 .btn-login {
   color: black;
   border: 0;

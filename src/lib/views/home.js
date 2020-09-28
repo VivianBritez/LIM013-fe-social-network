@@ -1,4 +1,4 @@
-import { logOut, getUser } from '../firebase/data.js';
+import { getUser } from '../firebase/data.js';
 
 export const profileTemplate = () => {
   // console.log('user', user);npm
@@ -7,10 +7,10 @@ export const profileTemplate = () => {
   viewProfile.innerHTML = ` 
     <header>
     <nav>
-    <input type="checkbox" id="check">
+    <input type="checkbox" id="check-and-uncheck">
     <label for="check">
-    <i class="fas fa-bars" id="btn"></i>
-    <i class="fas fa-times" id="cancel"></i>
+    <i class="fas fa-bars" id="hamburger"></i>
+    <i class="fas fa-times" id="cross"></i>
     </label>
       <ul>
         <li>
@@ -19,14 +19,14 @@ export const profileTemplate = () => {
       </ul>
     </nav>
     </header>
-    <form action="" class="container-perfil">
+    <section class="container-profile">
       <h2>Perfil</h2>
       <img class="user-image" src="${user.photoURL}">
       <p>${user.displayName}</p>
       <h3>Email</h3>
       <p>${user.email}</p>
       </section>
-    </form>
+    </section>
   `;
 
   return viewProfile;

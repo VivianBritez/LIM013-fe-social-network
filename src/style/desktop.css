@@ -1,4 +1,4 @@
-.bombilla{
+.light-bulb{
     position: fixed;
     height: 100%;
     left: 0;
@@ -6,7 +6,7 @@
     z-index: -1;
 }
 
-.conta{
+.bulb-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 7em;
@@ -21,7 +21,7 @@
 body{
     margin: 0;
 }
-.container-perfil{
+.container-profile{
     display: inline-block;
     margin-left: 3%;
     max-width: 300px;
@@ -61,8 +61,8 @@ nav ul li a:hover:before{
     transform: scaleX(1);
     transform-origin: left;
 }
-label #btn,
-label #cancel{
+label #hamburger,
+label #cross{
     color: green;
     font-size: 30px;
     float: right;
@@ -71,6 +71,6 @@ label #cancel{
     cursor: pointer;
     display: none;
 }
-#check{
+#check-and-uncheck{
     display: none;
 }

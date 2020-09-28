@@ -1,4 +1,4 @@
-import { eP, logOut } from '../firebase/data.js';
+import { emailAndPasswordAuth, logOut } from '../firebase/data.js';
 
 export default () => {
   const viewSignUp = document.createElement('section');
@@ -29,7 +29,7 @@ export default () => {
     const signUpEmailVal = signUpEmail.value;
     const signupConfirmPasswordVal = signupConfirmPassword.value;
 
-    eP(signUpEmailVal, signupConfirmPasswordVal);
+    emailAndPasswordAuth(signUpEmailVal, signupConfirmPasswordVal);
 
     // Clear the form
     signUpForm.reset();

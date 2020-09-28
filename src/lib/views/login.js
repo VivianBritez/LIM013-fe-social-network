@@ -1,12 +1,12 @@
-import { singInGoogle, singInFacebook, lp } from '../firebase/data.js';
+import { singInGoogle, singInFacebook, loginEmailAndPassword } from '../firebase/data.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
   viewLogin.innerHTML = `
-    <section class="conta">
-    <img src="img/bombilla.png" class="bombilla" alt="icono">
+    <section class="bulb-container">
+    <img src="img/light-bulb.png" class="light-bulb" alt="icono">
     </section>
-    <img src="img/energy.png" class="poxi" alt="icono">
+    <img src="img/light-bulb-mobile.png" class="light-bulb-mobile" alt="icono">
     <section class="login-style">
       <h1>Energía Verde</h1>
       <h3>¡Bienvenid@, Energía Verde!</h3>
@@ -35,7 +35,7 @@ export default () => {
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    lp(txtEmail, txtpassword);
+    loginEmailAndPassword(txtEmail, txtpassword);
 
     // Clear the form
     loginForm.reset();
