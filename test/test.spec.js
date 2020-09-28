@@ -14,45 +14,6 @@ global.firebase = firebasemock.MockFirebaseSdk(
   () => mockfirestore,
 );
 
-//  create user
-
-describe('should be able to create a user', () => {
-  it('should be able to create a user ', (done) => {
-    myModule
-      .emailAndPasswordAuth('vivianbritez@gmail.com', '123456')
-      .then((user) => {
-        expect(user.email).toBe('vivianbritez@gmail.com');
-        done();
-      });
-  });
-});
-
-//  Sign in with email
-
-describe('Shoul be a function', () => {
-  it('function', () => {
-    expect(typeof myModule.signInWithEmailAndPassword).toBe('function');
-  });
-});
-describe('login email and password', () => {
-  it('Should be able to log in with email and password', (done) => {
-    myModule
-      .signInWithEmailAndPassword('vivianbritez@gmail.com', '123456')
-      .then((user) => {
-        expect(user.email).toBe('vivianbritez@gmail.com');
-        done();
-      });
-  });
-});
-
-//  sing in with Google
-
-describe('logInGoogle', () => {
-  it('Login with Google', () => myModule.singInGoogle().then((user) => {
-    expect(user.isAnonymous).toBe(false);
-    expect(user.providerData).toEqual([{ providerId: 'google.com' }]);
-  }));
-});
 
 //  sing in with Facebook
 describe('Shoul be a function ', () => {
