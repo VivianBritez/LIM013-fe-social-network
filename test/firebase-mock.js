@@ -1,4 +1,4 @@
-// configurando firebase mock
+// Setting up firebase mock
 const firebasemock = require('firebase-mock');
 
 const mockauth = new firebasemock.MockAuthentication();

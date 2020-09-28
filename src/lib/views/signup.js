@@ -1,4 +1,4 @@
-import { usersAccount } from '../firebase/data.js';
+import { createUserAccount } from '../firebase/data.js';
 
 export default () => {
   const viewSignUp = document.createElement('section');
@@ -19,7 +19,7 @@ export default () => {
   const signUpEmail = viewSignUp.querySelector('#signup-email');
   const signupConfirmPassword = viewSignUp.querySelector('#signup-confirm-password');
   const signUpForm = viewSignUp.querySelector('#signup-form');
-  // console.log(usersAccount('sheillyrolo@gmial.com', '12345678'));
+  // console.log(createUserAccount('sheillyrolo@gmial.com', '12345678'));
 
   // Event submit to create a user account
   signUpForm.addEventListener('submit', (event) => {
@@ -27,7 +27,7 @@ export default () => {
 
     const signUpEmailVal = signUpEmail.value;
     const signupConfirmPasswordVal = signupConfirmPassword.value;
-    usersAccount(signUpEmailVal, signupConfirmPasswordVal)
+    createUserAccount(signUpEmailVal, signupConfirmPasswordVal)
       .then(() => {
         // Open green-energy template
         window.location.hash = '#/home';

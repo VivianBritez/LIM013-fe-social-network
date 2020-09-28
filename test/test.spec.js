@@ -1,5 +1,5 @@
 // Import the function
-import { usersAccount, loginUser } from '../src/lib/firebase/data.js';
+import { createUserAccount, loginUser } from '../src/lib/firebase/data.js';
 // Setting up firebase mock
 const firebasemock = require('firebase-mock');
 
@@ -17,12 +17,12 @@ global.firebase = firebasemock.MockFirebaseSdk(
   () => mocksdk,
 );
 
-// Testing usersAccount function
-describe('usersAccount', () => {
+// Testing createUserAccount function
+describe('createUserAccount', () => {
   it('should be a function', () => {
-    expect(typeof usersAccount).toBe('function');
+    expect(typeof createUserAccount).toBe('function');
   });
-  it('should be able to create an account', (done) => usersAccount('sheillyrlp@gmial.com', '12345678')
+  it('should be able to create an account', (done) => createUserAccount('sheillyrlp@gmial.com', '12345678')
     .then((user) => {
       expect(user.email).toBe('sheillyrlp@gmial.com');
       done();
