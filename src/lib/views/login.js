@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { loginUser } from '../firebase/auth.js';
 import { loginGoogle, loginFacebook } from '../firebase-controller/login-controller.js';
+=======
+import { singInFacebook, loginUser } from '../firebase/auth.js';
+import { loginGoogle } from '../firebase-controller/login-controller.js';
+>>>>>>> 26ad3e9df13822ed82f13c89a45af97f8c218fcf
 
 export default () => {
   const viewLogin = document.createElement('main');
