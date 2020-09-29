@@ -1,5 +1,5 @@
 import { singInFacebook, loginUser } from '../firebase/auth.js';
-import {loginGoogle} from '../controller/login-controller.js';
+import { loginGoogle } from '../firebase-controller/login-controller.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -70,6 +70,5 @@ export default () => {
     // console.log("Hola ingresaste a Facebook");
     singInFacebook();
   });
-  
   return viewLogin;
 };
