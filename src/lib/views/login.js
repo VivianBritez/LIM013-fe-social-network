@@ -1,4 +1,5 @@
-import { singInGoogle, singInFacebook, loginUser } from '../firebase/data.js';
+import { singInFacebook, loginUser } from '../firebase/auth.js';
+import {loginGoogle} from '../controller/login-controller.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -60,26 +61,15 @@ export default () => {
   viewLogin.querySelector('#btn-google').addEventListener('click', (event) => {
     event.preventDefault();
     // console.log('hola entre aqui');
-    singInGoogle()
-      .then(() => {
-        window.location.hash = '#/home';
-      })
-      .catch((error) => {
-        if (error) throw error;
-      });
+    loginGoogle();
   });
 
   // Sign in with facebook
   viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
     event.preventDefault();
     // console.log("Hola ingresaste a Facebook");
-    singInFacebook()
-      .then(() => {
-        window.location.hash = '#/home';
-      })
-      .catch((error) => {
-        if (error) throw error;
-      });
+    singInFacebook();
   });
+  
   return viewLogin;
 };

@@ -1,4 +1,4 @@
-import * as myModule from '../src/lib/firebase/data.js';
+import * as myModule from '../src/lib/firebase/auth.js';
 
 const firebasemock = require('firebase-mock');
 
