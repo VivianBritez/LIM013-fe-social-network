@@ -1,4 +1,4 @@
-import { getUser } from '../firebase/data.js';
+import { getUser } from '../firebase/auth.js';
 
 export const profileTemplate = () => {
   // console.log('user', user);npm
