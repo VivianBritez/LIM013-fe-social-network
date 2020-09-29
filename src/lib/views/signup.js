@@ -1,4 +1,4 @@
-import { createUserAccount, logOut } from '../firebase/data.js';
+import { createUserAccount, logOut } from '../firebase/auth.js';
 
 export default () => {
   const viewSignUp = document.createElement('section');
