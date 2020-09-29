@@ -1,5 +1,5 @@
-import { singInFacebook, loginUser } from '../firebase/auth.js';
-import {loginGoogle} from '../controller/login-controller.js';
+import { loginUser } from '../firebase/auth.js';
+import { loginGoogle, loginFacebook } from '../firebase-controller/login-controller.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -68,8 +68,7 @@ export default () => {
   viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
     event.preventDefault();
     // console.log("Hola ingresaste a Facebook");
-    singInFacebook();
+    loginFacebook();
   });
-  
   return viewLogin;
 };
