@@ -1,56 +1,57 @@
-import { getUser } from '../firebase/auth.js';
+import { homeCreateNote, homeLogOut } from '../firebase-controller/home-controller.js';
+//import { getUser } from '../firebase/auth.js';
 
 export const profileTemplate = () => {
-  // console.log('user', user);npm
-  const user = getUser();
+  // console.log('user', user);
+  //const user = getUser();
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <header>
     <nav>
     <input type="checkbox" id="check-and-uncheck">
-    <label for="check">
+    <label for="check-and-uncheck">
     <i class="fas fa-bars" id="hamburger"></i>
     <i class="fas fa-times" id="cross"></i>
     </label>
       <ul>
         <li>
-            <a href="#/login">Salir</a>
+            <a id="btn-log-out">Salir</a>
         </li>
       </ul>
     </nav>
     </header>
     <section class="container-profile">
       <h2>Perfil</h2>
-      <img class="user-image" src="${user.photoURL}">
-      <p>${user.displayName}</p>
+      <img class="user-image" src="${localStorage.getItem('userPhoto')}">
+      <p>${localStorage.getItem('userName')}</p>
       <h3>Email</h3>
-      <p>${user.email}</p>
+      <p>${localStorage.getItem('userEmail')}</p>
       </section>
     </section>
-    <div>
+    <div id="respon">
     <div id="post-container" class="post">
   <div id="post">
-    <textarea
-      id="text-post"
-      placeholder="¿Qué quieres compartir?"
-      maxlength="100"
-    ></textarea>
-    <select id="mode-post">
-      <option value="" disabled selected>Modo</option>
-      <option id="private" value="private">Privado</option>
-      <option id="public" value="public">Publico</option>
-    </select>
+    <div id="postboxpos"><textarea id="text-post" placeholder="¿Qué quieres compartir?"
+    maxlength="100" rows="8" cols="77" ></textarea></div>
+
   </div>
-  <input type="file" id="picture" />
-  <label><i id="icon-picture"></i></label>
-  <button type="button" id="btn-share">Compartir</button>
+  <div>
+  <label><i id="i" class="far fa-images"></i>
+  <input class="file" type="file"></label>
+<select class="space" id="mode-post">
+  <option value="" disabled selected>Modo</option>
+  <option id="private" value="private">Privado</option>
+  <option id="public" value="public">Publico</option>
+</select>
+  <label><i id="btn-post" class="far fa-paper-plane"></i></label>
+  </div>
 </div>
 <div id="share-post">
-  <p id="name-user">Publicado por</p>
-  <textarea id="text-share" maxlength="100"></textarea>
-  <label><i id="icon-like"></i></label>
-  <label><i id="icon-comment"></i></label>
-  <label><i id="icon-ellipsis-h"></i></label>
+  <h4 id="name-user">Publicado por</h4>
+  <textarea id="postboxpos" maxlength="100" rows="5" cols="77" ></textarea>
+  <label><i id="i" class="far fa-heart"></i></label>
+  <label><i id="i" class="far fa-comment"></i></label>
+  <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h"></i></label>
   <select id="options">
     <option value="" disabled selected>Elegir</option>
     <option id="edit" value="edit">Editar</option>
@@ -58,6 +59,17 @@ export const profileTemplate = () => {
   </select>
 </div>
   `;
+
+  const btnlogOut = viewProfile.querySelector('#btn-log-out');
+  btnlogOut.addEventListener( 'click', () =>{
+    homeLogOut();
+  });
+
+  const btnPost = viewProfile.querySelector('#btn-post');
+  btnPost.addEventListener( 'click', () => {
+    homeCreateNote(uid,username,privacy,note);
+  });
+
 
   return viewProfile;
 };
