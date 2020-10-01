@@ -74,3 +74,95 @@ label #cross{
 #check-and-uncheck{
     display: none;
 }
+#respon{
+    height: 80%;
+    bottom: 0;
+    position: fixed;
+}
+
+.post{
+    left:350px;
+    position:absolute;
+    width:600px;
+    height:210px;
+    background: #C1CED0 ;
+    padding: 10px;
+    }
+
+#share-post{
+    top:250px;
+    left:350px;
+    position:absolute;
+    width:600px;
+    height:210px;
+    background: #C1CED0 ;
+    padding: 10px;
+    
+}
+#text-post{
+    outline:none;
+    border:rgb(83, 78, 78);
+    background:#e9f0f2;
+    resize: none;
+    
+}
+#postboxpos{
+    top:45px;
+    left:10px;
+    padding: 10px;
+    resize: none;
+    border: rgb(83, 78, 78);
+}
+
+i{
+    color: green;
+    font-size: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.file{
+    position: absolute;
+    display: none;
+}
+.space{
+    margin-right: 355px;
+    background: green;
+    color: #fff;
+    padding: 4px;
+    width: 90px;
+    border-radius: 50px;
+    font-size: 13px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.5);
+
+}
+.options{
+    margin-left: 40px;
+}
+.ellipsis{
+    position: relative;
+    left: 380px;
+    top: -140px;
+}
+#options{
+    position: absolute;
+    left: 500px;
+    top: 18px;
+    opacity: 0.0;  
+}
+#options::after {
+    content: "";
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+#name-user{
+    color: #393939;
+    padding: 10px;
+
+}

@@ -1,4 +1,5 @@
-import { createUserAccount, logOut } from '../firebase/auth.js';
+import { logOut } from '../firebase/auth.js';
+import { createUser} from '../firebase-controller/signup-controller.js'
 
 export default () => {
   const viewSignUp = document.createElement('section');
@@ -21,6 +22,7 @@ export default () => {
   const signupConfirmPassword = viewSignUp.querySelector('#signup-confirm-password');
   const signUpForm = viewSignUp.querySelector('#signup-form');
   const sigOut = viewSignUp.querySelector('#btn-logout');
+  const userName = viewSignUp.querySelector('#signup-user-name');
 
   // Event submit to create a user account
   signUpForm.addEventListener('submit', (event) => {
@@ -28,20 +30,8 @@ export default () => {
 
     const signUpEmailVal = signUpEmail.value;
     const signupConfirmPasswordVal = signupConfirmPassword.value;
-    createUserAccount(signUpEmailVal, signupConfirmPasswordVal)
-      .then(() => {
-        // Open home template
-        window.location.hash = '#/home';
-        // Clear the form
-        signUpForm.reset();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/invalid-email' || errorCode === 'auth/weak-password') {
-          throw errorMessage;
-        }
-      });
+    const userNameVal = userName.value;
+    createUser(signUpEmailVal, signupConfirmPasswordVal, userNameVal);
   });
   sigOut.addEventListener('click', () => {
     logOut()
