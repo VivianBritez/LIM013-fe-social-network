@@ -25,7 +25,7 @@ const readCreateUserDB = (uid, email, photoUrl, nameUser) => {
 export const loginGoogle = () => {
     singInGoogle()
       .then((res) => {
-        localStorage.setItem('userName',res.user.displayName);
+      localStorage.setItem('userName',res.user.displayName);
       localStorage.setItem('userEmail',res.user.email);
       localStorage.setItem('userPhoto',res.user.photoURL);  
         
@@ -41,9 +41,9 @@ export const loginGoogle = () => {
 
 export const loginFacebook = () => {
     singInFacebook()
-      .then((localStorage) => {
+      .then((res) => {
       window.location.hash = '#/home';
-      readCreateUserDB(localStorage.user.uid, localStorage.user.email, localStorage.user.photoURL, localStorage.user.displayName);
+      readCreateUserDB(res.user.uid, res.user.email, res.user.photoURL, res.user.displayName);
     })
     .catch((error) => {
       if (error) throw error;
