@@ -1,6 +1,6 @@
 import { loginUser } from '../firebase/auth.js';
 import { loginGoogle, loginFacebook } from '../firebase-controller/login-controller.js';
-import {  readUserDB } from '../firebase/firestore.js';
+import {  readUserDB } from '../firebase/firestore.js
 
 export default () => {
   const viewLogin = document.createElement('main');
