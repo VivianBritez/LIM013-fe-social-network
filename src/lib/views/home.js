@@ -40,8 +40,8 @@ export const profileTemplate = () => {
   <input class="file" type="file"></label>
 <select class="space" id="privacy-post">
   <option value="0" disabled selected>Modo</option>
-  <option value="private">Privado</option>
-  <option value="public">Publico</option>
+  <option id="private" value="private">Privado</option>
+  <option id="public" value="public">Publico</option>
 </select>
   <label><i id="btn-post" class="far fa-paper-plane"></i></label>
   </div>
@@ -61,7 +61,7 @@ export const profileTemplate = () => {
   `;
   
   const privacy = viewProfile.querySelector('#privacy-post').value;
-  const noteVal = viewProfile.querySelector('#text-post');
+  const noteVal = viewProfile.querySelector('#btn-post');
 
   const note = noteVal.value;
 
@@ -74,7 +74,7 @@ export const profileTemplate = () => {
   const btnPost = viewProfile.querySelector('#btn-post');
   btnPost.addEventListener( 'click', () => {
     console.log(note, "sd",privacy);
-    //homeCreateNote( localStorage.getItem('userUid'),localStorage.getItem('userName'),privacy,note);
+    homeCreateNote( localStorage.getItem('userUid'),localStorage.getItem('userName'),privacy,note);
   });
 
 
