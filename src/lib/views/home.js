@@ -1,5 +1,5 @@
-import { homeCreateNote, homeLogOut } from '../firebase-controller/home-controller.js';
-// import { getUser } from '../firebase/auth.js';
+import { homeCreateNote, homeLogOut, createAddNoteToDB, readNoteToDB } from '../firebase-controller/home-controller.js';
+import { getUser } from '../firebase/auth.js';
 
 export const profileTemplate = () => {
   // console.log('user', user);
@@ -68,6 +68,24 @@ export const profileTemplate = () => {
   const btnPost = viewProfile.querySelector('#btn-post');
   btnPost.addEventListener('click', () => {
     homeCreateNote(uid, username, privacy, note);
+  });
+
+  // Start grabbing our DOM Element
+  const textPost = viewProfile.querySelector('#text-post');
+  // const textShareVal = viewProfile.querySelector('#textshare').value;
+  const btnShare = viewProfile.querySelector('#btn-share');
+
+  const user = getUser();
+
+  // Share post
+  btnShare.addEventListener('click', () => {
+    const textPostVal = textPost.value;
+
+    createAddNoteToDB(user.uid, user.displayName, textPostVal);
+    // Show post
+    readNoteToDB();
+    // Clear text content
+    // textPostVal = '';
   });
 
   return viewProfile;
