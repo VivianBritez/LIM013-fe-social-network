@@ -56,6 +56,7 @@ export default () => {
             localStorage.setItem('userName',user.name);
             localStorage.setItem('userEmail',user.email);
             localStorage.setItem('userPhoto',user.photoUrl);
+            localStorage.setItem('userUid',user.uid);
             console.log("entro",localStorage.getItem('userPhoto'));
 
             // Clear the form

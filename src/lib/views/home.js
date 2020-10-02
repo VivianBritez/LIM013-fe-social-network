@@ -36,12 +36,12 @@ export const profileTemplate = () => {
 
   </div>
   <div>
-  <label><i id="i" class="far fa-images"></i>
+  <label><i id="image" class="far fa-images"></i>
   <input class="file" type="file"></label>
-<select class="space" id="mode-post">
-  <option value="" disabled selected>Modo</option>
-  <option id="private" value="private">Privado</option>
-  <option id="public" value="public">Publico</option>
+<select class="space" id="privacy-post">
+  <option value="0" disabled selected>Modo</option>
+  <option value="private">Privado</option>
+  <option value="public">Publico</option>
 </select>
   <label><i id="btn-post" class="far fa-paper-plane"></i></label>
   </div>
@@ -49,8 +49,8 @@ export const profileTemplate = () => {
 <div id="share-post">
   <h4 id="name-user">Publicado por</h4>
   <textarea id="postboxpos" maxlength="100" rows="5" cols="77" ></textarea>
-  <label><i id="i" class="far fa-heart"></i></label>
-  <label><i id="i" class="far fa-comment"></i></label>
+  <label><i id="likes" class="far fa-heart"></i></label>
+  <label><i id="coment" class="far fa-comment"></i></label>
   <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h"></i></label>
   <select id="options">
     <option value="" disabled selected>Elegir</option>
@@ -59,6 +59,12 @@ export const profileTemplate = () => {
   </select>
 </div>
   `;
+  
+  const privacy = viewProfile.querySelector('#privacy-post').value;
+  const noteVal = viewProfile.querySelector('#text-post');
+
+  const note = noteVal.value;
+
 
   const btnlogOut = viewProfile.querySelector('#btn-log-out');
   btnlogOut.addEventListener( 'click', () =>{
@@ -67,7 +73,8 @@ export const profileTemplate = () => {
 
   const btnPost = viewProfile.querySelector('#btn-post');
   btnPost.addEventListener( 'click', () => {
-    homeCreateNote(uid,username,privacy,note);
+    console.log(note, "sd",privacy);
+    //homeCreateNote( localStorage.getItem('userUid'),localStorage.getItem('userName'),privacy,note);
   });
 
 

@@ -7,6 +7,7 @@ export const homeLogOut = () =>{
         localStorage.removeItem('userName');
         localStorage.removeItem('userEmail');
         localStorage.removeItem('userPhoto');
+        localStorage.removeItem('userUid');
         window.location.hash = '#/login';
     });
 };
@@ -19,7 +20,7 @@ export const homeGetNotes = () =>{
     let htmlSalida='';
     getNotesDB()
     .then((res) => {
-      
+
       if (res.empty) {
       
         } else {

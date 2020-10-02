@@ -12,6 +12,7 @@ export const createUser = (email,password,name) => {
         localStorage.setItem('userName',name);
         localStorage.setItem('userEmail',email);
         localStorage.setItem('userPhoto',imgProfileUserDefault);
+        localStorage.setItem('userUid',uid);
         // Clear the form
         //signUpForm.reset();
       })

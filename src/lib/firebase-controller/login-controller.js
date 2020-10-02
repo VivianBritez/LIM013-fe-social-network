@@ -10,13 +10,15 @@ const readCreateUserDB = (uid, email, photoUrl, nameUser) => {
       localStorage.setItem('userName',nameUser);
       localStorage.setItem('userEmail',email);
       localStorage.setItem('userPhoto',photoUrl);
+      localStorage.setItem('userUid',uid);
         } else {
       res.forEach((refDoc) => {
         const user = refDoc.data();
         //console.log(user);
         localStorage.setItem('userName',user.name);
         localStorage.setItem('userEmail',user.email);
-        localStorage.setItem('userPhoto',user.photoUrl);  
+        localStorage.setItem('userPhoto',user.photoUrl);
+        localStorage.setItem('userUid',user.uid); 
           });
         };
     });
@@ -27,7 +29,8 @@ export const loginGoogle = () => {
       .then((res) => {
       localStorage.setItem('userName',res.user.displayName);
       localStorage.setItem('userEmail',res.user.email);
-      localStorage.setItem('userPhoto',res.user.photoURL);  
+      localStorage.setItem('userPhoto',res.user.photoURL);
+      localStorage.setItem('userUid',res.user.uid);  
         
         console.log("entro aqui");
       window.location.hash = '#/home';
