@@ -1,5 +1,6 @@
 import { homeCreateNote, homeLogOut, createAddNoteToDB, readNoteToDB } from '../firebase-controller/home-controller.js';
 import { getUser } from '../firebase/auth.js';
+import { readAddNotesToDB } from '../firebase/firestore.js'
 
 export const profileTemplate = () => {
   // console.log('user', user);
@@ -50,6 +51,7 @@ export const profileTemplate = () => {
 </div>
 <div id="share-post">
   <h4 id="name-user">Publicado por</h4>
+  <div id="message-post"> </div>
   <textarea id="postboxpos" maxlength="100" rows="5" cols="77" ></textarea>
   <label><i id="i" class="far fa-heart"></i></label>
   <label><i id="i" class="far fa-comment"></i></label>
@@ -81,11 +83,23 @@ export const profileTemplate = () => {
   btnPost.addEventListener('click', () => {
     const textPostVal = textPost.value;
 
-    createAddNoteToDB(localStorage.getItem('userName'), textPostVal);
-    // Show post
-    readNoteToDB();
+    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal);
+
     // Clear text content
     // textPostVal = '';
+
+    // Show post
+    readAddNotesToDB()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.id, ' => ', doc.data().note);
+          const messagePost = viewProfile.querySelector('#message-post');
+          messagePost.innerHTML = `<p>${doc.id} => ${doc.data().note}</p>`;
+        });
+      })
+      .catch((error) => {
+        console.log('Error getting documents: ', error);
+      });
   });
 
   return viewProfile;

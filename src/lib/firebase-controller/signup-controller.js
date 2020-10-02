@@ -11,6 +11,7 @@ export const createUser = (email, password, name) => {
       // Save user data in firebase
       createUserDB(res.user.uid, email, imgProfileUserDefault, name);
 
+      localStorage.setItem('userID', res.user.uid);
       localStorage.setItem('userName', name);
       localStorage.setItem('userEmail', email);
       localStorage.setItem('userPhoto', imgProfileUserDefault);

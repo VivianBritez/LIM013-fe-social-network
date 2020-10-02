@@ -7,6 +7,8 @@ const readCreateUserDB = (uid, email, photoUrl, nameUser) => {
       console.log('res', res);
       if (res.empty) {
         createUserDB(uid, email, photoUrl, nameUser);
+
+        localStorage.setItem('userID', uid);
         localStorage.setItem('userName', nameUser);
         localStorage.setItem('userEmail', email);
         localStorage.setItem('userPhoto', photoUrl);
@@ -33,6 +35,7 @@ export const loginWithEmailAndPassword = (txtEmailVal, txtpasswordVal) => {
             // Open home template
             window.location.hash = '#/home';
 
+            localStorage.setItem('userID', res.user.uid);
             localStorage.setItem('userName', user.name);
             localStorage.setItem('userEmail', user.email);
             localStorage.setItem('userPhoto', user.photoUrl);
@@ -53,6 +56,7 @@ export const loginWithEmailAndPassword = (txtEmailVal, txtpasswordVal) => {
 export const loginGoogle = () => {
   singInGoogle()
     .then((res) => {
+      localStorage.setItem('userID', res.user.uid);
       localStorage.setItem('userName', res.user.displayName);
       localStorage.setItem('userEmail', res.user.email);
       localStorage.setItem('userPhoto', res.user.photoURL);

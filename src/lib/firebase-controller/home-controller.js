@@ -41,8 +41,8 @@ export const homeGetNotes = () => {
     });
 };
 
-export const createAddNoteToDB = (name, createNote) => {
-  addNotesToDB(name, createNote)
+export const createAddNoteToDB = (userID, name, createNote) => {
+  addNotesToDB(userID, name, createNote)
     .then((docRef) => {
       localStorage.setItem('userName', name);
       console.log('Document written with ID: ', docRef.id);
@@ -56,7 +56,10 @@ export const readNoteToDB = () => {
   readAddNotesToDB()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
+        console.log(doc.id, ' => ', doc.data().note);
       });
+    })
+    .catch((error) => {
+      console.log('Error getting documents: ', error);
     });
 };
