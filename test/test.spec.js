@@ -19,7 +19,7 @@ describe('createUserAccount', () => {
   it('should be a function', () => {
     expect(typeof myModule.createUserAccount).toBe('function');
   });
-  it('should be able to create an account', done => myModule.createUserAccount('sheillyrlp@gmial.com', '12345678')
+  it('should be able to create an account', (done) => myModule.createUserAccount('sheillyrlp@gmial.com', '12345678')
     .then((user) => {
       expect(user.email).toBe('sheillyrlp@gmial.com');
       done();

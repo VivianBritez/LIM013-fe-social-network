@@ -1,9 +1,9 @@
 import { homeCreateNote, homeLogOut } from '../firebase-controller/home-controller.js';
-//import { getUser } from '../firebase/auth.js';
+// import { getUser } from '../firebase/auth.js';
 
 export const profileTemplate = () => {
   // console.log('user', user);
-  //const user = getUser();
+  // const user = getUser();
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <header>
@@ -61,15 +61,14 @@ export const profileTemplate = () => {
   `;
 
   const btnlogOut = viewProfile.querySelector('#btn-log-out');
-  btnlogOut.addEventListener( 'click', () =>{
+  btnlogOut.addEventListener('click', () => {
     homeLogOut();
   });
 
   const btnPost = viewProfile.querySelector('#btn-post');
-  btnPost.addEventListener( 'click', () => {
-    homeCreateNote(uid,username,privacy,note);
+  btnPost.addEventListener('click', () => {
+    homeCreateNote(uid, username, privacy, note);
   });
-
 
   return viewProfile;
 };

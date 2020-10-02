@@ -1,6 +1,6 @@
 import { loginUser } from '../firebase/auth.js';
 import { loginGoogle, loginFacebook } from '../firebase-controller/login-controller.js';
-import {  readUserDB } from '../firebase/firestore.js
+import { readUserDB } from '../firebase/firestore.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -35,34 +35,32 @@ export default () => {
   const txtpassword = viewLogin.querySelector('#txt-password');
   const loginForm = viewLogin.querySelector('#login-form');
 
-  
   // Event submit to user login
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const txtEmailVal = txtEmail.value;
     const txtpasswordVal = txtpassword.value;
-    console.log("paso");
+    console.log('paso');
     loginUser(txtEmailVal, txtpasswordVal)
       .then((res) => {
-        console.log(res);
+        console.log('res');
         readUserDB(res.user.uid)
-        .then((querySnapshot) => {
-          querySnapshot.forEach((refDoc) => {
-            const user = refDoc.data();
-            // Open home template
-            window.location.hash = '#/home';
-            
-            localStorage.setItem('userName',user.name);
-            localStorage.setItem('userEmail',user.email);
-            localStorage.setItem('userPhoto',user.photoUrl);
-            console.log("entro",localStorage.getItem('userPhoto'));
+          .then((querySnapshot) => {
+            querySnapshot.forEach((refDoc) => {
+              const user = refDoc.data();
+              // Open home template
+              window.location.hash = '#/home';
 
-            // Clear the form
-            loginForm.reset();
+              localStorage.setItem('userName', user.name);
+              localStorage.setItem('userEmail', user.email);
+              localStorage.setItem('userPhoto', user.photoUrl);
+              console.log('entro', localStorage.getItem('userPhoto'));
+
+              // Clear the form
+              loginForm.reset();
+            });
           });
-        });
-        
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -75,8 +73,8 @@ export default () => {
 
   // Sign in with google
   viewLogin.querySelector('#btn-google').addEventListener('click', () => {
-    //event.preventDefault();
-   //console.log('hola entre aqui');
+    // event.preventDefault();
+    // console.log('hola entre aqui');
     loginGoogle();
   });
 
