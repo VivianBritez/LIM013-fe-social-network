@@ -1,5 +1,5 @@
 import { readUserDB, createUserDB } from '../firebase/firestore.js';
-import { singInGoogle, singInFacebook } from '../firebase/auth.js';
+import { singInGoogle, singInFacebook, loginUser } from '../firebase/auth.js';
 
 const readCreateUserDB = (uid, email, photoUrl, nameUser) => {
   readUserDB(uid)
@@ -18,6 +18,34 @@ const readCreateUserDB = (uid, email, photoUrl, nameUser) => {
           localStorage.setItem('userEmail', user.email);
           localStorage.setItem('userPhoto', user.photoUrl);
         });
+      }
+    });
+};
+
+export const loginWithEmailAndPassword = (txtEmailVal, txtpasswordVal) => {
+  loginUser(txtEmailVal, txtpasswordVal)
+    .then((res) => {
+      console.log('res');
+      readUserDB(res.user.uid)
+        .then((querySnapshot) => {
+          querySnapshot.forEach((refDoc) => {
+            const user = refDoc.data();
+            // Open home template
+            window.location.hash = '#/home';
+
+            localStorage.setItem('userName', user.name);
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userPhoto', user.photoUrl);
+
+            console.log('entro', localStorage.getItem('userPhoto'));
+          });
+        });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
+        throw errorMessage;
       }
     });
 };

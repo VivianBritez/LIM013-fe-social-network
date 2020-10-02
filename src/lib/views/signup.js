@@ -31,8 +31,13 @@ export default () => {
     const signUpEmailVal = signUpEmail.value;
     const signupConfirmPasswordVal = signupConfirmPassword.value;
     const userNameVal = userName.value;
+
     createUser(signUpEmailVal, signupConfirmPasswordVal, userNameVal);
+
+    // Clear the form
+    signUpForm.reset();
   });
+
   sigOut.addEventListener('click', () => {
     logOut()
       .then(() => {

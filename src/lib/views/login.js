@@ -1,6 +1,6 @@
-import { loginUser } from '../firebase/auth.js';
-import { loginGoogle, loginFacebook } from '../firebase-controller/login-controller.js';
-import { readUserDB } from '../firebase/firestore.js';
+// import { loginUser } from '../firebase/auth.js';
+import { loginGoogle, loginFacebook, loginWithEmailAndPassword } from '../firebase-controller/login-controller.js';
+// import { readUserDB } from '../firebase/firestore.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -41,34 +41,12 @@ export default () => {
 
     const txtEmailVal = txtEmail.value;
     const txtpasswordVal = txtpassword.value;
+
     console.log('paso');
-    loginUser(txtEmailVal, txtpasswordVal)
-      .then((res) => {
-        console.log('res');
-        readUserDB(res.user.uid)
-          .then((querySnapshot) => {
-            querySnapshot.forEach((refDoc) => {
-              const user = refDoc.data();
-              // Open home template
-              window.location.hash = '#/home';
 
-              localStorage.setItem('userName', user.name);
-              localStorage.setItem('userEmail', user.email);
-              localStorage.setItem('userPhoto', user.photoUrl);
-              console.log('entro', localStorage.getItem('userPhoto'));
-
-              // Clear the form
-              loginForm.reset();
-            });
-          });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
-          throw errorMessage;
-        }
-      });
+    loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
+    // Clear the login form
+    loginForm.reset();
   });
 
   // Sign in with google

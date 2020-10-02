@@ -8,12 +8,12 @@ export const createUser = (email, password, name) => {
     .then((res) => {
       // Open home template
       window.location.hash = '#/home';
+      // Save user data in firebase
       createUserDB(res.user.uid, email, imgProfileUserDefault, name);
+
       localStorage.setItem('userName', name);
       localStorage.setItem('userEmail', email);
       localStorage.setItem('userPhoto', imgProfileUserDefault);
-      // Clear the form
-      // signUpForm.reset();
     })
     .catch((error) => {
       const errorCode = error.code;
