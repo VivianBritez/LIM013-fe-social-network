@@ -41,26 +41,6 @@ export default () => {
 
     const txtEmailVal = txtEmail.value;
     const txtpasswordVal = txtpassword.value;
-<<<<<<< HEAD
-    console.log("paso");
-    loginUser(txtEmailVal, txtpasswordVal)
-      .then((res) => {
-        console.log(res);
-        readUserDB(res.user.uid)
-        .then((querySnapshot) => {
-          querySnapshot.forEach((refDoc) => {
-            const user = refDoc.data();
-            // Open home template
-            window.location.hash = '#/home';
-            
-            localStorage.setItem('userName',user.name);
-            localStorage.setItem('userEmail',user.email);
-            localStorage.setItem('userPhoto',user.photoUrl);
-            localStorage.setItem('userUid',user.uid);
-            console.log("entro",localStorage.getItem('userPhoto'));
-=======
->>>>>>> 4b30f9344701a70d055252346c90031f996927bd
-
     console.log('paso');
 
     loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);

@@ -1,4 +1,4 @@
-import { homeLogOut, createAddNoteToDB } from '../firebase-controller/home-controller.js';
+import { createAddNoteToDB } from '../firebase-controller/home-controller.js';
 import { readAddNotesToDB } from '../firebase/firestore.js';
 
 export const profileTemplate = () => {
@@ -55,18 +55,6 @@ export const profileTemplate = () => {
     </select>
   </div>
   `;
-  
-  const privacy = viewProfile.querySelector('#privacy-post').value;
-  const noteVal = viewProfile.querySelector('#btn-post');
-
-  const note = noteVal.value;
-
-
-  const btnlogOut = viewProfile.querySelector('#btn-log-out');
-  btnlogOut.addEventListener('click', () => {
-    homeLogOut();
-  });
-
   // Start grabbing our DOM Element
   const textPost = viewProfile.querySelector('#text-post');
   const btnShare = viewProfile.querySelector('#btn-share');
