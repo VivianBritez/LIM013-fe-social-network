@@ -1,5 +1,5 @@
 import { logOut } from '../firebase/auth.js';
-import { createUser} from '../firebase-controller/signup-controller.js'
+import { createUser } from '../firebase-controller/signup-controller.js';
 
 export default () => {
   const viewSignUp = document.createElement('section');
@@ -31,8 +31,13 @@ export default () => {
     const signUpEmailVal = signUpEmail.value;
     const signupConfirmPasswordVal = signupConfirmPassword.value;
     const userNameVal = userName.value;
+
     createUser(signUpEmailVal, signupConfirmPasswordVal, userNameVal);
+
+    // Clear the form
+    signUpForm.reset();
   });
+
   sigOut.addEventListener('click', () => {
     logOut()
       .then(() => {

@@ -1,6 +1,6 @@
-import { loginUser } from '../firebase/auth.js';
-import { loginGoogle, loginFacebook } from '../firebase-controller/login-controller.js';
-import {  readUserDB } from '../firebase/firestore.js';
+// import { loginUser } from '../firebase/auth.js';
+import { loginGoogle, loginFacebook, loginWithEmailAndPassword } from '../firebase-controller/login-controller.js';
+// import { readUserDB } from '../firebase/firestore.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -35,13 +35,13 @@ export default () => {
   const txtpassword = viewLogin.querySelector('#txt-password');
   const loginForm = viewLogin.querySelector('#login-form');
 
-  
   // Event submit to user login
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const txtEmailVal = txtEmail.value;
     const txtpasswordVal = txtpassword.value;
+<<<<<<< HEAD
     console.log("paso");
     loginUser(txtEmailVal, txtpasswordVal)
       .then((res) => {
@@ -58,26 +58,20 @@ export default () => {
             localStorage.setItem('userPhoto',user.photoUrl);
             localStorage.setItem('userUid',user.uid);
             console.log("entro",localStorage.getItem('userPhoto'));
+=======
+>>>>>>> 4b30f9344701a70d055252346c90031f996927bd
 
-            // Clear the form
-            loginForm.reset();
-          });
-        });
-        
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/invalid-email' || errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
-          throw errorMessage;
-        }
-      });
+    console.log('paso');
+
+    loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
+    // Clear the login form
+    loginForm.reset();
   });
 
   // Sign in with google
   viewLogin.querySelector('#btn-google').addEventListener('click', () => {
-    //event.preventDefault();
-   //console.log('hola entre aqui');
+    // event.preventDefault();
+    // console.log('hola entre aqui');
     loginGoogle();
   });
 
