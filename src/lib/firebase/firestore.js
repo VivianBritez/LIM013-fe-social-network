@@ -23,10 +23,9 @@ export const createNoteDB = (uid, nameUser, privacy, note) => firebase.firestore
 export const getNotesDB = () => firebase.firestore().collection('notes')
   .get();
 
-export const addNotesToDB = (useruid, userDisplayName, createNote) => firebase.firestore()
+export const addNotesToDB = (name, createNote) => firebase.firestore()
   .collection('addNotes').add({
-    creator: useruid,
-    creatorName: userDisplayName,
+    creatorName: name,
     note: createNote,
   });
 

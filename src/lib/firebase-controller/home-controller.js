@@ -41,9 +41,10 @@ export const homeGetNotes = () => {
     });
 };
 
-export const createAddNoteToDB = (useruid, userDisplayName, createNote) => {
-  addNotesToDB(useruid, userDisplayName, createNote)
+export const createAddNoteToDB = (name, createNote) => {
+  addNotesToDB(name, createNote)
     .then((docRef) => {
+      localStorage.setItem('userName', name);
       console.log('Document written with ID: ', docRef.id);
     })
     .catch((error) => {

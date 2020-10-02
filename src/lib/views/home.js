@@ -31,9 +31,11 @@ export const profileTemplate = () => {
     <div id="respon">
     <div id="post-container" class="post">
   <div id="post">
-    <div id="postboxpos"><textarea id="text-post" placeholder="¿Qué quieres compartir?"
-    maxlength="100" rows="8" cols="77" ></textarea></div>
-
+    <div id="postboxpos">
+    <textarea id="text-post" placeholder="¿Qué quieres compartir?"
+    maxlength="100" rows="8" cols="77" >
+    </textarea>
+    </div>
   </div>
   <div>
   <label><i id="i" class="far fa-images"></i>
@@ -66,22 +68,20 @@ export const profileTemplate = () => {
   });
 
   const btnPost = viewProfile.querySelector('#btn-post');
+  /*
   btnPost.addEventListener('click', () => {
     homeCreateNote(uid, username, privacy, note);
   });
-
+  */
   // Start grabbing our DOM Element
   const textPost = viewProfile.querySelector('#text-post');
   // const textShareVal = viewProfile.querySelector('#textshare').value;
-  const btnShare = viewProfile.querySelector('#btn-share');
-
-  const user = getUser();
 
   // Share post
-  btnShare.addEventListener('click', () => {
+  btnPost.addEventListener('click', () => {
     const textPostVal = textPost.value;
 
-    createAddNoteToDB(user.uid, user.displayName, textPostVal);
+    createAddNoteToDB(localStorage.getItem('userName'), textPostVal);
     // Show post
     readNoteToDB();
     // Clear text content
