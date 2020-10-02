@@ -1,10 +1,8 @@
-import { homeCreateNote, homeLogOut, createAddNoteToDB, readNoteToDB } from '../firebase-controller/home-controller.js';
-import { getUser } from '../firebase/auth.js';
-import { readAddNotesToDB } from '../firebase/firestore.js'
+import { homeLogOut, createAddNoteToDB } from '../firebase-controller/home-controller.js';
+import { readAddNotesToDB } from '../firebase/firestore.js';
 
 export const profileTemplate = () => {
   // console.log('user', user);
-  // const user = getUser();
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <header>
@@ -29,39 +27,33 @@ export const profileTemplate = () => {
       <p>${localStorage.getItem('userEmail')}</p>
       </section>
     </section>
-    <div id="respon">
-    <div id="post-container" class="post">
-  <div id="post">
-    <div id="postboxpos">
-    <textarea id="text-post" placeholder="¿Qué quieres compartir?"
-    maxlength="100" rows="8" cols="77" >
-    </textarea>
+    <div id="post-container" class="post general-position">
+    <div id="box-post" class="box-post">
+      <textarea id="text-post" placeholder="¿Qué quieres compartir?" maxlength="100" rows="8" cols="77">
+        </textarea>
     </div>
+    <label><i id="i" class="far fa-images"></i>
+      <input class="file" type="file"></label>
+    <select class="space" id="mode-post">
+      <option value="" disabled selected>Modo</option>
+      <option id="private" value="private">Privado</option>
+      <option id="public" value="public">Publico</option>
+    </select>
+    <label><i id="btn-share" class="far fa-paper-plane"></i></label>
   </div>
-  <div>
-  <label><i id="i" class="far fa-images"></i>
-  <input class="file" type="file"></label>
-<select class="space" id="mode-post">
-  <option value="" disabled selected>Modo</option>
-  <option id="private" value="private">Privado</option>
-  <option id="public" value="public">Publico</option>
-</select>
-  <label><i id="btn-post" class="far fa-paper-plane"></i></label>
+  <div id="share-post" class="general-position">
+    <h4 id="name-user">Publicado por</h4>
+    <div id="message-post"> </div>
+    <div id="message-post" class="box-post"></div>
+    <label><i id="i" class="far fa-heart"></i></label>
+    <label><i id="i" class="far fa-comment"></i></label>
+    <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h"></i></label>
+    <select id="options">
+      <option value="" disabled selected>Elegir</option>
+      <option id="edit" value="edit">Editar</option>
+      <option id="delete" value="delete">Borrar</option>
+    </select>
   </div>
-</div>
-<div id="share-post">
-  <h4 id="name-user">Publicado por</h4>
-  <div id="message-post"> </div>
-  <textarea id="postboxpos" maxlength="100" rows="5" cols="77" ></textarea>
-  <label><i id="i" class="far fa-heart"></i></label>
-  <label><i id="i" class="far fa-comment"></i></label>
-  <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h"></i></label>
-  <select id="options">
-    <option value="" disabled selected>Elegir</option>
-    <option id="edit" value="edit">Editar</option>
-    <option id="delete" value="delete">Borrar</option>
-  </select>
-</div>
   `;
 
   const btnlogOut = viewProfile.querySelector('#btn-log-out');
@@ -69,36 +61,27 @@ export const profileTemplate = () => {
     homeLogOut();
   });
 
-  const btnPost = viewProfile.querySelector('#btn-post');
-  /*
-  btnPost.addEventListener('click', () => {
-    homeCreateNote(uid, username, privacy, note);
-  });
-  */
   // Start grabbing our DOM Element
   const textPost = viewProfile.querySelector('#text-post');
-  // const textShareVal = viewProfile.querySelector('#textshare').value;
+  const btnShare = viewProfile.querySelector('#btn-share');
 
   // Share post
-  btnPost.addEventListener('click', () => {
+  btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
 
     createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal);
 
     // Clear text content
-    // textPostVal = '';
 
     // Show post
+    const messagePost = viewProfile.querySelector('#message-post');
     readAddNotesToDB()
-      .then((querySnapshot) => {
+      .onSnapshot((querySnapshot) => {
+        messagePost.innerHTML = '';
         querySnapshot.forEach((doc) => {
-          // console.log(doc.id, ' => ', doc.data().note);
-          const messagePost = viewProfile.querySelector('#message-post');
-          messagePost.innerHTML = `<p>${doc.id} => ${doc.data().note}</p>`;
+          console.log(doc.id, ' => ', doc.data().note);
+          messagePost.innerHTML += `<p>${doc.data().note}</p>`;
         });
-      })
-      .catch((error) => {
-        console.log('Error getting documents: ', error);
       });
   });
 

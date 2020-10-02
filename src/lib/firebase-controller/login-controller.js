@@ -1,17 +1,17 @@
 import { readUserDB, createUserDB } from '../firebase/firestore.js';
 import { singInGoogle, singInFacebook, loginUser } from '../firebase/auth.js';
 
-const readCreateUserDB = (uid, email, photoUrl, nameUser) => {
-  readUserDB(uid)
+const readCreateUserDB = (useruid, emailUser, userPhotoUrl, username) => {
+  readUserDB(useruid)
     .then((res) => {
       console.log('res', res);
       if (res.empty) {
-        createUserDB(uid, email, photoUrl, nameUser);
+        createUserDB(useruid, emailUser, userPhotoUrl, username);
 
-        localStorage.setItem('userID', uid);
-        localStorage.setItem('userName', nameUser);
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('userPhoto', photoUrl);
+        localStorage.setItem('userID', useruid);
+        localStorage.setItem('userName', username);
+        localStorage.setItem('userEmail', emailUser);
+        localStorage.setItem('userPhoto', userPhotoUrl);
       } else {
         res.forEach((refDoc) => {
           const user = refDoc.data();
