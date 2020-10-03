@@ -22,9 +22,9 @@ body{
     margin: 0;
 }
 .container-profile{
-    display: inline-block;
     margin-left: 3%;
     max-width: 300px;
+    float: left;
 }
 nav{
 background: #EDF1ED;
@@ -75,35 +75,46 @@ label #cross{
     display: none;
 }
 .general-position{
-    height: 80%;
-    bottom: 0;
-    position: fixed;
+    bottom: 50%;
+}
+
+.general-position-dos{
+    width: 200px;
 }
 
 .post{
-    left:350px;
-    position:absolute;
-    width:600px;
-    height:210px;
-    background: #C1CED0 ;
+    width: 63%;
+    height: 210px;
+    background: #C1CED0;
     padding: 10px;
+    margin-left: 26%;
+    margin-top: 4%;
     }
 
 #share-post{
-    top:250px;
-    left:350px;
-    position:absolute;
-    width:600px;
+    width:63%;
     height:210px;
     background: #C1CED0 ;
     padding: 10px;
+    margin-left: 26%;
+    margin-top: 4%;;
     
+}
+.general-position-dos{
+    position:absolute;
+    width:600px;
+    height:210px;
+    background: red ;
+    padding: 10px;
 }
 #text-post{
     outline:none;
     border:rgb(83, 78, 78);
     background:#e9f0f2;
     resize: none;
+    position: relative;
+    height: 110px;
+    margin: 1%;
     
 }
 .box-post{
@@ -165,4 +176,7 @@ i{
     color: #393939;
     padding: 10px;
 
+}
+.plane{
+    align-self: flex-start;
 }

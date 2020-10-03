@@ -11,8 +11,8 @@ export const homeLogOut = () => {
     });
 };
 
-export const createAddNoteToDB = (userID, name, createNote) => {
-  addNotesToDB(userID, name, createNote)
+export const createAddNoteToDB = (userID, name, createNote,date) => {
+  addNotesToDB(userID, name, createNote,date)
     .then((docRef) => {
       localStorage.setItem('userName', name);
       console.log('Document written with ID: ', docRef.id);
