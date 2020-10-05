@@ -28,8 +28,8 @@ export const profileTemplate = () => {
       </section>
     </section>
     <div id="post-container" class="post general-position">
-    <div id="box-post" class="box-post">
-      <textarea id="text-post" placeholder="¿Qué quieres compartir?" maxlength="100" rows="8" cols="77">
+    <div id="box-post">
+      <textarea class="textarea" placeholder="¿Qué quieres compartir?" maxlength="100" rows="8" cols="77">
         </textarea>
     </div>
     <label><i id="i" class="far fa-images"></i>
@@ -41,7 +41,7 @@ export const profileTemplate = () => {
     </select>
     <label class"plane"><i id="btn-share" class="far fa-paper-plane"></i></label>
   </div>
-  <div id="message-post" class="box-post"> 
+  <div id="message-post"> 
   </div>
   `;
   
@@ -58,20 +58,22 @@ const listPublication = () =>{
         console.log(doc.id, ' => ', doc.data().note);
         console.log(doc.id, ' => ', doc.data().creatorName);
         messagePost.innerHTML += `<div id="share-post">
-        <h4 id="name-user">Publicado por${doc.data().creatorName}</h4>
+        <h4 id="name-user">Publicado por ${doc.data().creatorName}
+        <label class="ellipsis"><i class="fas fa-ellipsis-h"><select id="options">
+        <option value="" disabled selected>Elegir</option>
+        <option id="edit" value="edit">Editar</option>
+        <option id="delete" value="delete">Borrar</option>
+      </select></i></label></h4>
+        
         <div id="text-post"><p>${doc.data().note}</p></div>
         <label><i id="i" class="far fa-heart"></i></label>
   <label><i id="i" class="far fa-comment"></i></label>
-  <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h"></i></label>
-  <select id="options">
-    <option value="" disabled selected>Elegir</option>
-    <option id="edit" value="edit">Editar</option>
-    <option id="delete" value="delete">Borrar</option>
-  </select>
+  <button type="button" id="button"></button>
   </div> `;
       });
     });
 };
+
 listPublication();
   // Share post
   btnShare.addEventListener('click', () => {

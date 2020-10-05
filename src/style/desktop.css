@@ -93,12 +93,14 @@ label #cross{
 
 #share-post{
     width:63%;
-    height:210px;
     background: #C1CED0 ;
     padding: 10px;
     margin-left: 26%;
     margin-top: 4%;;
     
+}
+#btn-share{
+    float: right;
 }
 .general-position-dos{
     position:absolute;
@@ -117,13 +119,6 @@ label #cross{
     margin: 1%;
     
 }
-.box-post{
-    top:45px;
-    left:10px;
-    padding: 10px;
-    resize: none;
-    border: rgb(83, 78, 78);
-}
 
 i{
     color: green;
@@ -138,7 +133,6 @@ i{
     display: none;
 }
 .space{
-    margin-right: 355px;
     background: green;
     color: #fff;
     padding: 4px;
@@ -148,19 +142,24 @@ i{
     box-shadow: 0 5px 25px rgba(0,0,0,.5);
 
 }
-.options{
-    margin-left: 40px;
+.textarea{
+    border: rgb(83, 78, 78);
+    background: #e9f0f2;
+    height: 110px;
+    margin: 1%;
+    width: 97%;
+    margin-top: 4%;
+    outline: none;
+    resize: none;
 }
 .ellipsis{
-    position: relative;
-    left: 380px;
-    top: -140px;
+    float: right;
 }
 #options{
-    position: absolute;
-    left: 500px;
-    top: 18px;
-    opacity: 0.0;  
+    position: relative;
+    width: 20px;
+    left: -25px;
+    opacity: 0.0;
 }
 #options::after {
     content: "";
