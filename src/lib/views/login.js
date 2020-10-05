@@ -41,7 +41,6 @@ export default () => {
 
     const txtEmailVal = txtEmail.value;
     const txtpasswordVal = txtpassword.value;
-
     console.log('paso');
 
     loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
