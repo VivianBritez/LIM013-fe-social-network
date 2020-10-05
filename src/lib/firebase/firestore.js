@@ -19,5 +19,9 @@ export const addNotesToDB = (userID, name, createNote,date) => firebase.firestor
     date: date,
   });
 
-export const readAddNotesToDB = () => firebase.firestore()
-  .collection('publications').orderBy("date","desc");
+// callbackfn es un funcion como parametro lo mando 
+export const readAddNotesToDB = callbackfn => firebase.firestore()
+  .collection('publications').orderBy("date","desc").onSnapshot((data) => {
+    console.log(data);
+    callbackfn(data);
+  });

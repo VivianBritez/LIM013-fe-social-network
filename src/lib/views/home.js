@@ -1,7 +1,24 @@
 import { homeLogOut, createAddNoteToDB } from '../firebase-controller/home-controller.js';
-import { readAddNotesToDB } from '../firebase/firestore.js';
 
-export const profileTemplate = () => {
+const postTemplate = (doc) => {
+  const div = document.createElement('div');
+  div.classList = 'share-post';
+  div.innerHTML = `
+  <h4 id="name-user">Publicado por${doc.data().creatorName}</h4>
+  <div id="text-post"><p>${doc.data().note}</p></div>
+  <label><i id="i" class="far fa-heart"></i></label>
+  <label><i id="i" class="far fa-comment"></i></label>
+  <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h"></i></label>
+  <select id="options">
+  <option value="" disabled selected>Elegir</option>
+  <option id="edit" value="edit">Editar</option>
+  <option id="delete" value="delete">Borrar</option>
+  </select>
+ `;
+  return div;
+};
+
+export const profileTemplate = (posts) => {
   // console.log('user', user);
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
@@ -44,52 +61,31 @@ export const profileTemplate = () => {
   <div id="message-post" class="box-post"> 
   </div>
   `;
-  
+
   // Start grabbing our DOM Element
   const textPost = viewProfile.querySelector('#text-post');
   const btnShare = viewProfile.querySelector('#btn-share');
-const listPublication = () =>{
-  // Show post
-  const messagePost = viewProfile.querySelector('#message-post');
-  readAddNotesToDB()
-    .onSnapshot((querySnapshot) => {
-      messagePost.innerHTML = '';
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, ' => ', doc.data().note);
-        console.log(doc.id, ' => ', doc.data().creatorName);
-        messagePost.innerHTML += `<div id="share-post">
-        <h4 id="name-user">Publicado por${doc.data().creatorName}</h4>
-        <div id="text-post"><p>${doc.data().note}</p></div>
-        <label><i id="i" class="far fa-heart"></i></label>
-  <label><i id="i" class="far fa-comment"></i></label>
-  <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h"></i></label>
-  <select id="options">
-    <option value="" disabled selected>Elegir</option>
-    <option id="edit" value="edit">Editar</option>
-    <option id="delete" value="delete">Borrar</option>
-  </select>
-  </div> `;
-      });
-    });
-};
-listPublication();
+ 
+  posts.forEach((post) => {
+    const messagePost = viewProfile.querySelector('#message-post');
+    messagePost.appendChild(postTemplate(post));
+  });
   // Share post
   btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
     const date = new Date();
-    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal,date);
+    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date);
 
     // Clear text content
-    listPublication();
-    
+    // listPublication();
   });
-const btnlogOut = viewProfile.querySelector('#btn-log-out');
-btnlogOut.addEventListener( 'click', () => {
-  homeLogOut();
-});
+  const btnlogOut = viewProfile.querySelector('#btn-log-out');
+  btnlogOut.addEventListener('click', () => {
+    homeLogOut();
+  });
   return viewProfile;
 };
 /*
-    
-    
+
+
   */
