@@ -1,5 +1,5 @@
 import { logOut } from '../firebase/auth.js';
-import { addNotesToDB, readAddNotesToDB } from '../firebase/firestore.js';
+import { addNotesToDB, readAddNotesToDB,readUserDB } from '../firebase/firestore.js';
 
 export const homeLogOut = () => {
   logOut()
@@ -11,10 +11,12 @@ export const homeLogOut = () => {
     });
 };
 
-export const createAddNoteToDB = (userID, name, createNote,date) => {
-  addNotesToDB(userID, name, createNote,date)
+export const createAddNoteToDB = (userID, name, createNote,date, privacy,  photoUser) => {
+  console.log(privacy, "viendo");
+  addNotesToDB(userID, name, createNote,date, privacy,  photoUser)
     .then((docRef) => {
       localStorage.setItem('userName', name);
+      localStorage.setItem('userPhoto', photoUser);
       console.log('Document written with ID: ', docRef.id);
     })
     .catch((error) => {
@@ -31,5 +33,17 @@ export const readNoteToDB = () => {
     })
     .catch((error) => {
       console.log('Error getting documents: ', error);
+    });
+};
+
+export const readUser = (uid) => {
+  readUserDB(uid)
+    .then((querySnapshot) => {
+      querySnapshot.forEach((refDoc) => {
+        const user = refDoc.data();
+        console.log("userconroller",user);
+        return user;
+       
+      });
     });
 };
