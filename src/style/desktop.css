@@ -153,17 +153,20 @@ i{
     margin-top: 4%;
     outline: none;
     resize: none;
+    text-align: center;
 }
 .ellipsis{
     float: right;
     margin-top: -50px;
 }
+
 #options{
     position: relative;
     width: 50px;
     left: -50px;
     opacity: 0.0;
 }
+
 #options::after {
     content: "";
     opacity: 0.5;
@@ -199,4 +202,13 @@ i{
 .container-user{
     background: linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
     border-radius: 20px;
+}
+.show{
+    display: block;
+}
+
+#accept{
+    width: 100px;
+    float: right;
+    border: none;
 }

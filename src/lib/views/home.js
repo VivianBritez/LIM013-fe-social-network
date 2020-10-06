@@ -1,5 +1,4 @@
-import { homeLogOut, createAddNoteToDB,readUser } from '../firebase-controller/home-controller.js';
-import { deletepost,updatePosts } from '../firebase/firestore.js';
+import { homeLogOut, createAddNoteToDB, editTextPostToDB, deletePostToDB,} from '../firebase-controller/home-controller.js';
 
 const formatoFecha = (fecha) =>{
   let fechaFin=(fecha.getDate())+" - "+(fecha.getMonth()+1)+" - "+fecha.getFullYear()+ "  "+ fecha.getHours()+":"+ fecha.getMinutes();
@@ -17,57 +16,60 @@ const postTemplate = (doc) => {
   <span><img class="user-image-post" src="${doc.data().photoUser}"></span>
   <h4 class="name-user">Publicado por ${doc.data().creatorName}
   <h4 class="name-user">${formatoFecha(doc.data().date.toDate())}</h4>
+  <div id="show-options" class="hidden">
   <label class="ellipsis" id="ellipsis" ><i id="i" class="fas fa-ellipsis-h"></i>
   <select id="options">
-  <option value="0" disabled selected>Elegir</option>
-  <option id="edit" value="edit-${doc.id}">Editar</option>
-  <option id="delete" value="delete-${doc.id}">Borrar</option>
+  <option value="" disabled selected>Elegir</option>
+  <option id="edit" value="edit">Editar</option>
+  <option id="delete" value="delete">Borrar</option>
   </select></label></h4>
   </div>
-  <div id="text-post"><p>${doc.data().note}</p></div>
+  </div>
+  <div id="text-post" class="show"><p>${doc.data().note}</p></div>
+  <div id="edit-option" class="hidden">
+  <textarea class="textarea" id="edit-text-post">${doc.data().note}</textarea>
+  <button type="button" id="accept"><i class="fas fa-check"></i></button>
+  </div>
   <label><i id="i" class="far fa-heart"></i></label>
   <label><i id="i" class="far fa-comment"></i></label>
-  <button type="button" id="save" class="hidden">guardar</button>
+
 
  `;
-const text = div.querySelector('#text-post');
-const optionVal = div.querySelector('#options');
-const  ellipsis = div.querySelector('#ellipsis');
-if(doc.data().creatorID!=localStorage.getItem('userID')){
-ellipsis.classList.add('hidden');
-}
-optionVal.addEventListener('change', () => {
-  const options = optionVal.value;
-  let optionsArr=options.split("-");
-  if(optionsArr[0]=="delete"){
-    console.log("idborrado",optionsArr[1]);
-    deletepost(optionsArr[1]);
-  }
-  if(optionsArr[0]=="edit"){
-    text.innerHTML ='<textarea id="new-text">'+doc.data().note+'</textarea>';
-    
-    const save = div.querySelector('#save');
-    save.classList.remove('hidden');
-    save.addEventListener('click', () =>{
-      const new_text=text.querySelector("#new-text").value;
-      text.innerHTML='<p>'+new_text+'</p>';
-      
-      save.classList.add('hidden');
-      if(new_text!=doc.data().note){
-        updatePosts(optionsArr[1],new_text);
-      }else{
-        console.log("no cambio");
-        //return false;
+
+  // Start grabbing our DOM Element
+  const options = div.querySelector('#options');
+  const showOptions = div.querySelector('#show-options');
+  const textPost = div.querySelector('#text-post');
+  const editOption = div.querySelector('#edit-option');
+  const accept = div.querySelector('#accept');
+  // Edit and delete post
+  if (localStorage.getItem('userID') === doc.data().creatorID) {
+    showOptions.classList.remove('hidden');
+    showOptions.classList.add('show');
+    options.addEventListener('change', (e) => {
+      const selectedOption = e.target.value;
+      // console.log(selectedOption);
+      if (selectedOption === 'edit') {
+        console.log('Aquí puede editar');
+        console.log(doc.id);
+        // console.log(doc.data().creatorID);
+        textPost.classList.add('hidden');
+        textPost.classList.remove('show');
+        editOption.classList.add('show');
+        editOption.classList.remove('hidden');
+
+        accept.addEventListener('click', () => {
+          const editTextPostVal = div.querySelector('#edit-text-post').value;
+          console.log(editTextPostVal);
+          const newDate = new Date();
+          editTextPostToDB(doc.id, editTextPostVal, newDate);
+        });
+      } else if (selectedOption === 'delete') {
+        console.log('Data eliminada');
+        deletePostToDB(doc.id);
       }
-      
     });
   }
-  //esto pone seleccionado a "elegir" de nuevo cada que termine
-  optionVal.getElementsByTagName('option')[0].selected = true;
-  
- });
- 
-
   return div;
 };
 
@@ -122,7 +124,21 @@ export const profileTemplate = (posts) => {
   
   const post = viewProfile.querySelector('#mode-post');
   const btnShare = viewProfile.querySelector('#btn-share');
- 
+  const modePost = viewProfile.querySelector('#mode-post');
+
+  modePost.addEventListener('change', (e) => {
+    const selectedMode = e.target.value;
+    // Share post
+    btnShare.addEventListener('click', () => {
+      const textPostVal = textPost.value;
+      const date = new Date();
+      createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, selectedMode);
+
+      // Clear text content
+      // listPublication();
+    });
+  });
+
   posts.forEach((post) => {
     
     const messagePost = viewProfile.querySelector('#message-post');
@@ -136,16 +152,11 @@ export const profileTemplate = (posts) => {
     const date = new Date();
     createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal,localStorage.getItem("userPhoto"));
 
-    // Clear text content
-    // listPublication();
   });
+
   const btnlogOut = viewProfile.querySelector('#btn-log-out');
   btnlogOut.addEventListener('click', () => {
     homeLogOut();
   });
   return viewProfile;
 };
-/*
-
-
-  */
