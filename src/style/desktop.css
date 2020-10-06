@@ -27,8 +27,9 @@ body{
     float: left;
 }
 nav{
-background: #EDF1ED;
-height: 80px;
+    background:linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
+    height: 80px;
+    text-align: center;
 }
 nav ul{
     float: right;
@@ -41,7 +42,7 @@ nav ul li {
 }
 nav ul li a{
     position: relative;
-    color: green;
+    color: black;
     font-size: 18px;
     text-transform: uppercase;
 }
@@ -63,7 +64,7 @@ nav ul li a:hover:before{
 }
 label #hamburger,
 label #cross{
-    color: green;
+    color: black;
     font-size: 30px;
     float: right;
     line-height: 80px;
@@ -93,12 +94,15 @@ label #cross{
 
 .share-post{
     width:63%;
-    height:210px;
     background: #C1CED0 ;
     padding: 10px;
     margin-left: 26%;
     margin-top: 4%;;
+    border-radius: 30px;
     
+}
+#btn-share{
+    float: right;
 }
 .general-position-dos{
     position:absolute;
@@ -117,16 +121,9 @@ label #cross{
     margin: 1%;
     
 }
-.box-post{
-    top:45px;
-    left:10px;
-    padding: 10px;
-    resize: none;
-    border: rgb(83, 78, 78);
-}
 
 i{
-    color: green;
+    color: #006400;
     font-size: 30px;
     margin-right: 10px;
     cursor: pointer;
@@ -138,9 +135,8 @@ i{
     display: none;
 }
 .space{
-    margin-right: 355px;
-    background: green;
-    color: #fff;
+    background: linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
+    color: black;
     padding: 4px;
     width: 90px;
     border-radius: 50px;
@@ -148,22 +144,29 @@ i{
     box-shadow: 0 5px 25px rgba(0,0,0,.5);
 
 }
-.options{
-    margin-left: 40px;
+.textarea{
+    border: rgb(83, 78, 78);
+    background: #e9f0f2;
+    height: 110px;
+    margin: 1%;
+    width: 97%;
+    margin-top: 4%;
+    outline: none;
+    resize: none;
+    text-align: center;
 }
 .ellipsis{
-    position: relative;
-    left: 380px;
-    top: -140px;
+    float: right;
+    margin-top: -50px;
 }
-/*
+
 #options{
-    position: absolute;
-    left: 500px;
-    top: 18px;
-    opacity: 0.0;  
+    position: relative;
+    width: 50px;
+    left: -50px;
+    opacity: 0.0;
 }
-*/
+
 #options::after {
     content: "";
     opacity: 0.5;
@@ -174,7 +177,7 @@ i{
     position: absolute;
     z-index: -1;   
   }
-#name-user{
+.name-user{
     color: #393939;
     padding: 10px;
 
@@ -183,15 +186,29 @@ i{
     align-self: flex-start;
 }
 
+.hidden{
+    display: none;
+}
+.title{
+    font-size: 30px;
+    width: 400px;
+    margin-left: 90%;
+    padding-top: 4%;
+}
+.title-energy{
+    width: 40%;
+    height: 0%;
+}
+.container-user{
+    background: linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
+    border-radius: 20px;
+}
 .show{
     display: block;
 }
 
-.hide{
-    display: none;
-}
-
 #accept{
     width: 100px;
-    height: 50px;
+    float: right;
+    border: none;
 }

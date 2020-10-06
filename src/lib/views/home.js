@@ -1,30 +1,40 @@
-import {
-  homeLogOut, createAddNoteToDB, editTextPostToDB, deletePostToDB,
-} from '../firebase-controller/home-controller.js';
+import { homeLogOut, createAddNoteToDB, editTextPostToDB, deletePostToDB,} from '../firebase-controller/home-controller.js';
+
+const formatoFecha = (fecha) =>{
+  let fechaFin=(fecha.getDate())+" - "+(fecha.getMonth()+1)+" - "+fecha.getFullYear()+ "  "+ fecha.getHours()+":"+ fecha.getMinutes();
+  return fechaFin;
+}
 
 const postTemplate = (doc) => {
+//const user=readUser(doc.data().creatorID);
+//console.log("userHome",user);
   const div = document.createElement('div');
+  console.log("id",doc.data());
   div.classList = 'share-post';
   div.innerHTML = `
-  <h4 id="name-user">Publicado por${doc.data().creatorName}</h4>
-  <div id="text-post" class="show"><p>${doc.data().note}</p></div>
-  <div id="edit-option" class="hide">
-  <textarea id="edit-text-post" maxlength="100" rows="8" cols="77">${doc.data().note}</textarea>
-  <button type="button" id="accept">Aceptar</button>
-  </div>
-  <label><i id="i" class="far fa-heart"></i></label>
-  <label><i id="i" class="far fa-comment"></i></label>
-  <div id="show-options" class="show-options hide">
-  <label class="ellipsis"><i id="i" class="fas fa-ellipsis-h">
-  </i>
+  <div class="container-user">
+  <span><img class="user-image-post" src="${doc.data().photoUser}"></span>
+  <h4 class="name-user">Publicado por ${doc.data().creatorName}
+  <h4 class="name-user">${formatoFecha(doc.data().date.toDate())}</h4>
+  <div id="show-options" class="hidden">
+  <label class="ellipsis" id="ellipsis" ><i id="i" class="fas fa-ellipsis-h"></i>
   <select id="options">
   <option value="" disabled selected>Elegir</option>
   <option id="edit" value="edit">Editar</option>
   <option id="delete" value="delete">Borrar</option>
-  </select>
-  </label>
+  </select></label></h4>
   </div>
-`;
+  </div>
+  <div id="text-post" class="show"><p>${doc.data().note}</p></div>
+  <div id="edit-option" class="hidden">
+  <textarea class="textarea" id="edit-text-post">${doc.data().note}</textarea>
+  <button type="button" id="accept"><i class="fas fa-check"></i></button>
+  </div>
+  <label><i id="i" class="far fa-heart"></i></label>
+  <label><i id="i" class="far fa-comment"></i></label>
+
+
+ `;
 
   // Start grabbing our DOM Element
   const options = div.querySelector('#options');
@@ -34,7 +44,7 @@ const postTemplate = (doc) => {
   const accept = div.querySelector('#accept');
   // Edit and delete post
   if (localStorage.getItem('userID') === doc.data().creatorID) {
-    showOptions.classList.remove('hide');
+    showOptions.classList.remove('hidden');
     showOptions.classList.add('show');
     options.addEventListener('change', (e) => {
       const selectedOption = e.target.value;
@@ -43,10 +53,10 @@ const postTemplate = (doc) => {
         console.log('Aquí puede editar');
         console.log(doc.id);
         // console.log(doc.data().creatorID);
-        textPost.classList.add('hide');
+        textPost.classList.add('hidden');
         textPost.classList.remove('show');
         editOption.classList.add('show');
-        editOption.classList.remove('hide');
+        editOption.classList.remove('hidden');
 
         accept.addEventListener('click', () => {
           const editTextPostVal = div.querySelector('#edit-text-post').value;
@@ -69,6 +79,8 @@ export const profileTemplate = (posts) => {
   viewProfile.innerHTML = ` 
     <header>
     <nav>
+    <div class="title-energy">
+    <h4 class="title">Energía Verde💡</h4></div>
     <input type="checkbox" id="check-and-uncheck">
     <label for="check-and-uncheck">
     <i class="fas fa-bars" id="hamburger"></i>
@@ -90,8 +102,8 @@ export const profileTemplate = (posts) => {
       </section>
     </section>
     <div id="post-container" class="post general-position">
-    <div id="box-post" class="box-post">
-      <textarea id="text-post" placeholder="¿Qué quieres compartir?" maxlength="100" rows="8" cols="77">
+    <div >
+      <textarea id="box-post"class="textarea" placeholder="¿Qué quieres compartir?" maxlength="100" rows="8" cols="77">
         </textarea>
     </div>
     <label><i id="i" class="far fa-images"></i>
@@ -103,12 +115,14 @@ export const profileTemplate = (posts) => {
     </select>
     <label class"plane"><i id="btn-share" class="far fa-paper-plane"></i></label>
   </div>
-  <div id="message-post" class="box-post"> 
+  <div id="message-post"> 
   </div>
   `;
 
   // Start grabbing our DOM Element
-  const textPost = viewProfile.querySelector('#text-post');
+  const textPost = viewProfile.querySelector('#box-post');
+  
+  const post = viewProfile.querySelector('#mode-post');
   const btnShare = viewProfile.querySelector('#btn-share');
   const modePost = viewProfile.querySelector('#mode-post');
 
@@ -126,8 +140,18 @@ export const profileTemplate = (posts) => {
   });
 
   posts.forEach((post) => {
+    
     const messagePost = viewProfile.querySelector('#message-post');
     messagePost.appendChild(postTemplate(post));
+  });
+  // Share post
+  btnShare.addEventListener('click', () => {
+    const textPostVal = textPost.value;
+    const postVal = post.value;
+    console.log(postVal, 'provando valor')
+    const date = new Date();
+    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal,localStorage.getItem("userPhoto"));
+
   });
 
   const btnlogOut = viewProfile.querySelector('#btn-log-out');
