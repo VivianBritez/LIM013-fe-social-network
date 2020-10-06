@@ -1,5 +1,5 @@
 import { logOut } from '../firebase/auth.js';
-import { addNotesToDB, readAddNotesToDB } from '../firebase/firestore.js';
+import { addNotesToDB, editTextPost, readAddNotesToDB, deletePost } from '../firebase/firestore.js';
 
 export const homeLogOut = () => {
   logOut()
@@ -11,8 +11,8 @@ export const homeLogOut = () => {
     });
 };
 
-export const createAddNoteToDB = (userID, name, createNote,date) => {
-  addNotesToDB(userID, name, createNote,date)
+export const createAddNoteToDB = (userID, name, createNote, datePost, userMode) => {
+  addNotesToDB(userID, name, createNote, datePost, userMode)
     .then((docRef) => {
       localStorage.setItem('userName', name);
       console.log('Document written with ID: ', docRef.id);
@@ -31,5 +31,21 @@ export const readNoteToDB = () => {
     })
     .catch((error) => {
       console.log('Error getting documents: ', error);
+    });
+};
+
+export const editTextPostToDB = (docID, changeNote, newDate) => {
+  editTextPost(docID, changeNote, newDate)
+    .then(() => {
+      console.log('note updated');
+    });
+};
+
+export const deletePostToDB = (docID) => {
+  deletePost(docID)
+    .then(() => {
+      console.log('Document successfully deleted!');
+    }).catch((error) => {
+      console.error('Error removing document:', error);
     });
 };

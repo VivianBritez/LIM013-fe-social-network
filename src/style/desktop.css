@@ -156,12 +156,14 @@ i{
     left: 380px;
     top: -140px;
 }
+/*
 #options{
     position: absolute;
     left: 500px;
     top: 18px;
     opacity: 0.0;  
 }
+*/
 #options::after {
     content: "";
     opacity: 0.5;
@@ -179,4 +181,17 @@ i{
 }
 .plane{
     align-self: flex-start;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
+
+#accept{
+    width: 100px;
+    height: 50px;
 }
