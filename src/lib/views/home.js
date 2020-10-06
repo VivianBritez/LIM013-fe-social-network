@@ -1,15 +1,20 @@
-import { homeLogOut, createAddNoteToDB, editTextPostToDB, deletePostToDB,} from '../firebase-controller/home-controller.js';
+import {
+  homeLogOut,
+  createAddNoteToDB,
+  editTextPostToDB,
+  deletePostToDB,
+} from '../firebase-controller/home-controller.js';
 
-const formatoFecha = (fecha) =>{
-  let fechaFin=(fecha.getDate())+" - "+(fecha.getMonth()+1)+" - "+fecha.getFullYear()+ "  "+ fecha.getHours()+":"+ fecha.getMinutes();
+const formatoFecha = (fecha) => {
+  const fechaFin = (fecha.getDate()) + ' - ' + (fecha.getMonth() + 1) + ' - ' + fecha.getFullYear() + '  ' + fecha.getHours() + ':' + fecha.getMinutes();
   return fechaFin;
-}
+};
 
 const postTemplate = (doc) => {
-//const user=readUser(doc.data().creatorID);
-//console.log("userHome",user);
+  // const user=readUser(doc.data().creatorID);
+  // console.log("userHome",user);
   const div = document.createElement('div');
-  console.log("id",doc.data());
+  console.log('id', doc.data());
   div.classList = 'share-post';
   div.innerHTML = `
   <div class="container-user">
@@ -34,7 +39,7 @@ const postTemplate = (doc) => {
   <label><i id="i" class="far fa-comment"></i></label>
 
 
- `;
+`;
 
   // Start grabbing our DOM Element
   const options = div.querySelector('#options');
@@ -108,7 +113,7 @@ export const profileTemplate = (posts) => {
     </div>
     <label><i id="i" class="far fa-images"></i>
       <input class="file" type="file"></label>
-    <select class="space" id="mode-post">
+    <select class="space hidden" id="mode-post">
       <option value="" disabled selected>Modo</option>
       <option id="private" value="private">Privado</option>
       <option id="public" value="public">Publico</option>
@@ -121,7 +126,7 @@ export const profileTemplate = (posts) => {
 
   // Start grabbing our DOM Element
   const textPost = viewProfile.querySelector('#box-post');
-  
+
   const post = viewProfile.querySelector('#mode-post');
   const btnShare = viewProfile.querySelector('#btn-share');
   const modePost = viewProfile.querySelector('#mode-post');
@@ -140,7 +145,6 @@ export const profileTemplate = (posts) => {
   });
 
   posts.forEach((post) => {
-    
     const messagePost = viewProfile.querySelector('#message-post');
     messagePost.appendChild(postTemplate(post));
   });
@@ -148,10 +152,9 @@ export const profileTemplate = (posts) => {
   btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
     const postVal = post.value;
-    console.log(postVal, 'provando valor')
+    console.log(postVal, 'provando valor');
     const date = new Date();
-    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal,localStorage.getItem("userPhoto"));
-
+    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal, localStorage.getItem('userPhoto'));
   });
 
   const btnlogOut = viewProfile.querySelector('#btn-log-out');

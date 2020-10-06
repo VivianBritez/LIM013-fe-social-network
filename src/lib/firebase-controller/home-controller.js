@@ -1,5 +1,11 @@
 import { logOut } from '../firebase/auth.js';
-import { addNotesToDB, editTextPost, readAddNotesToDB, deletePost, readUserDB} from '../firebase/firestore.js';
+import {
+  addNotesToDB,
+  editTextPost,
+  readAddNotesToDB,
+  deletePost,
+  readUserDB,
+} from '../firebase/firestore.js';
 
 export const homeLogOut = () => {
   logOut()
@@ -40,11 +46,10 @@ export const readUser = (uid) => {
     .then((querySnapshot) => {
       querySnapshot.forEach((refDoc) => {
         const user = refDoc.data();
-        console.log("userconroller",user);
+        console.log('userconroller', user);
         return user;
-       
       });
-  });
+    });
 };
 export const editTextPostToDB = (docID, changeNote, newDate) => {
   editTextPost(docID, changeNote, newDate)
@@ -61,4 +66,3 @@ export const deletePostToDB = (docID) => {
       console.error('Error removing document:', error);
     });
 };
-

@@ -39,8 +39,7 @@ export const loginWithEmailAndPassword = (txtEmailVal, txtpasswordVal) => {
             localStorage.setItem('userName', user.name);
             localStorage.setItem('userEmail', user.email);
             localStorage.setItem('userPhoto', user.photoUrl);
-
-            //console.log('entro', localStorage.getItem('userPhoto'));
+            // console.log('entro', localStorage.getItem('userPhoto'));
           });
         });
     })

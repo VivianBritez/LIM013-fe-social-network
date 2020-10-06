@@ -11,21 +11,21 @@ export const readUserDB = (uid) => firebase.firestore().collection('users')
   .where('uid', '==', uid)
   .get();
 
-export const addNotesToDB = (userID, name, createNote,datePost, userMode, photoUser) => firebase.firestore()
+export const addNotesToDB = (userID, name, createNote, datePost, userMode, photoUser) => firebase
+  .firestore()
   .collection('publications').add({
     creatorID: userID,
     creatorName: name,
     note: createNote,
     date: datePost,
     mode: userMode,
-    photoUser: photoUser,
-    
+    photo: photoUser,
   });
 
 // callbackfn es un funcion como parametro lo mando
-export const readAddNotesToDB = callbackfn => firebase.firestore()
-  .collection('publications').orderBy("date","desc").onSnapshot((data) => {
-    console.log("data",data);
+export const readAddNotesToDB = (callbackfn) => firebase.firestore()
+  .collection('publications').orderBy('date', 'desc').onSnapshot((data) => {
+    console.log('data', data);
     callbackfn(data);
   });
 
