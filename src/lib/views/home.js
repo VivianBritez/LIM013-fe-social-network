@@ -18,7 +18,7 @@ const postTemplate = (doc) => {
   div.classList = 'share-post';
   div.innerHTML = `
   <div class="container-user">
-  <span><img class="user-image-post" src="${doc.data().photoUser}"></span>
+  <span><img class="user-image-post" src="${doc.data().photo}"></span>
   <h4 class="name-user">Publicado por ${doc.data().creatorName}
   <h4 class="name-user">${formatoFecha(doc.data().date.toDate())}</h4>
   <div id="show-options" class="hidden">
