@@ -6,7 +6,7 @@ import {
 } from '../firebase-controller/home-controller.js';
 
 const formatoFecha = (fecha) => {
-  const fechaFin = (fecha.getDate()) + ' - ' + (fecha.getMonth() + 1) + ' - ' + fecha.getFullYear() + '  ' + fecha.getHours() + ':' + fecha.getMinutes();
+  const fechaFin = `${fecha.getDate()} - ${fecha.getMonth() + 1} - ${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
   return fechaFin;
 };
 
@@ -18,7 +18,7 @@ const postTemplate = (doc) => {
   div.classList = 'share-post';
   div.innerHTML = `
   <div class="container-user">
-  <span><img class="user-image-post" src="${doc.data().photoUser}"></span>
+  <span><img class="user-image-post" src="${doc.data().photo}"></span>
   <h4 class="name-user">Publicado por ${doc.data().creatorName}
   <h4 class="name-user">${formatoFecha(doc.data().date.toDate())}</h4>
   <div id="show-options" class="hidden">
@@ -92,9 +92,14 @@ export const profileTemplate = (posts) => {
     <i class="fas fa-times" id="cross"></i>
     </label>
       <ul>
+      <li>
+      <a id="btn-profile" href="#/profile">My Profile</a>
+        </li>
+        </li>
         <li>
             <a id="btn-log-out">Salir</a>
         </li>
+    
       </ul>
     </nav>
     </header>
