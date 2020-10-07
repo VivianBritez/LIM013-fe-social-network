@@ -39,3 +39,16 @@ export const editTextPost = (docID, changeNote, newDate) => firebase.firestore()
 // Delete post
 export const deletePost = (docID) => firebase.firestore().collection('publications')
   .doc(docID).delete();
+
+// Comment
+
+export const addCommentToPost = (userID, name, docID, userComment, dateComment, photoUser) => firebase
+  .firestore()
+  .collection('publications').doc(docID).collection('comments')
+  .add({
+    creatorID: userID,
+    from: name,
+    comment: userComment,
+    date: dateComment,
+    photo: photoUser,
+  });

@@ -5,6 +5,7 @@ import {
   readAddNotesToDB,
   deletePost,
   readUserDB,
+  addCommentToPost,
 } from '../firebase/firestore.js';
 
 export const homeLogOut = () => {
@@ -64,5 +65,14 @@ export const deletePostToDB = (docID) => {
       console.log('Document successfully deleted!');
     }).catch((error) => {
       console.error('Error removing document:', error);
+    });
+};
+
+export const addCommentToDB = (userID, name, docID, userComment, dateComment, photoUser) => {
+  addCommentToPost(userID, name, docID, userComment, dateComment, photoUser)
+    .then(() => {
+      console.log('Comment successfully!');
+    }).catch((error) => {
+      console.error('Error send comment:', error);
     });
 };

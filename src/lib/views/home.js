@@ -3,6 +3,7 @@ import {
   createAddNoteToDB,
   editTextPostToDB,
   deletePostToDB,
+  addCommentToDB,
 } from '../firebase-controller/home-controller.js';
 
 const formatoFecha = (fecha) => {
@@ -36,9 +37,11 @@ const postTemplate = (doc) => {
   <button type="button" id="accept"><i class="fas fa-check"></i></button>
   </div>
   <label><i id="i" class="far fa-heart"></i></label>
-  <label><i id="i" class="far fa-comment"></i></label>
-
-
+  <label><i id="comment-icon" class="far fa-comment"></i></label>
+  <div id="comment-container" class="hidden">
+  <textarea id="comment-post"></textarea>
+  <button type="button" id="btn-send">Enviar</button>
+  </div>
 `;
 
   // Start grabbing our DOM Element
@@ -75,6 +78,25 @@ const postTemplate = (doc) => {
       }
     });
   }
+
+  // Add comments in a post
+  const commentIcon = div.querySelector('#comment-icon');
+  const commentPost = div.querySelector('#comment-post');
+  const commentContainer = div.querySelector('#comment-container');
+  const btnSend = div.querySelector('#btn-send');
+
+  commentIcon.addEventListener('click', () => {
+    console.log('Funciona');
+    commentContainer.classList.add('show');
+    commentContainer.classList.remove('hidden');
+
+    btnSend.addEventListener('click', () => {
+      const commentPostVal = commentPost.value;
+      const dateComment = new Date();
+      addCommentToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), doc.id, commentPostVal, dateComment, localStorage.getItem('userPhoto'));
+    });
+  });
+
   return div;
 };
 
