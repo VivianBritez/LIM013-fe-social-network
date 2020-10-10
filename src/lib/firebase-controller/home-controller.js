@@ -30,6 +30,7 @@ export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, 
     });
 };
 
+/*
 export const readNoteToDB = () => {
   readAddNotesToDB()
     .then((querySnapshot) => {
@@ -41,6 +42,7 @@ export const readNoteToDB = () => {
       console.log('Error getting documents: ', error);
     });
 };
+*/
 
 export const readUser = (uid) => {
   readUserDB(uid)

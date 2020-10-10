@@ -18,14 +18,14 @@ const changeTemplate = (hash) => {
     case '#/signup':
     { return container.appendChild(components.signUpTemplateProp()); }
     case '#/home':
-    { readAddNotesToDB((data) => {
+    { return readAddNotesToDB((data) => {
       // console.log(data);
       container.innerHTML = '';
-      return container.appendChild(components.profileTemplateProp(data));
+      container.appendChild(components.profileTemplateProp(data));
     });
     }
     default:
-      /*return container.appendChild(components.errorPageProp());*/
+      return container.appendChild(components.errorPageProp());
   }
 };
 

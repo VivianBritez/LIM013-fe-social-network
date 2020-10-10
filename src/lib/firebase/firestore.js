@@ -24,8 +24,12 @@ export const addNotesToDB = (userID, name, createNote, datePost, userMode, photo
 
 // callbackfn es un funcion como parametro lo mando
 export const readAddNotesToDB = (callbackfn) => firebase.firestore()
-  .collection('publications').orderBy('date', 'desc').onSnapshot((data) => {
-    console.log('data', data);
+  .collection('publications').orderBy('date', 'desc').onSnapshot((querySnapShot) => {
+    const data = [];
+    querySnapShot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
+    // console.log('data', data);
     callbackfn(data);
   });
 
@@ -39,6 +43,7 @@ export const editTextPost = (docID, changeNote, newDate) => firebase.firestore()
 // Delete post
 export const deletePost = (docID) => firebase.firestore().collection('publications')
   .doc(docID).delete();
+//-----------------------------------------------------------------------------------------------
 
 // Comment
 
