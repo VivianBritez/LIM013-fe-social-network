@@ -5,7 +5,6 @@ import {
   deletePostToDB,
   addCommentToDB,
 } from '../firebase-controller/home-controller.js';
-import { getCommentToDB } from '../firebase/firestore.js';
 
 const formatoFecha = (fecha) => {
   const fechaFin = (fecha.getDate()) + ' - ' + (fecha.getMonth() + 1) + ' - ' + fecha.getFullYear() + '  ' + fecha.getHours() + ':' + fecha.getMinutes();
@@ -13,6 +12,7 @@ const formatoFecha = (fecha) => {
 };
 
 const commentTemplate = (com) => {
+  console.log(com.comment);
   const commentShare = document.createElement('div');
   // console.log('doc', doc);
   // commentShare.classList = 'comment-share';
@@ -22,10 +22,10 @@ const commentTemplate = (com) => {
   return commentShare;
 };
 
-const postTemplate = (doc, comments) => {
+const postTemplate = (doc, comentarios) => {
   // console.log(doc);
   // console.log(doc.id);
-  // console.log(comments);
+  // console.log(comentarios);
   // const user=readUser(doc.creatorID);
   // console.log("userHome",user);
   const div = document.createElement('div');
@@ -95,7 +95,7 @@ const postTemplate = (doc, comments) => {
     });
   }
 
-  // Add comments in a post
+  // Add comentarios in a post
   const commentIcon = div.querySelector('#comment-icon');
   const commentContainer = div.querySelector('#comment-container');
   const commentPost = div.querySelector('#comment-post');
@@ -113,16 +113,20 @@ const postTemplate = (doc, comments) => {
     });
   });
 
-  comments.forEach((element) => {
+  comentarios.forEach((element) => {
     // console.log(element);
     const commentShow = div.querySelector('#comment-show');
     commentShow.appendChild(commentTemplate(element));
   });
 
+  // console.log(comments);
+  // const commentShow = div.querySelector('#comment-show');
+  // commentShow.appendChild(commentTemplate(comments));
+
   return div;
 };
 
-export const profileTemplate = (posts) => {
+export const profileTemplate = (posts, comments) => {
   // console.log(posts);
   // console.log('user', user);
   const viewProfile = document.createElement('section');
@@ -208,9 +212,12 @@ export const profileTemplate = (posts) => {
   posts.forEach((publication) => {
     // console.log(publication);
     const messagePost = viewProfile.querySelector('#message-post');
+    messagePost.appendChild(postTemplate(publication, comments));
+    /*
     getCommentToDB(publication.id, ((comments) => {
       messagePost.appendChild(postTemplate(publication, comments));
     }));
+    */
   });
 
   return viewProfile;

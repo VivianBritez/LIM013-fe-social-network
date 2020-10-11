@@ -1,4 +1,4 @@
-import { readAddNotesToDB } from '../firebase/firestore.js';
+import { readAddNotesToDB, getCommentToDB } from '../firebase/firestore.js';
 import { components } from '../views/components.js';
 
 // Change Template
@@ -19,8 +19,17 @@ const changeTemplate = (hash) => {
     { return container.appendChild(components.signUpTemplateProp()); }
     case '#/home':
     { return readAddNotesToDB((data) => {
-      container.innerHTML = '';
-      container.appendChild(components.profileTemplateProp(data));
+      console.log(data.length);
+      console.log(data[0].id);
+      // container.innerHTML = '';
+      for (let i = 0; i < data.length; i += 1) {
+        const dataID = data[i].id;
+        console.log(dataID);
+        getCommentToDB(dataID, ((comments) => {
+          container.innerHTML = '';
+          container.appendChild(components.profileTemplateProp(data, comments));
+        }));
+      }
     });
     }
     default:
