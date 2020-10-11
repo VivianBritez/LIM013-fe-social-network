@@ -5,17 +5,31 @@ import {
   deletePostToDB,
   addCommentToDB,
 } from '../firebase-controller/home-controller.js';
+import { getCommentToDB } from '../firebase/firestore.js';
 
 const formatoFecha = (fecha) => {
   const fechaFin = (fecha.getDate()) + ' - ' + (fecha.getMonth() + 1) + ' - ' + fecha.getFullYear() + '  ' + fecha.getHours() + ':' + fecha.getMinutes();
   return fechaFin;
 };
 
-const postTemplate = (doc) => {
+const commentTemplate = (com) => {
+  const commentShare = document.createElement('div');
+  // console.log('doc', doc);
+  // commentShare.classList = 'comment-share';
+  commentShare.innerHTML = `
+  <div id="comment-view"><p>${com.comment}</p></div>
+  `;
+  return commentShare;
+};
+
+const postTemplate = (doc, comments) => {
+  // console.log(doc);
+  // console.log(doc.id);
+  // console.log(comments);
   // const user=readUser(doc.creatorID);
   // console.log("userHome",user);
   const div = document.createElement('div');
-  console.log('id', doc);
+  // console.log('doc', doc);
   div.classList = 'share-post';
   div.innerHTML = `
   <div class="container-user">
@@ -41,6 +55,8 @@ const postTemplate = (doc) => {
   <div id="comment-container" class="hidden">
   <textarea id="comment-post"></textarea>
   <button type="button" id="btn-send">Enviar</button>
+  </div>
+  <div id="comment-show">
   </div>
 `;
 
@@ -81,8 +97,8 @@ const postTemplate = (doc) => {
 
   // Add comments in a post
   const commentIcon = div.querySelector('#comment-icon');
-  const commentPost = div.querySelector('#comment-post');
   const commentContainer = div.querySelector('#comment-container');
+  const commentPost = div.querySelector('#comment-post');
   const btnSend = div.querySelector('#btn-send');
 
   commentIcon.addEventListener('click', () => {
@@ -97,10 +113,17 @@ const postTemplate = (doc) => {
     });
   });
 
+  comments.forEach((element) => {
+    // console.log(element);
+    const commentShow = div.querySelector('#comment-show');
+    commentShow.appendChild(commentTemplate(element));
+  });
+
   return div;
 };
 
 export const profileTemplate = (posts) => {
+  // console.log(posts);
   // console.log('user', user);
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
@@ -151,8 +174,9 @@ export const profileTemplate = (posts) => {
 
   const post = viewProfile.querySelector('#mode-post');
   const btnShare = viewProfile.querySelector('#btn-share');
-  const modePost = viewProfile.querySelector('#mode-post');
+  // const modePost = viewProfile.querySelector('#mode-post');
 
+  /*
   modePost.addEventListener('change', (e) => {
     const selectedMode = e.target.value;
     // Share post
@@ -165,11 +189,8 @@ export const profileTemplate = (posts) => {
       // listPublication();
     });
   });
+  */
 
-  posts.forEach((post) => {
-    const messagePost = viewProfile.querySelector('#message-post');
-    messagePost.appendChild(postTemplate(post));
-  });
   // Share post
   btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
@@ -183,5 +204,14 @@ export const profileTemplate = (posts) => {
   btnlogOut.addEventListener('click', () => {
     homeLogOut();
   });
+
+  posts.forEach((publication) => {
+    // console.log(publication);
+    const messagePost = viewProfile.querySelector('#message-post');
+    getCommentToDB(publication.id, ((comments) => {
+      messagePost.appendChild(postTemplate(publication, comments));
+    }));
+  });
+
   return viewProfile;
 };

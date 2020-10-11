@@ -19,7 +19,6 @@ const changeTemplate = (hash) => {
     { return container.appendChild(components.signUpTemplateProp()); }
     case '#/home':
     { return readAddNotesToDB((data) => {
-      // console.log(data);
       container.innerHTML = '';
       container.appendChild(components.profileTemplateProp(data));
     });

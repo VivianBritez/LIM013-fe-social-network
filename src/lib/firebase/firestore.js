@@ -29,7 +29,7 @@ export const readAddNotesToDB = (callbackfn) => firebase.firestore()
     querySnapShot.forEach((doc) => {
       data.push({ id: doc.id, ...doc.data() });
     });
-    // console.log('data', data);
+    // console.log('data', typeof data);
     callbackfn(data);
   });
 
@@ -56,4 +56,16 @@ export const addCommentToPost = (userID, name, docID, userComment, dateComment, 
     comment: userComment,
     date: dateComment,
     photo: photoUser,
+  });
+
+export const getCommentToDB = (docID, callbackfn) => firebase.firestore()
+  .collection('publications').doc(docID).collection('comments')
+  .orderBy('date', 'desc')
+  .onSnapshot((querySnapShot) => {
+    const data = [];
+    querySnapShot.forEach((doc) => {
+      data.push({ postID: docID, id: doc.id, ...doc.data() });
+    });
+    // console.log('data', data);
+    callbackfn(data);
   });

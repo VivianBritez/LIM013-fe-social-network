@@ -22,7 +22,7 @@ const fixtureData = {
 
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
-describe('Edit post', () => {
+describe('Edit a post', () => {
   it('Should be able to edit a post', (done) => {
     return editTextPost('abc1d', 'Hello wonderful world', '')
       .then(() => readAddNotesToDB(
