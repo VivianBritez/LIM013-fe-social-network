@@ -24,7 +24,13 @@ border-radius: 50%;
 float: left;
 margin: 1%;
 }
-
+.user-image-comment {
+  width: 35px;
+  border-radius: 50%;
+  float: left;
+  margin-top: 7px;
+  margin-left: 10px;
+}
 .light-bulb-mobile {
   margin: auto;
   display: none;

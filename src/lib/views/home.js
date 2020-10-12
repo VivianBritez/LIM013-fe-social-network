@@ -7,7 +7,7 @@ import {
 } from '../firebase-controller/home-controller.js';
 
 const formatoFecha = (fecha) => {
-  const fechaFin = (fecha.getDate()) + ' - ' + (fecha.getMonth() + 1) + ' - ' + fecha.getFullYear() + '  ' + fecha.getHours() + ':' + fecha.getMinutes();
+  const fechaFin = `${fecha.getDate()} - ${fecha.getMonth() + 1} - ${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
   return fechaFin;
 };
 
@@ -16,11 +16,17 @@ const commentTemplate = (comData) => {
   // console.log('doc', doc);
   // commentList.classList = 'comment-share';
   commentList.innerHTML = `
-  <div id="comment-view"><p>${comData.comment}</p></div>
+
+  <span><img class="user-image-comment" src="${comData.photo}"></span>
+  <h5 class="username-comment">${comData.from}</h5>
+  <p>${comData.comment}</p>
+
   `;
   return commentList;
 };
-
+/* <div class="container-user-comment>
+</div>
+*/
 const postTemplate = (doc, commentDoc) => {
   // console.log(doc);
   // console.log(doc.id);
@@ -52,8 +58,9 @@ const postTemplate = (doc, commentDoc) => {
   <label><i id="i" class="far fa-heart"></i></label>
   <label><i id="comment-icon" class="far fa-comment"></i></label>
   <div id="comment-box" class="hidden">
-  <textarea id="comment-post"></textarea>
-  <button type="button" id="btn-send">Enviar</button>
+  <span><img class="user-image-comment" src="${doc.photo}"></span>
+  <textarea id="comment-post" class="comment-post" placeholder="Añade un comentario..."></textarea>
+  <button type="button" id="btn-send-comment" class="btn-send-comment"><img src="./img/send-paper-plane.png"></button>
   </div>
   <div id="comment-show">
   </div>
@@ -99,7 +106,7 @@ const postTemplate = (doc, commentDoc) => {
   const commentIcon = div.querySelector('#comment-icon');
   const commentBox = div.querySelector('#comment-box');
   const commentPost = div.querySelector('#comment-post');
-  const btnSend = div.querySelector('#btn-send');
+  const btnSend = div.querySelector('#btn-send-comment');
 
   commentIcon.addEventListener('click', () => {
     console.log('Funciona');
