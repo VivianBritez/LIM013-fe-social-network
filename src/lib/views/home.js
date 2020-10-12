@@ -16,11 +16,9 @@ const commentTemplate = (comData) => {
   // console.log('doc', doc);
   // commentList.classList = 'comment-share';
   commentList.innerHTML = `
-
   <span><img class="user-image-comment" src="${comData.photo}"></span>
   <h5 class="username-comment">${comData.from}</h5>
   <p>${comData.comment}</p>
-
   `;
   return commentList;
 };
@@ -58,7 +56,7 @@ const postTemplate = (doc, commentDoc) => {
   <label><i id="i" class="far fa-heart"></i></label>
   <label><i id="comment-icon" class="far fa-comment"></i></label>
   <div id="comment-box" class="hidden">
-  <span><img class="user-image-comment" src="${doc.photo}"></span>
+  <span><img class="user-image-comment" src="${localStorage.getItem('userPhoto')}"></span>
   <textarea id="comment-post" class="comment-post" placeholder="Añade un comentario..."></textarea>
   <button type="button" id="btn-send-comment" class="btn-send-comment"><img src="./img/send-paper-plane.png"></button>
   </div>
