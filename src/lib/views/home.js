@@ -11,21 +11,20 @@ const formatoFecha = (fecha) => {
   return fechaFin;
 };
 
-const commentTemplate = (com) => {
-  console.log(com.comment);
-  const commentShare = document.createElement('div');
+const commentTemplate = (comData) => {
+  const commentList = document.createElement('div');
   // console.log('doc', doc);
-  // commentShare.classList = 'comment-share';
-  commentShare.innerHTML = `
-  <div id="comment-view"><p>${com.comment}</p></div>
+  // commentList.classList = 'comment-share';
+  commentList.innerHTML = `
+  <div id="comment-view"><p>${comData.comment}</p></div>
   `;
-  return commentShare;
+  return commentList;
 };
 
-const postTemplate = (doc, comentarios) => {
+const postTemplate = (doc, commentDoc) => {
   // console.log(doc);
   // console.log(doc.id);
-  // console.log(comentarios);
+  // console.log(commentDoc);
   // const user=readUser(doc.creatorID);
   // console.log("userHome",user);
   const div = document.createElement('div');
@@ -52,7 +51,7 @@ const postTemplate = (doc, comentarios) => {
   </div>
   <label><i id="i" class="far fa-heart"></i></label>
   <label><i id="comment-icon" class="far fa-comment"></i></label>
-  <div id="comment-container" class="hidden">
+  <div id="comment-box" class="hidden">
   <textarea id="comment-post"></textarea>
   <button type="button" id="btn-send">Enviar</button>
   </div>
@@ -66,6 +65,7 @@ const postTemplate = (doc, comentarios) => {
   const textPost = div.querySelector('#text-post');
   const editOption = div.querySelector('#edit-option');
   const accept = div.querySelector('#accept');
+
   // Edit and delete post
   if (localStorage.getItem('userID') === doc.creatorID) {
     showOptions.classList.remove('hidden');
@@ -95,40 +95,37 @@ const postTemplate = (doc, comentarios) => {
     });
   }
 
-  // Add comentarios in a post
+  // Add commments in a post
   const commentIcon = div.querySelector('#comment-icon');
-  const commentContainer = div.querySelector('#comment-container');
+  const commentBox = div.querySelector('#comment-box');
   const commentPost = div.querySelector('#comment-post');
   const btnSend = div.querySelector('#btn-send');
 
   commentIcon.addEventListener('click', () => {
     console.log('Funciona');
-    commentContainer.classList.add('show');
-    commentContainer.classList.remove('hidden');
+    commentBox.classList.add('show');
+    commentBox.classList.remove('hidden');
 
     btnSend.addEventListener('click', () => {
       const commentPostVal = commentPost.value;
       const dateComment = new Date();
-      addCommentToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), doc.id, commentPostVal, dateComment, localStorage.getItem('userPhoto'));
+      addCommentToDB(doc.id, localStorage.getItem('userID'), localStorage.getItem('userName'), commentPostVal, dateComment, localStorage.getItem('userPhoto'));
     });
   });
 
-  comentarios.forEach((element) => {
+  // Send each comments to commentTemplate
+  commentDoc.forEach((element) => {
     // console.log(element);
-    const commentShow = div.querySelector('#comment-show');
-    commentShow.appendChild(commentTemplate(element));
+    if (doc.id === element.postID) {
+      const commentShow = div.querySelector('#comment-show');
+      commentShow.appendChild(commentTemplate(element));
+    }
   });
-
-  // console.log(comments);
-  // const commentShow = div.querySelector('#comment-show');
-  // commentShow.appendChild(commentTemplate(comments));
 
   return div;
 };
 
 export const profileTemplate = (posts, comments) => {
-  // console.log(posts);
-  // console.log('user', user);
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <header>
@@ -175,31 +172,14 @@ export const profileTemplate = (posts, comments) => {
 
   // Start grabbing our DOM Element
   const textPost = viewProfile.querySelector('#box-post');
-
   const post = viewProfile.querySelector('#mode-post');
   const btnShare = viewProfile.querySelector('#btn-share');
-  // const modePost = viewProfile.querySelector('#mode-post');
-
-  /*
-  modePost.addEventListener('change', (e) => {
-    const selectedMode = e.target.value;
-    // Share post
-    btnShare.addEventListener('click', () => {
-      const textPostVal = textPost.value;
-      const date = new Date();
-      createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, selectedMode);
-
-      // Clear text content
-      // listPublication();
-    });
-  });
-  */
 
   // Share post
   btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
     const postVal = post.value;
-    console.log(postVal, 'provando valor');
+    // console.log(postVal, 'probando valor');
     const date = new Date();
     createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal, localStorage.getItem('userPhoto'));
   });
@@ -209,15 +189,10 @@ export const profileTemplate = (posts, comments) => {
     homeLogOut();
   });
 
+  // Send each publication to postTemplate
   posts.forEach((publication) => {
-    // console.log(publication);
     const messagePost = viewProfile.querySelector('#message-post');
     messagePost.appendChild(postTemplate(publication, comments));
-    /*
-    getCommentToDB(publication.id, ((comments) => {
-      messagePost.appendChild(postTemplate(publication, comments));
-    }));
-    */
   });
 
   return viewProfile;

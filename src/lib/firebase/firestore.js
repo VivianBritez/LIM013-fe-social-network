@@ -45,9 +45,8 @@ export const deletePost = (docID) => firebase.firestore().collection('publicatio
   .doc(docID).delete();
 //-----------------------------------------------------------------------------------------------
 
-// Comment
-
-export const addCommentToPost = (userID, name, docID, userComment, dateComment, photoUser) => firebase
+// Add comments to "comments" collection in each post
+export const addCommentToPost = (docID, userID, name, userComment, dateComment, photoUser) => firebase
   .firestore()
   .collection('publications').doc(docID).collection('comments')
   .add({
@@ -58,14 +57,14 @@ export const addCommentToPost = (userID, name, docID, userComment, dateComment, 
     photo: photoUser,
   });
 
+// Get comments of "comments" collection in database
 export const getCommentToDB = (docID, callbackfn) => firebase.firestore()
   .collection('publications').doc(docID).collection('comments')
   .orderBy('date', 'desc')
   .onSnapshot((querySnapShot) => {
-    const data = [];
+    const commentData = [];
     querySnapShot.forEach((doc) => {
-      data.push({ postID: docID, id: doc.id, ...doc.data() });
+      commentData.push({ postID: docID, id: doc.id, ...doc.data() });
     });
-    // console.log('data', data);
-    callbackfn(data);
+    callbackfn(commentData);
   });

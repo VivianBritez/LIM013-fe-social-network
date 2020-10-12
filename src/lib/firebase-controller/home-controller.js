@@ -2,7 +2,6 @@ import { logOut } from '../firebase/auth.js';
 import {
   addNotesToDB,
   editTextPost,
-  readAddNotesToDB,
   deletePost,
   readUserDB,
   addCommentToPost,
@@ -70,8 +69,8 @@ export const deletePostToDB = (docID) => {
     });
 };
 
-export const addCommentToDB = (userID, name, docID, userComment, dateComment, photoUser) => {
-  addCommentToPost(userID, name, docID, userComment, dateComment, photoUser)
+export const addCommentToDB = (docID, userID, name, userComment, dateComment, photoUser) => {
+  addCommentToPost(docID, userID, name, userComment, dateComment, photoUser)
     .then(() => {
       console.log('Comment successfully!');
     }).catch((error) => {
