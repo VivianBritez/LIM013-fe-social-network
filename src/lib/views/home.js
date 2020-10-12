@@ -119,10 +119,10 @@ const postTemplate = (doc, commentDoc) => {
   });
 
   // Send each comments to commentTemplate
+  const commentShow = div.querySelector('#comment-show');
   commentDoc.forEach((element) => {
     // console.log(element);
     if (doc.id === element.postID) {
-      const commentShow = div.querySelector('#comment-show');
       commentShow.appendChild(commentTemplate(element));
     }
   });
@@ -179,6 +179,21 @@ export const profileTemplate = (posts, comments) => {
   const textPost = viewProfile.querySelector('#box-post');
   const post = viewProfile.querySelector('#mode-post');
   const btnShare = viewProfile.querySelector('#btn-share');
+  // const modePost = viewProfile.querySelector('#mode-post');
+
+  /*
+  modePost.addEventListener('change', (e) => {
+    const selectedMode = e.target.value;
+    // Share post
+    btnShare.addEventListener('click', () => {
+      const textPostVal = textPost.value;
+      const date = new Date();
+      createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, selectedMode);
+      // Clear text content
+      // listPublication();
+    });
+  });
+  */
 
   // Share post
   btnShare.addEventListener('click', () => {
