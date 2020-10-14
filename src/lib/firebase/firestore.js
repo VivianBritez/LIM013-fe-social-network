@@ -11,6 +11,19 @@ export const readUserDB = uid => firebase.firestore().collection('users')
   .where('uid', '==', uid)
   .get();
 
+
+export const getUserInformation = callback => firebase.firestore()
+  .collection('users')
+  .onSnapshot((querySnapshot) => {
+    const data = [];
+    querySnapshot.forEach((doc) => {
+      data.push({ id: doc.id, ...doc.data() });
+    });
+    callback(data);
+  });
+
+
+
 export const addNotesToDB = (userID, name, createNote, datePost, userMode, photoUser) => firebase
   .firestore()
   .collection('publications').add({
@@ -24,9 +37,24 @@ export const addNotesToDB = (userID, name, createNote, datePost, userMode, photo
 
 // callbackfn es un funcion como parametro lo mando
 export const readAddNotesToDB = callbackfn => firebase.firestore()
-  .collection('publications').orderBy('date', 'desc').onSnapshot((data) => {
+  .collection('publications')
+  .orderBy('date', 'desc')
+  .onSnapshot((querySnapshot) => {
+    const data = [];
+    querySnapshot.forEach((doc) => {
+      const obj = {
+        id: doc.id,
+        creatorName: doc.data().creatorName,
+        note: doc.data().note,
+        date: doc.data().date,
+        mode: doc.data().mode,
+        photo: doc.data().photo,
+      };
+      data.push(obj); // sacar todas las propiedades...
+    });
     console.log('data', data);
     callbackfn(data);
+    console.log(callbackfn);
   });
 
 // Update post
@@ -40,14 +68,15 @@ export const editTextPost = (docID, changeNote, newDate) => firebase.firestore()
 export const deletePost = docID => firebase.firestore().collection('publications')
   .doc(docID).delete();
 
+// update profile
 
-export const addDescription = description => firebase
-  .firestore()
-  .collection('publications').add({
-    about: description,
+
+export const editInfoProfile = (docID, name, direction, about, preferences) => {
+  const result = firebase.firestore().collection("users").doc(docID).update({
+    displayName: name,
+    displayDirection: direction,
+    displayAbout: about,
+    displayPreferences: preferences,
   });
-export const readAddDescriptionToDB = callback => firebase.firestore()
-  .collection('description').onSnapshot((data) => {
-    console.log('data', data);
-    callback(data);
-  });
+  return result;
+};

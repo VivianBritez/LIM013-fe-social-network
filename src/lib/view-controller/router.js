@@ -1,4 +1,4 @@
-import { readAddNotesToDB, readAddDescriptionToDB } from '../firebase/firestore.js';
+import { readAddNotesToDB, getUserInformation } from '../firebase/firestore.js';
 import { components } from '../views/components.js';
 
 // Change Template
@@ -11,28 +11,30 @@ const changeTemplate = (hash) => {
   switch (hash) {
     case '':
     case '#':
-    case '#/':
-    { return container.appendChild(components.loginTemplateProp()); }
-    case '#/login':
-    { return container.appendChild(components.loginTemplateProp()); }
-    case '#/signup':
-    { return container.appendChild(components.signUpTemplateProp()); }
-    case '#/profile':
-    { readAddDescriptionToDB((data) => {
-      // console.log(data);
-      container.innerHTML = '';
-      return container.appendChild(components.profilePro(data));
-    });
+    case '#/': {
+      return container.appendChild(components.loginTemplateProp());
     }
-    case '#/home':
-    { readAddNotesToDB((data) => {
-      // console.log(data);
-      container.innerHTML = '';
-      return container.appendChild(components.profileTemplateProp(data));
-    });
+    case '#/login': {
+      return container.appendChild(components.loginTemplateProp());
+    }
+    case '#/signup': {
+      return container.appendChild(components.signUpTemplateProp());
+    }
+    case '#/profile': {
+      return getUserInformation((data) => {
+        container.innerHTML = '';
+        container.appendChild(components.profilePro(data));
+      });
+    }
+    case '#/home': {
+      return readAddNotesToDB((data) => {
+        // console.log(data);
+        container.innerHTML = '';
+        container.appendChild(components.profileTemplateProp(data));
+      });
     }
     default:
-      /* return container.appendChild(components.errorPageProp()); */
+      return container.appendChild(components.errorPageProp());
   }
 };
 

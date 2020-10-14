@@ -22,6 +22,7 @@ describe('createUserAccount', () => {
   it('should be able to create an account', (done) => myModule.createUserAccount('sheillyrlp@gmial.com', '12345678')
     .then((user) => {
       expect(user.email).toBe('sheillyrlp@gmial.com');
+      expect(user.password).toBe('12345678');
       done();
     }));
 });

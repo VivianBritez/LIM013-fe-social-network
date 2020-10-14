@@ -12,7 +12,6 @@ const components = {
   profileTemplateProp: profileTemplate,
   profilePro: profile,
   errorPageProp: errorPage,
-  
 };
 
 export { components };

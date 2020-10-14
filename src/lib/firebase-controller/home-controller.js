@@ -2,7 +2,6 @@ import { logOut } from '../firebase/auth.js';
 import {
   addNotesToDB,
   editTextPost,
-  readAddNotesToDB,
   deletePost,
   readUserDB,
 } from '../firebase/firestore.js';
@@ -28,6 +27,7 @@ export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, 
       console.error('Error adding document: ', error);
     });
 };
+/*
 
 export const readNoteToDB = () => {
   readAddNotesToDB()
@@ -40,7 +40,7 @@ export const readNoteToDB = () => {
       console.log('Error getting documents: ', error);
     });
 };
-
+*/
 export const readUser = (uid) => {
   readUserDB(uid)
     .then((querySnapshot) => {

@@ -11,16 +11,16 @@ const formatoFecha = (fecha) => {
 };
 
 const postTemplate = (doc) => {
-  // const user=readUser(doc.data().creatorID);
+  // const user=readUser(doc.creatorID);
   // console.log("userHome",user);
   const div = document.createElement('div');
-  console.log('id', doc.data());
+  console.log('id', doc);
   div.classList = 'share-post';
   div.innerHTML = `
   <div class="container-user">
-  <span><img class="user-image-post" src="${doc.data().photo}"></span>
-  <h4 class="name-user">Publicado por ${doc.data().creatorName}
-  <h4 class="name-user">${formatoFecha(doc.data().date.toDate())}</h4>
+  <span><img class="user-image-post" src="${doc.photo}"></span>
+  <h4 class="name-user">Publicado por ${doc.creatorName}
+  <h4 class="name-user">${formatoFecha(doc.date.toDate())}</h4>
   <div id="show-options" class="hidden">
   <label class="ellipsis" id="ellipsis" ><i id="i" class="fas fa-ellipsis-h"></i>
   <select id="options">
@@ -30,9 +30,9 @@ const postTemplate = (doc) => {
   </select></label></h4>
   </div>
   </div>
-  <div id="text-post" class="show"><p>${doc.data().note}</p></div>
+  <div id="text-post" class="show"><p>${doc.note}</p></div>
   <div id="edit-option" class="hidden">
-  <textarea class="textarea" id="edit-text-post">${doc.data().note}</textarea>
+  <textarea class="textarea" id="edit-text-post">${doc.note}</textarea>
   <button type="button" id="accept"><i class="fas fa-check"></i></button>
   </div>
   <label><i id="i" class="far fa-heart"></i></label>
@@ -48,7 +48,7 @@ const postTemplate = (doc) => {
   const editOption = div.querySelector('#edit-option');
   const accept = div.querySelector('#accept');
   // Edit and delete post
-  if (localStorage.getItem('userID') === doc.data().creatorID) {
+  if (localStorage.getItem('userID') === doc.creatorID) {
     showOptions.classList.remove('hidden');
     showOptions.classList.add('show');
     options.addEventListener('change', (e) => {
@@ -57,7 +57,7 @@ const postTemplate = (doc) => {
       if (selectedOption === 'edit') {
         console.log('Aquí puede editar');
         console.log(doc.id);
-        // console.log(doc.data().creatorID);
+        // console.log(doc.creatorID);
         textPost.classList.add('hidden');
         textPost.classList.remove('show');
         editOption.classList.add('show');
@@ -70,7 +70,7 @@ const postTemplate = (doc) => {
           editTextPostToDB(doc.id, editTextPostVal, newDate);
         });
       } else if (selectedOption === 'delete') {
-        console.log('Data eliminada');
+        console.log('eliminada');
         deletePostToDB(doc.id);
       }
     });
@@ -145,19 +145,19 @@ export const profileTemplate = (posts) => {
       createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, selectedMode);
 
       // Clear text content
-      // listPublication();
     });
   });
 
   posts.forEach((post) => {
     const messagePost = viewProfile.querySelector('#message-post');
     messagePost.appendChild(postTemplate(post));
+    console.log(messagePost);
   });
   // Share post
   btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
     const postVal = post.value;
-    console.log(postVal, 'provando valor');
+    console.log(postVal, 'probando valor');
     const date = new Date();
     createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal, localStorage.getItem('userPhoto'));
   });
