@@ -1,4 +1,4 @@
-import { readAddNotesToDB, getCommentToDB } from '../firebase/firestore.js';
+import { readAddNotesToDB } from '../firebase/firestore.js';
 import { components } from '../views/components.js';
 
 // Change Template
