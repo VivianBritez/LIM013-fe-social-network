@@ -5,6 +5,7 @@ import {
   deletePostToDB,
   addCommentToDB,
 } from '../firebase-controller/home-controller.js';
+import { getCommentToDB } from '../firebase/firestore.js';
 
 const formatoFecha = (fecha) => {
   const fechaFin = `${fecha.getDate()} - ${fecha.getMonth() + 1} - ${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
@@ -25,7 +26,7 @@ const commentTemplate = (comData) => {
 /* <div class="container-user-comment>
 </div>
 */
-const postTemplate = (doc, commentDoc) => {
+const postTemplate = (doc) => {
   // console.log(doc);
   // console.log(doc.id);
   // console.log(commentDoc);
@@ -119,13 +120,16 @@ const postTemplate = (doc, commentDoc) => {
   });
 
   // Send each comments to commentTemplate
-  const commentShow = div.querySelector('#comment-show');
-  commentDoc.forEach((element) => {
-    // console.log(element);
-    if (doc.id === element.postID) {
-      commentShow.appendChild(commentTemplate(element));
+  getCommentToDB(doc.id, ((comments) => {
+    const commentShow = div.querySelector('#comment-show');
+    if (commentShow) {
+      commentShow.innerHTML = '';
+      comments.forEach((element) => {
+        // console.log(element);
+        commentShow.appendChild(commentTemplate(element));
+      });
     }
-  });
+  }));
 
   return div;
 };

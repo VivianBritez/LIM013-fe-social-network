@@ -19,12 +19,8 @@ const changeTemplate = (hash) => {
     { return container.appendChild(components.signUpTemplateProp()); }
     case '#/home':
     { return readAddNotesToDB((data) => {
-      data.forEach((element) => {
-        getCommentToDB(element.id, ((comments) => {
-          container.innerHTML = '';
-          container.appendChild(components.profileTemplateProp(data, comments));
-        }));
-      });
+      container.innerHTML = '';
+      container.appendChild(components.profileTemplateProp(data));
     });
     }
     default:
