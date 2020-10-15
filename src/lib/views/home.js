@@ -122,13 +122,11 @@ const postTemplate = (doc) => {
   // Send each comments to commentTemplate
   getCommentToDB(doc.id, ((comments) => {
     const commentShow = div.querySelector('#comment-show');
-    if (commentShow) {
-      commentShow.innerHTML = '';
-      comments.forEach((element) => {
-        // console.log(element);
-        commentShow.appendChild(commentTemplate(element));
-      });
-    }
+    commentShow.innerHTML = '';
+    comments.forEach((element) => {
+      // console.log(element);
+      commentShow.appendChild(commentTemplate(element));
+    });
   }));
 
   return div;
