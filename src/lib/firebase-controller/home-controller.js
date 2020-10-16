@@ -10,9 +10,6 @@ import {
 export const homeLogOut = () => {
   logOut()
     .then(() => {
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('userPhoto');
       window.location.hash = '#/login';
     });
 };
@@ -20,8 +17,6 @@ export const homeLogOut = () => {
 export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, photoUser) => {
   addNotesToDB(userID, name, createNote, datePost, userMode, photoUser)
     .then((docRef) => {
-      localStorage.setItem('userName', name);
-      localStorage.setItem('userPhoto', photoUser);
       console.log('Document written with ID: ', docRef.id);
     })
     .catch((error) => {
