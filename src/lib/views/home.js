@@ -6,6 +6,7 @@ import {
   addCommentToDB,
 } from '../firebase-controller/home-controller.js';
 import { getCommentToDB } from '../firebase/firestore.js';
+import { getUser } from '../firebase/auth.js';
 
 const formatoFecha = (fecha) => {
   const fechaFin = `${fecha.getDate()} - ${fecha.getMonth() + 1} - ${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
@@ -27,6 +28,7 @@ const commentTemplate = (comData) => {
 </div>
 */
 const postTemplate = (doc) => {
+  const user = getUser();
   // console.log(doc);
   // console.log(doc.id);
   // console.log(commentDoc);
@@ -57,7 +59,7 @@ const postTemplate = (doc) => {
   <label><i id="i" class="far fa-heart"></i></label>
   <label><i id="comment-icon" class="far fa-comment"></i></label>
   <div id="comment-box" class="hidden">
-  <span><img class="user-image-comment" src="${localStorage.getItem('userPhoto')}"></span>
+  <span><img class="user-image-comment" src="${user.photoURL}"></span>
   <textarea id="comment-post" class="comment-post" placeholder="Añade un comentario..."></textarea>
   <button type="button" id="btn-send-comment" class="btn-send-comment"><img src="./img/send-paper-plane.png"></button>
   </div>
@@ -73,7 +75,7 @@ const postTemplate = (doc) => {
   const accept = div.querySelector('#accept');
 
   // Edit and delete post
-  if (localStorage.getItem('userID') === doc.creatorID) {
+  if (user.uid === doc.creatorID) {
     showOptions.classList.remove('hidden');
     showOptions.classList.add('show');
     options.addEventListener('change', (e) => {
@@ -115,7 +117,7 @@ const postTemplate = (doc) => {
     btnSend.addEventListener('click', () => {
       const commentPostVal = commentPost.value;
       const dateComment = new Date();
-      addCommentToDB(doc.id, localStorage.getItem('userID'), localStorage.getItem('userName'), commentPostVal, dateComment, localStorage.getItem('userPhoto'));
+      addCommentToDB(doc.id, user.uid, user.displayName, commentPostVal, dateComment, user.displayName);
     });
   });
 
@@ -133,6 +135,8 @@ const postTemplate = (doc) => {
 };
 
 export const profileTemplate = (posts, comments) => {
+  const user = getUser();
+  console.log(user);
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <header>
@@ -153,10 +157,10 @@ export const profileTemplate = (posts, comments) => {
     </header>
     <section class="container-profile">
       <h2>Perfil</h2>
-      <img class="user-image" src="${localStorage.getItem('userPhoto')}">
-      <p>${localStorage.getItem('userName')}</p>
+      <img class="user-image" src="${user.photoURL}">
+      <p>${user.displayName}</p>
       <h3>Email</h3>
-      <p>${localStorage.getItem('userEmail')}</p>
+      <p>${user.email}</p>
       </section>
     </section>
     <div id="post-container" class="post general-position">
@@ -203,7 +207,7 @@ export const profileTemplate = (posts, comments) => {
     const postVal = post.value;
     // console.log(postVal, 'probando valor');
     const date = new Date();
-    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal, localStorage.getItem('userPhoto'));
+    createAddNoteToDB(user.uid, user.displayName, textPostVal, date, postVal, user.photoURL);
   });
 
   const btnlogOut = viewProfile.querySelector('#btn-log-out');
