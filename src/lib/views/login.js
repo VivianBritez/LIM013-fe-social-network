@@ -1,5 +1,6 @@
 // import { loginUser } from '../firebase/auth.js';
 import { loginGoogle, loginFacebook, loginWithEmailAndPassword } from '../firebase-controller/login-controller.js';
+import { authListener } from '../firebase/auth.js';
 // import { readUserDB } from '../firebase/firestore.js';
 
 export default () => {
@@ -35,31 +36,36 @@ export default () => {
   const txtpassword = viewLogin.querySelector('#txt-password');
   const loginForm = viewLogin.querySelector('#login-form');
 
-  // Event submit to user login
-  loginForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+  authListener((user) => {
+    if (user === null) {
+      // Event submit to user login
+      loginForm.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    const txtEmailVal = txtEmail.value;
-    const txtpasswordVal = txtpassword.value;
-    console.log('paso');
+        const txtEmailVal = txtEmail.value;
+        const txtpasswordVal = txtpassword.value;
+        console.log('paso');
 
-    loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
-    // Clear the login form
-    loginForm.reset();
+        loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
+        // Clear the login form
+        loginForm.reset();
+      });
+
+      // Sign in with google
+      viewLogin.querySelector('#btn-google').addEventListener('click', () => {
+        // event.preventDefault();
+        // console.log('hola entre aqui');
+        loginGoogle();
+      });
+
+      // Sign in with facebook
+      viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
+        event.preventDefault();
+        // console.log("Hola ingresaste a Facebook");
+        loginFacebook();
+      });
+    }
   });
 
-  // Sign in with google
-  viewLogin.querySelector('#btn-google').addEventListener('click', () => {
-    // event.preventDefault();
-    // console.log('hola entre aqui');
-    loginGoogle();
-  });
-
-  // Sign in with facebook
-  viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
-    event.preventDefault();
-    // console.log("Hola ingresaste a Facebook");
-    loginFacebook();
-  });
   return viewLogin;
 };
