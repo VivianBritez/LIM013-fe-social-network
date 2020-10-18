@@ -1,13 +1,12 @@
 export const firebaseInit = () => {
   const firebaseConfig = {
-    apiKey: 'AIzaSyAJsgq2BP-6H8TRouriGWLAVyYnwEIGUQU',
-    authDomain: 'continual-air-289918.firebaseapp.com',
-    databaseURL: 'https://continual-air-289918.firebaseio.com',
-    projectId: 'continual-air-289918',
-    storageBucket: 'continual-air-289918.appspot.com',
-    messagingSenderId: '352014947754',
-    appId: '1:352014947754:web:cf433cb5a4869a9e36c7d3',
-    measurementId: 'G-R2NB3F2FJM',
+    apiKey: "AIzaSyA_B2EZp8VlQoUoeDhsCeZikGjAeX9K570",
+    authDomain: "energy-sources.firebaseapp.com",
+    databaseURL: "https://energy-sources.firebaseio.com",
+    projectId: "energy-sources",
+    storageBucket: "energy-sources.appspot.com",
+    messagingSenderId: "517477040110",
+    appId: "1:517477040110:web:cffbaf0adbaaacb81298ff"
   };
 
   // Initialize Firebase

@@ -6,7 +6,7 @@ const imgProfileUserDefault = '../img/userProfile.png';
 export const createUser = (email, password, name) => {
   createUserAccount(email, password)
     .then((res) => {
-      console.log(res);
+      console.log(res.user.uid);
       const user = getUser();
       console.log(user);
       user.updateProfile({

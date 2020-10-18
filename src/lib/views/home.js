@@ -142,7 +142,7 @@ export const profileTemplate = (posts, comments) => {
     <header>
     <nav>
     <div class="title-energy">
-    <h4 class="title">Energía Verde💡</h4></div>
+    <h4 class="title">Energy Sources💡</h4></div>
     <input type="checkbox" id="check-and-uncheck">
     <label for="check-and-uncheck">
     <i class="fas fa-bars" id="hamburger"></i>

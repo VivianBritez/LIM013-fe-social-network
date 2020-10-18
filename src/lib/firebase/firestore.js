@@ -1,5 +1,5 @@
 export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => firebase.firestore()
-  .collection('users').add({
+  .collection('users').doc(useruid).set({
     name: username,
     email: emailUser,
     uid: useruid,

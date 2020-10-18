@@ -13,8 +13,8 @@ export default () => {
     <img src="img/light-bulb-mobile.png" class="light-bulb-mobile" alt="icono">
     </figure>
     <section class="login-style">
-      <h1>Energía Verde</h1>
-      <h3>¡Bienvenid@, Energía Verde!</h3>
+      <h1>Energy Sources</h1>
+      <h3>¡Bienvenid@, Energy Sources!</h3>
       <form id="login-form" class="login-form">
         <input type="text" id="txt-email" class="input" placeholder="Nombre de usuario o Email">
         <p id="alert-txt-email"></p>
@@ -52,8 +52,8 @@ export default () => {
       });
 
       // Sign in with google
-      viewLogin.querySelector('#btn-google').addEventListener('click', () => {
-        // event.preventDefault();
+      viewLogin.querySelector('#btn-google').addEventListener('click', (event) => {
+        event.preventDefault();
         // console.log('hola entre aqui');
         loginGoogle();
       });
