@@ -9,7 +9,7 @@ h1,
 h2 {
   margin-top: 5%;
   text-align: center;
-  color: #32CD32;
+  color: #583101;
   font-size: 30px;
 }
 .user-image {
@@ -42,6 +42,7 @@ margin: 1%;
 h3 {
   text-align: center;
   padding-top: 7%;
+  color: #583101;
 }
 #alert-txt-email,
 #alert-txt-password {
@@ -57,6 +58,7 @@ form {
 }
 
 .input {
+  color: #765834;
   display: block;
   padding: 10px;
   width: 100%;
@@ -64,7 +66,7 @@ form {
   text-align: center;
   border: 0;
   border-radius: 50px;
-  background: #f3f3f3;
+  background: #FFF6EC;
   font-size: 16px;
 }
 
@@ -73,18 +75,17 @@ form {
 }
 
 .btn-login {
-  color: black;
+  color: #FFF6EC;
   border: 0;
   cursor: pointer;
-  opacity: 0.8;
   display: block;
   padding: 10px;
   width: 100%;
   margin: 12px 0;
   text-align: center;
   border-radius: 50px;
-  background: linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
-  font-size: 16px;
+  background: #765834;
+  font-size: 20px;
 }
 
 .btn-google-facebook {
@@ -101,10 +102,14 @@ p {
   text-align: center;
   padding-top: 2%;
   margin: revert;
+  color: #583101;
 }
 
 .btn-register {
   text-decoration: none;
+  color: #583101;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /*Register Template*/
@@ -117,14 +122,13 @@ p {
   text-align: center;
   border: 0;
   border-radius: 50px;
-  background: #f3f3f3;
+  background: #FFF6EC;
   font-size: 16px;
 }
 
 .submit-form {
-  color: black;
+  color: #FFF6EC;
   cursor: pointer;
-  opacity: 0.8;
   display: block;
   padding: 10px 0;
   width: 100%;
@@ -132,7 +136,8 @@ p {
   text-align: center;
   border: 0;
   border-radius: 50px;
-  background: #6fcf97;
-  font-size: 20px;
+  background: #765834;
+  font-size: 24px;
+  font-weight: bold;
 }
 

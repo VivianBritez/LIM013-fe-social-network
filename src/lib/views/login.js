@@ -1,20 +1,19 @@
 // import { loginUser } from '../firebase/auth.js';
 import { loginGoogle, loginFacebook, loginWithEmailAndPassword } from '../firebase-controller/login-controller.js';
-import { authListener } from '../firebase/auth.js';
 // import { readUserDB } from '../firebase/firestore.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
   viewLogin.innerHTML = `
     <figure class="bulb-container">
-    <img src="img/light-bulb.png" class="light-bulb" alt="icono">
+    <img src="img/reading-main.png" class="light-bulb" alt="icono">
     </figure>
     <figure class="bulb-mobile">
-    <img src="img/light-bulb-mobile.png" class="light-bulb-mobile" alt="icono">
+    <img src="img/Leaders-are-Readers.png" class="light-bulb-mobile" alt="icono">
     </figure>
     <section class="login-style">
-      <h1>Energy Sources</h1>
-      <h3>¡Bienvenid@, Energy Sources!</h3>
+      <h1>Leaders are Readers</h1>
+      <h3>¡Bienvenid@, reading lover!</h3>
       <form id="login-form" class="login-form">
         <input type="text" id="txt-email" class="input" placeholder="Nombre de usuario o Email">
         <p id="alert-txt-email"></p>
@@ -25,7 +24,6 @@ export default () => {
       <p>O bien ingresa con..</p>
     <section class="btn-google-facebook">
       <button id="btn-google" class="btn-image"><img src="./img/icon-google.png"></button>
-      <button id ="btn-facebook"class="btn-image"><img src="./img/icon-facebook.png"></button>
     </section>
     <p>¿No tienes una cuenta?<a href="#/signup" id = "btn-register" class="btn-register">Regístrate</a></p>
     </section>
@@ -36,36 +34,34 @@ export default () => {
   const txtpassword = viewLogin.querySelector('#txt-password');
   const loginForm = viewLogin.querySelector('#login-form');
 
-  authListener((user) => {
-    if (user === null) {
-      // Event submit to user login
-      loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+  // Event submit to user login
+  loginForm.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-        const txtEmailVal = txtEmail.value;
-        const txtpasswordVal = txtpassword.value;
-        console.log('paso');
+    const txtEmailVal = txtEmail.value;
+    const txtpasswordVal = txtpassword.value;
+    console.log('paso');
 
-        loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
-        // Clear the login form
-        loginForm.reset();
-      });
-
-      // Sign in with google
-      viewLogin.querySelector('#btn-google').addEventListener('click', (event) => {
-        event.preventDefault();
-        // console.log('hola entre aqui');
-        loginGoogle();
-      });
-
-      // Sign in with facebook
-      viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
-        event.preventDefault();
-        // console.log("Hola ingresaste a Facebook");
-        loginFacebook();
-      });
-    }
+    loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
+    // Clear the login form
+    loginForm.reset();
   });
+
+  // Sign in with google
+  viewLogin.querySelector('#btn-google').addEventListener('click', (event) => {
+    event.preventDefault();
+    // console.log('hola entre aqui');
+    loginGoogle();
+  });
+
+  /*
+  // Sign in with facebook
+  viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
+    event.preventDefault();
+    // console.log("Hola ingresaste a Facebook");
+    loginFacebook();
+  });
+  */
 
   return viewLogin;
 };
