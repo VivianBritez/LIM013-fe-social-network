@@ -1,4 +1,4 @@
-import { readAddNotesToDB, getUserInformation } from '../firebase/firestore.js';
+import { readAddNotesToDB } from '../firebase/firestore.js';
 import { components } from '../views/components.js';
 
 // Change Template
@@ -21,10 +21,7 @@ const changeTemplate = (hash) => {
       return container.appendChild(components.signUpTemplateProp());
     }
     case '#/profile': {
-      return getUserInformation((data) => {
-        container.innerHTML = '';
-        container.appendChild(components.profilePro(data));
-      });
+      container.appendChild(components.profilePro(data));
     }
     case '#/home': {
       return readAddNotesToDB((data) => {
@@ -32,6 +29,7 @@ const changeTemplate = (hash) => {
         container.innerHTML = '';
         container.appendChild(components.profileTemplateProp(data));
       });
+      break;
     }
     default:
       return container.appendChild(components.errorPageProp());

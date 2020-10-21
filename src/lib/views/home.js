@@ -5,14 +5,17 @@ import {
   deletePostToDB,
 } from '../firebase-controller/home-controller.js';
 
+import { getUser } from '../firebase/auth.js';
+import { countLike } from '../firebase/firestore.js';
+
 const formatoFecha = (fecha) => {
   const fechaFin = `${fecha.getDate()} - ${fecha.getMonth() + 1} - ${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
   return fechaFin;
 };
 
 const postTemplate = (doc) => {
-  // const user=readUser(doc.creatorID);
-  // console.log("userHome",user);
+  console.log('doc', doc.id);
+  const user = getUser();
   const div = document.createElement('div');
   console.log('id', doc);
   div.classList = 'share-post';
@@ -34,8 +37,8 @@ const postTemplate = (doc) => {
   <div id="edit-option" class="hidden">
   <textarea class="textarea" id="edit-text-post">${doc.note}</textarea>
   <button type="button" id="accept"><i class="fas fa-check"></i></button>
-  </div>
-  <label><i id="i" class="far fa-heart"></i></label>
+  <label><i id="like" class="far fa-heart"></i></label>
+  
   <label><i id="i" class="far fa-comment"></i></label>
 
 
@@ -48,7 +51,7 @@ const postTemplate = (doc) => {
   const editOption = div.querySelector('#edit-option');
   const accept = div.querySelector('#accept');
   // Edit and delete post
-  if (localStorage.getItem('userID') === doc.creatorID) {
+  if (user.uid === doc.creatorID) {
     showOptions.classList.remove('hidden');
     showOptions.classList.add('show');
     options.addEventListener('change', (e) => {
@@ -75,17 +78,19 @@ const postTemplate = (doc) => {
       }
     });
   }
+
   return div;
 };
 
 export const profileTemplate = (posts) => {
   // console.log('user', user);
+  const user = getUser();
   const viewProfile = document.createElement('section');
   viewProfile.innerHTML = ` 
     <header>
     <nav>
     <div class="title-energy">
-    <h4 class="title">Energía Verde💡</h4></div>
+    <h4 class="title">Energy Sources💡</h4></div>
     <input type="checkbox" id="check-and-uncheck">
     <label for="check-and-uncheck">
     <i class="fas fa-bars" id="hamburger"></i>
@@ -105,10 +110,10 @@ export const profileTemplate = (posts) => {
     </header>
     <section class="container-profile">
       <h2>Perfil</h2>
-      <img class="user-image" src="${localStorage.getItem('userPhoto')}">
-      <p>${localStorage.getItem('userName')}</p>
+      <img class="user-image" src="${user.photoURL}">
+      <p>${user.displayName}</p>
       <h3>Email</h3>
-      <p>${localStorage.getItem('userEmail')}</p>
+      <p>${user.email}</p>
       </section>
     </section>
     <div id="post-container" class="post general-position">
@@ -142,7 +147,7 @@ export const profileTemplate = (posts) => {
     btnShare.addEventListener('click', () => {
       const textPostVal = textPost.value;
       const date = new Date();
-      createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, selectedMode);
+      createAddNoteToDB(user.uid, user.displayName, textPostVal, date, selectedMode);
 
       // Clear text content
     });
@@ -159,12 +164,14 @@ export const profileTemplate = (posts) => {
     const postVal = post.value;
     console.log(postVal, 'probando valor');
     const date = new Date();
-    createAddNoteToDB(localStorage.getItem('userID'), localStorage.getItem('userName'), textPostVal, date, postVal, localStorage.getItem('userPhoto'));
+    createAddNoteToDB(user.uid, user.displayName, textPostVal, date, postVal, user.photoURL);
   });
 
   const btnlogOut = viewProfile.querySelector('#btn-log-out');
   btnlogOut.addEventListener('click', () => {
     homeLogOut();
   });
+
+
   return viewProfile;
 };

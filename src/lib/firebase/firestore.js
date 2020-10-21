@@ -1,11 +1,12 @@
 export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => firebase.firestore()
-  .collection('users').add({
+  .collection('users').doc(useruid).set({
     name: username,
     email: emailUser,
     uid: useruid,
     photoUrl: userPhotoUrl,
 
   });
+
 
 export const readUserDB = uid => firebase.firestore().collection('users')
   .where('uid', '==', uid)
@@ -33,6 +34,7 @@ export const addNotesToDB = (userID, name, createNote, datePost, userMode, photo
     date: datePost,
     mode: userMode,
     photo: photoUser,
+    likes: [],
   });
 
 // callbackfn es un funcion como parametro lo mando
@@ -44,11 +46,13 @@ export const readAddNotesToDB = callbackfn => firebase.firestore()
     querySnapshot.forEach((doc) => {
       const obj = {
         id: doc.id,
+        creatorID: doc.data().creatorID,
         creatorName: doc.data().creatorName,
         note: doc.data().note,
         date: doc.data().date,
         mode: doc.data().mode,
         photo: doc.data().photo,
+        likes: doc.data().likes,
       };
       data.push(obj); // sacar todas las propiedades...
     });
@@ -70,7 +74,7 @@ export const deletePost = docID => firebase.firestore().collection('publications
 
 // update profile
 
-
+/*
 export const editInfoProfile = (docID, name, direction, about, preferences) => {
   const result = firebase.firestore().collection("users").doc(docID).update({
     displayName: name,
@@ -80,3 +84,6 @@ export const editInfoProfile = (docID, name, direction, about, preferences) => {
   });
   return result;
 };
+*/
+
+export const countLike = (id, likes) => firebase.firestore().collection('publications').doc(id).update({ likes });

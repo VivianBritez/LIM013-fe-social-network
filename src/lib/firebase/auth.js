@@ -25,3 +25,4 @@ export const createUserAccount = (email, password) => firebase.auth()
 
 export const loginUser = (email, password) => firebase.auth()
   .signInWithEmailAndPassword(email, password);
+

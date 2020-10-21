@@ -1,7 +1,5 @@
-import { editTextProfileToDB } from '../firebase-controller/profile-controller.js';
 
-
-export const profile = (users) => {
+export const profile = () => {
   console.log('user', users);
   const editProfile = document.createElement('section');
   editProfile.innerHTML = ` 
