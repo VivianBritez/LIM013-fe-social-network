@@ -27,7 +27,7 @@ body{
     float: left;
 }
 nav{
-    background:linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
+    background:linear-gradient(30deg, #603813,#84654B, #8C6F58, #9F8776, #B29F94);
     height: 80px;
     text-align: center;
 }
@@ -42,7 +42,7 @@ nav ul li {
 }
 nav ul li a{
     position: relative;
-    color: black;
+    color: #FFF6EC;
     font-size: 18px;
     text-transform: uppercase;
 }
@@ -64,7 +64,7 @@ nav ul li a:hover:before{
 }
 label #hamburger,
 label #cross{
-    color: black;
+    color: #FFEDD8;
     font-size: 30px;
     float: right;
     line-height: 80px;
@@ -86,19 +86,21 @@ label #cross{
 .post{
     width: 63%;
     height: 210px;
-    background: #C1CED0;
+    background: #FFFFFF;
+    border: 2px solid rgba(118, 88, 52, 0.53);
     padding: 10px;
     margin-left: 26%;
     margin-top: 4%;
+    border-radius: 5px;
     }
 
 .share-post{
     width:63%;
-    background: #C1CED0 ;
-    padding: 10px;
+    background: #FFFFFF;
+    border: 2px solid rgba(118, 88, 52, 0.53);
     margin-left: 26%;
     margin-top: 4%;;
-    border-radius: 30px;
+    border-radius: 5px;
     
 }
 #btn-share{
@@ -113,27 +115,28 @@ label #cross{
 }
 #text-post{
     outline:none;
-    border:rgb(83, 78, 78);
-    background:#e9f0f2;
+    border-top: 2px solid rgba(118, 88, 52, 0.53);
+    border-bottom: 2px solid rgba(118, 88, 52, 0.53); 
+    background:#FFFFFF;
     resize: none;
     position: relative;
-    height: 110px;
-    margin: 1%;
-    
+    height: 110px; 
+    margin-bottom: 1%;
 }
 
 i{
-    color: #006400;
+    color: #816036;
     font-size: 30px;
     margin-right: 10px;
     cursor: pointer;
     margin-left: 10px;
+    margin-bottom: 1%;
 }
 
 .btn-send-comment{
     border: 0;
     background: none;
-    color: #006400;
+    color: #816036;
     float: right;
     margin: 10px;
 }
@@ -153,8 +156,8 @@ i{
 
 }
 .textarea{
-    border: rgb(83, 78, 78);
-    background: #e9f0f2;
+    border: 2px solid rgba(118, 88, 52, 0.53);
+    background: #FFFFFF;
     height: 110px;
     margin: 1%;
     width: 97%;
@@ -162,6 +165,9 @@ i{
     outline: none;
     resize: none;
     text-align: center;
+    border-radius: 5px;
+    color: #765834;
+    font-size: 20px;
 }
 .comment-post{
     border: 0;
@@ -196,8 +202,8 @@ i{
     z-index: -1;   
   }
 .name-user{
-    color: #393939;
-    padding: 10px;
+    color: #583101;
+    padding: 19px;
 
 }
 .plane{
@@ -212,14 +218,15 @@ i{
     width: 400px;
     margin-left: 90%;
     padding-top: 4%;
+    color: #FFF6EC;
 }
 .title-energy{
     width: 40%;
     height: 0%;
 }
 .container-user{
-    background: linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
-    border-radius: 20px;
+    background: #FFF6EC;
+    border-radius: 5px;
 }
 .show{
     display: block;
@@ -229,4 +236,5 @@ i{
     width: 100px;
     float: right;
     border: none;
+    background: #FFFFFF;
 }

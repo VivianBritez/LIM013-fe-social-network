@@ -5,14 +5,14 @@ import {
   deletePostToDB,
   addCommentToDB,
 } from '../firebase-controller/home-controller.js';
-import { getCommentToDB } from '../firebase/firestore.js';
+import { getCommentToDB, getCount, incrementCounter, likesCounter } from '../firebase/firestore.js';
 import { getUser } from '../firebase/auth.js';
-
+/*
 const formatoFecha = (fecha) => {
   const fechaFin = `${fecha.getDate()} - ${fecha.getMonth() + 1} - ${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
   return fechaFin;
 };
-
+*/
 const commentTemplate = (comData) => {
   const commentList = document.createElement('div');
   // console.log('doc', doc);
@@ -40,8 +40,7 @@ const postTemplate = (doc) => {
   div.innerHTML = `
   <div class="container-user">
   <span><img class="user-image-post" src="${doc.photo}"></span>
-  <h4 class="name-user">Publicado por ${doc.creatorName}
-  <h4 class="name-user">${formatoFecha(doc.date.toDate())}</h4>
+  <h4 class="name-user">${doc.creatorName}</h4>
   <div id="show-options" class="hidden">
   <label class="ellipsis" id="ellipsis" ><i id="i" class="fas fa-ellipsis-h"></i>
   <select id="options">
@@ -56,12 +55,12 @@ const postTemplate = (doc) => {
   <textarea class="textarea" id="edit-text-post">${doc.note}</textarea>
   <button type="button" id="accept"><i class="fas fa-check"></i></button>
   </div>
-  <label><i id="i" class="far fa-heart"></i></label>
+  <label><i id="like" class="far fa-heart"></i></label>
   <label><i id="comment-icon" class="far fa-comment"></i></label>
   <div id="comment-box" class="hidden">
   <span><img class="user-image-comment" src="${user.photoURL}"></span>
   <textarea id="comment-post" class="comment-post" placeholder="Añade un comentario..."></textarea>
-  <button type="button" id="btn-send-comment" class="btn-send-comment"><img src="./img/send-paper-plane.png"></button>
+  <button type="button" id="btn-send-comment" class="btn-send-comment"><img src="./img/icons8-paper-plane-30.png"></button>
   </div>
   <div id="comment-show">
   </div>
@@ -131,6 +130,17 @@ const postTemplate = (doc) => {
     });
   }));
 
+  // Likes counter
+  const like = div.querySelector('#like');
+
+  like.addEventListener('click', () => {
+    likesCounter(doc.id, 10).then(() => {
+      return incrementCounter(doc.id, 10);
+    }).then(() => {
+      return getCount(doc.id);
+    });
+  });
+
   return div;
 };
 
@@ -142,7 +152,7 @@ export const profileTemplate = (posts, comments) => {
     <header>
     <nav>
     <div class="title-energy">
-    <h4 class="title">Energy Sources💡</h4></div>
+    <h4 class="title">Leaders are Readers 📖</h4></div>
     <input type="checkbox" id="check-and-uncheck">
     <label for="check-and-uncheck">
     <i class="fas fa-bars" id="hamburger"></i>
@@ -165,10 +175,9 @@ export const profileTemplate = (posts, comments) => {
     </section>
     <div id="post-container" class="post general-position">
     <div >
-      <textarea id="box-post"class="textarea" placeholder="¿Qué quieres compartir?" maxlength="100" rows="8" cols="77">
-        </textarea>
+      <textarea id="box-post" class="textarea" placeholder="¿Qué quieres compartir?"></textarea>
     </div>
-    <label><i id="i" class="far fa-images"></i>
+    <label><img src="./img/gallery.png">
       <input class="file" type="file"></label>
     <select class="space hidden" id="mode-post">
       <option value="" disabled selected>Modo</option>
