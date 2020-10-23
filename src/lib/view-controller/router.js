@@ -20,7 +20,7 @@ const changeTemplate = (hash) => {
     case '#/home':
     { return readAddNotesToDB((data) => {
       container.innerHTML = '';
-      container.appendChild(components.profileTemplateProp(data));
+      container.appendChild(components.homeTemplateProp(data));
     });
     }
     default:

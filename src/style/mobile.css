@@ -31,11 +31,11 @@ margin: 5px;
   margin-top: 7px;
   margin-left: 10px;
 }
-.light-bulb-mobile {
+.reading-logo-mobile{
   margin: auto;
   display: none;
 }
-.bulb-mobile{
+.logo-mobile{
   display: flex;
 }
 
@@ -88,13 +88,13 @@ form {
   font-size: 20px;
 }
 
-.btn-google-facebook {
+.btn-google {
   display: block;
   text-align: center;
   margin: auto;
 }
 
-.btn-image {
+.btn-image-google {
   border: transparent;
   background: none;
 }

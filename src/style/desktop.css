@@ -1,4 +1,10 @@
-.light-bulb{
+.text-email{
+    text-align: center;
+    padding-top: 7%;
+    color: #583101;
+  }
+
+.reading-character{
     position: fixed;
     height: 100%;
     left: 0;
@@ -6,7 +12,7 @@
     z-index: -1;
 }
 
-.bulb-container{
+.brand-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 7em;
@@ -220,7 +226,7 @@ i{
     padding-top: 4%;
     color: #FFF6EC;
 }
-.title-energy{
+.title-leaders-readers{
     width: 40%;
     height: 0%;
 }

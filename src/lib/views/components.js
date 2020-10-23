@@ -1,6 +1,6 @@
 import loginTemplate from './login.js';
 import signUpTemplate from './signup.js';
-import { profileTemplate } from './home.js';
+import { homeTemplate } from './home.js';
 import errorPage from './404.js';
 
 // Create object
@@ -8,7 +8,7 @@ import errorPage from './404.js';
 const components = {
   loginTemplateProp: loginTemplate,
   signUpTemplateProp: signUpTemplate,
-  profileTemplateProp: profileTemplate,
+  homeTemplateProp: homeTemplate,
   errorPageProp: errorPage,
 };
 
