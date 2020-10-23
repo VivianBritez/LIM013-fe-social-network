@@ -5,7 +5,7 @@ import {
   deletePostToDB,
   addCommentToDB,
 } from '../firebase-controller/home-controller.js';
-import { getCommentToDB, getCount, incrementCounter, likesCounter } from '../firebase/firestore.js';
+import { getCommentToDB, getCount, incrementCounter, likesCounter, likeToPost } from '../firebase/firestore.js';
 import { getUser } from '../firebase/auth.js';
 /*
 const formatoFecha = (fecha) => {
@@ -116,7 +116,7 @@ const postTemplate = (doc) => {
     btnSend.addEventListener('click', () => {
       const commentPostVal = commentPost.value;
       const dateComment = new Date();
-      addCommentToDB(doc.id, user.uid, user.displayName, commentPostVal, dateComment, user.displayName);
+      addCommentToDB(doc.id, user.uid, user.displayName, commentPostVal, dateComment, user.photoURL);
     });
   });
 
@@ -134,24 +134,29 @@ const postTemplate = (doc) => {
   const like = div.querySelector('#like');
 
   like.addEventListener('click', () => {
+    likeToPost(user.uid, doc.id);
+    console.log('Like a post');
+  });
+  /*
+  like.addEventListener('click', () => {
     likesCounter(doc.id, 10).then(() => {
       return incrementCounter(doc.id, 10);
     }).then(() => {
       return getCount(doc.id);
     });
   });
-
+*/
   return div;
 };
 
-export const profileTemplate = (posts, comments) => {
+export const homeTemplate = (posts) => {
   const user = getUser();
   console.log(user);
-  const viewProfile = document.createElement('section');
-  viewProfile.innerHTML = ` 
+  const viewHome = document.createElement('section');
+  viewHome.innerHTML = ` 
     <header>
     <nav>
-    <div class="title-energy">
+    <div class="title-leaders-readers">
     <h4 class="title">Leaders are Readers 📖</h4></div>
     <input type="checkbox" id="check-and-uncheck">
     <label for="check-and-uncheck">
@@ -169,7 +174,7 @@ export const profileTemplate = (posts, comments) => {
       <h2>Perfil</h2>
       <img class="user-image" src="${user.photoURL}">
       <p>${user.displayName}</p>
-      <h3>Email</h3>
+      <h3 class="text-email">Email</h3>
       <p>${user.email}</p>
       </section>
     </section>
@@ -184,17 +189,17 @@ export const profileTemplate = (posts, comments) => {
       <option id="private" value="private">Privado</option>
       <option id="public" value="public">Publico</option>
     </select>
-    <label class"plane"><i id="btn-share" class="far fa-paper-plane"></i></label>
+    <label><i id="btn-share" class="far fa-paper-plane"></i></label>
   </div>
   <div id="message-post"> 
   </div>
   `;
 
   // Start grabbing our DOM Element
-  const textPost = viewProfile.querySelector('#box-post');
-  const post = viewProfile.querySelector('#mode-post');
-  const btnShare = viewProfile.querySelector('#btn-share');
-  // const modePost = viewProfile.querySelector('#mode-post');
+  const textPost = viewHome.querySelector('#box-post');
+  const post = viewHome.querySelector('#mode-post');
+  const btnShare = viewHome.querySelector('#btn-share');
+  // const modePost = viewHome.querySelector('#mode-post');
 
   /*
   modePost.addEventListener('change', (e) => {
@@ -219,16 +224,16 @@ export const profileTemplate = (posts, comments) => {
     createAddNoteToDB(user.uid, user.displayName, textPostVal, date, postVal, user.photoURL);
   });
 
-  const btnlogOut = viewProfile.querySelector('#btn-log-out');
+  const btnlogOut = viewHome.querySelector('#btn-log-out');
   btnlogOut.addEventListener('click', () => {
     homeLogOut();
   });
 
   // Send each publication to postTemplate
   posts.forEach((publication) => {
-    const messagePost = viewProfile.querySelector('#message-post');
-    messagePost.appendChild(postTemplate(publication, comments));
+    const messagePost = viewHome.querySelector('#message-post');
+    messagePost.appendChild(postTemplate(publication));
   });
 
-  return viewProfile;
+  return viewHome;
 };

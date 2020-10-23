@@ -1,4 +1,6 @@
-export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => firebase.firestore()
+import { db } from './firebase-init.js';
+
+export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => db
   .collection('users').doc(useruid).set({
     name: username,
     email: emailUser,
@@ -7,7 +9,7 @@ export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => fire
 
   });
 
-export const readUserDB = (uid) => firebase.firestore().collection('users')
+export const readUserDB = (uid) => db.collection('users')
   .where('uid', '==', uid)
   .get();
 
@@ -23,7 +25,7 @@ export const addNotesToDB = (userID, name, createNote, datePost, userMode, photo
   });
 
 // callbackfn es un funcion como parametro lo mando
-export const readAddNotesToDB = (callbackfn) => firebase.firestore()
+export const readAddNotesToDB = (callbackfn) => db
   .collection('publications').orderBy('date', 'desc').onSnapshot((querySnapShot) => {
     const data = [];
     querySnapShot.forEach((doc) => {
@@ -34,22 +36,22 @@ export const readAddNotesToDB = (callbackfn) => firebase.firestore()
   });
 
 // Update post
-export const editTextPost = (docID, changeNote, newDate) => firebase.firestore().collection('publications')
+export const editTextPost = (docID, changeNote, newDate) => db.collection('publications')
   .doc(docID).update({
     note: changeNote,
     date: newDate,
   });
 
 // Delete post
-export const deletePost = (docID) => firebase.firestore().collection('publications')
+export const deletePost = (docID) => db.collection('publications')
   .doc(docID).delete();
 
 // Initializes a distributed counter
 export const likesCounter = (docID, numShards) => {
-  let ref = firebase.firestore()
+  let ref = db
     .collection('publications').doc(docID).collection('counters')
     .doc();
-  let batch = firebase.firestore().batch();
+  let batch = db.batch();
 
   // Initialize the counter document
   batch.set(ref, { numberShards: numShards });
@@ -66,7 +68,7 @@ export const likesCounter = (docID, numShards) => {
 
 // Increment counter
 export const incrementCounter = (docID, numShards) => {
-  let ref = firebase.firestore()
+  let ref = db
     .collection('publications').doc(docID).collection('counters')
     .doc();
   // Select a shard of the counter at random
@@ -79,7 +81,7 @@ export const incrementCounter = (docID, numShards) => {
 
 // To get the total count
 export const getCount = (docID) => {
-  let ref = firebase.firestore()
+  let ref = db
     .collection('publications').doc(docID).collection('counters')
     .doc();
   // Sum the count of each shard in the subcollection
@@ -92,7 +94,20 @@ export const getCount = (docID) => {
   });
 };
 //-----------------------------------------------------------------------------------------------
+// Like function
+export const likeToPost = (userID, postID) => firebase
+  .firestore().collection('likes').doc(userID).collection('like')
+  .doc(postID)
+  .set({
+    postId: true,
+  });
 
+export const getLikeToPost = (postID) => firebase
+  .firestore().collection('likes').doc().collection('like')
+  .doc()
+  .where('postId', '==', postID)
+  .get();
+//----------------------------------------------------------------------------------------------
 // Add comments to "comments" collection in each post
 export const addCommentToPost = (docID, userID, name, userComment, dateComment, photoUser) => firebase
   .firestore()
@@ -106,7 +121,7 @@ export const addCommentToPost = (docID, userID, name, userComment, dateComment, 
   });
 
 // Get comments of "comments" collection in database
-export const getCommentToDB = (docID, callbackfn) => firebase.firestore()
+export const getCommentToDB = (docID, callbackfn) => db
   .collection('publications').doc(docID).collection('comments')
   .orderBy('date', 'desc')
   .onSnapshot((querySnapShot) => {

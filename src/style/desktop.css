@@ -1,4 +1,16 @@
-.light-bulb{
+.text-email{
+    text-align: center;
+    padding-top: 7%;
+    color: #583101;
+  }
+
+h3{
+    padding-top: 7%;
+    color: #583101;
+    text-align: center;
+}
+
+.reading-character{
     position: fixed;
     height: 100%;
     left: 0;
@@ -6,7 +18,7 @@
     z-index: -1;
 }
 
-.bulb-container{
+.brand-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 7em;
@@ -171,8 +183,9 @@ i{
 }
 .comment-post{
     border: 0;
+    outline: none;
     height: 35px;
-    width: 90%;
+    width: 60%;
     resize: none;
     margin-top: 6px;
     margin-left: 10px;
@@ -220,7 +233,7 @@ i{
     padding-top: 4%;
     color: #FFF6EC;
 }
-.title-energy{
+.title-leaders-readers{
     width: 40%;
     height: 0%;
 }
