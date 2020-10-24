@@ -11,6 +11,7 @@ import {
   incrementCounter,
   likesCounter,
 } from '../firebase/firestore.js';
+
 import { getUser } from '../firebase/auth.js';
 /*
 const formatoFecha = (fecha) => {
@@ -146,11 +147,18 @@ const postTemplate = (doc) => {
   const like = div.querySelector('#like');
 
   like.addEventListener('click', () => {
-    likesCounter(doc.id, 10)
-      .then(() => incrementCounter(doc.id, 10))
-      .then(() => getCount(doc.id));
+    likeToPost(user.uid, doc.id);
+    console.log('Like a post');
   });
-
+  /*
+  like.addEventListener('click', () => {
+    likesCounter(doc.id, 10).then(() => {
+      return incrementCounter(doc.id, 10);
+    }).then(() => {
+      return getCount(doc.id);
+    });
+  });
+*/
   return div;
 };
 
@@ -161,23 +169,24 @@ export const homeTemplate = (posts) => {
   viewHome.innerHTML = ` 
     <header>
     <nav>
-    <div class='title-leaders-readers'>
-    <h4 class='title'>Leaders are Readers 📖</h4></div>
-    <input type='checkbox' id='check-and-uncheck'>
-    <label for='check-and-uncheck'>
-    <i class='fas fa-bars' id='hamburger'></i>
-    <i class='fas fa-times' id='cross'></i>
+    <div class="title-leaders-readers">
+    <h4 class="title">Leaders are Readers 📖</h4></div>
+    <input type="checkbox" id="check-and-uncheck">
+    <label for="check-and-uncheck">
+    <i class="fas fa-bars" id="hamburger"></i>
+    <i class="fas fa-times" id="cross"></i>
+
     </label>
       <ul>
         <li>
-            <a id='btn-log-out'>Salir</a>
+            <a id="btn-log-out">Salir</a>
         </li>
       </ul>
     </nav>
     </header>
-    <section class='container-profile'>
+    <section class="container-profile">
       <h2>Perfil</h2>
-      <img class='user-image' src='${user.photoURL}'>
+      <img class="user-image" src="${user.photoURL}">
       <p>${user.displayName}</p>
       <h3 class="text-email">Email</h3>
       <p>${user.email}</p>
@@ -195,7 +204,8 @@ export const homeTemplate = (posts) => {
       <option id='private' value='private'>Privado</option>
       <option id='public' value='public'>Publico</option>
     </select>
-    <label><i id='btn-share' class='far fa-paper-plane'></i></label>
+    <label><i id="btn-share" class="far fa-paper-plane"></i></label>
+
   </div>
   <div id='message-post'> 
   </div>
@@ -246,7 +256,7 @@ export const homeTemplate = (posts) => {
   posts.forEach((publication) => {
     const messagePost = viewHome.querySelector('#message-post');
     messagePost.appendChild(postTemplate(publication));
-  });
+
   // Previsualize image
   const uploadImg = viewHome.querySelector('#upload-img');
   uploadImg.addEventListener('change', (event) => {
@@ -263,6 +273,7 @@ export const homeTemplate = (posts) => {
       preview.innerHTML = '';
       preview.append(etiquetteImage);
     };
+
   });
 
   return viewHome;
