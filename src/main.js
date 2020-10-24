@@ -1,4 +1,3 @@
-//  Import firebase initialize
 import { changeTemplate } from './lib/view-controller/router.js';
 // Webpage load and reload function
 const init = () => {

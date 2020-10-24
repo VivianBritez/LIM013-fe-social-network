@@ -5,7 +5,7 @@ const firebaseConfig = {
   projectId: 'leaders-are-readers',
   storageBucket: 'leaders-are-readers.appspot.com',
   messagingSenderId: '1010200109042',
-  appId: '1:1010200109042:web:f70cd13f1057467c66556b',
+  appId: '1:1010200109042:web:f70cd13f1057467c66556b'
 };
 
 // Initialize Firebase
