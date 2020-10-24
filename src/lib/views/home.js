@@ -134,7 +134,7 @@ const postTemplate = (doc) => {
   const like = div.querySelector('#like');
 
   like.addEventListener('click', () => {
-    likeToPost(user.uid, doc.id);
+    likeToPost(doc.id, user.uid);
     console.log('Like a post');
   });
   /*

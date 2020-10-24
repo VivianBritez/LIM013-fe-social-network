@@ -22,6 +22,7 @@ export const addNotesToDB = (userID, name, createNote, datePost, userMode, photo
     date: datePost,
     mode: userMode,
     photo: photoUser,
+    likesCount: 0,
   });
 
 // callbackfn es un funcion como parametro lo mando
@@ -95,11 +96,11 @@ export const getCount = (docID) => {
 };
 //-----------------------------------------------------------------------------------------------
 // Like function
-export const likeToPost = (userID, postID) => firebase
-  .firestore().collection('likes').doc(userID).collection('like')
-  .doc(postID)
+export const likeToPost = (docID, userID) => firebase
+  .firestore().collection('publications').doc(docID).collection('likes')
+  .doc(userID)
   .set({
-    postId: true,
+    uid: userID,
   });
 
 export const getLikeToPost = (postID) => firebase
