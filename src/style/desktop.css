@@ -252,3 +252,10 @@ i{
     border: none;
     background: #FFFFFF;
 }
+
+#uploader{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50%;
+    margin-bottom: 10px;
+}

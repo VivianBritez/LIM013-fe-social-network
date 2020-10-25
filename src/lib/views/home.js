@@ -11,7 +11,7 @@ import {
   incrementCounter,
   likesCounter,
 } from '../firebase/firestore.js';
-
+import { uploadImgPost, getImgURL } from '../firebase/storage.js';
 import { getUser } from '../firebase/auth.js';
 /*
 const formatoFecha = (fecha) => {
@@ -57,6 +57,7 @@ const postTemplate = (doc) => {
   </div>
   </div>
   <div id='text-post' class='show'><p>${doc.note}</p></div>
+  <div id="img-div" class="hidden"><img src="${doc.link}"></div>
   <div id='edit-option' class='hidden'>
   <textarea class='textarea' id='edit-text-post'>${doc.note}</textarea>
   <button type='button' id='accept'><i class='fas fa-check'></i></button>
@@ -71,6 +72,12 @@ const postTemplate = (doc) => {
   <div id='comment-show'>
   </div>
 `;
+
+  if (doc.link !== '' && doc.link !== undefined) {
+    const imgDiv = div.querySelector('#img-div');
+    imgDiv.classList.remove('hidden');
+    imgDiv.classList.add('show');
+  }
 
   // Start grabbing our DOM Element
   const options = div.querySelector('#options');
@@ -193,10 +200,11 @@ export const homeTemplate = (posts) => {
       </section>
     </section>
     <div id='post-container' class='post general-position'>
-    <div >
+    <div>
       <textarea id='box-post' class='textarea' placeholder='¿Qué quieres compartir?'></textarea>
     </div>
-    <div id= 'show-img' </div>
+    <div id="show-img">
+    <img id="imageSendToStorage"></div>
     <label ><img src='./img/gallery.png' >
       <input class='file' id ='upload-img' type='file'></label>
     <select class='space hidden' id='mode-post'>
@@ -230,6 +238,55 @@ export const homeTemplate = (posts) => {
     });
   });
   */
+  let files = [];
+  // Previsualize image
+  const uploadImg = viewHome.querySelector('#upload-img');
+  const upload = () => {
+    uploadImg.addEventListener('change', (event) => {
+      console.log(uploadImg);
+      const reader = new FileReader();
+      files = event.target.files;
+      console.log(files);
+      reader.readAsDataURL(event.target.files[0]);
+      console.log(reader);
+      return files;
+    });
+  };
+  const x = upload();
+  uploadImg.addEventListener('change', (event) => {
+    console.log(uploadImg);
+    const reader = new FileReader();
+    files = event.target.files;
+    console.log(files);
+    reader.readAsDataURL(event.target.files[0]);
+    console.log(reader);
+    //
+    reader.onload = () => {
+      const preview = viewHome.querySelector('#show-img');
+      const etiquetteImage = viewHome.querySelector('#imageSendToStorage');
+      etiquetteImage.src = reader.result;
+      console.log(etiquetteImage);
+      preview.innerHTML = '';
+      preview.append(etiquetteImage);
+    };
+/*
+    btnShare.addEventListener('click', () => {
+      const textPostVal = textPost.value;
+      const postVal = post.value;
+      // console.log(postVal, 'probando valor');
+      const date = new Date();
+      uploadImgPost(
+        user.uid,
+        files[0],
+        user.displayName,
+        textPostVal,
+        date,
+        postVal,
+        user.photoURL,
+      );
+    });
+    */
+  });
 
   // Share post
   btnShare.addEventListener('click', () => {
@@ -237,43 +294,38 @@ export const homeTemplate = (posts) => {
     const postVal = post.value;
     // console.log(postVal, 'probando valor');
     const date = new Date();
-    createAddNoteToDB(
-      user.uid,
-      user.displayName,
-      textPostVal,
-      date,
-      postVal,
-      user.photoURL,
-    );
+    if (x === undefined) {
+      uploadImgPost(
+        user.uid,
+        files[0],
+        user.displayName,
+        textPostVal,
+        date,
+        postVal,
+        user.photoURL,
+      );
+    }
+    if (textPostVal !== '') {
+      createAddNoteToDB(
+        user.uid,
+        user.displayName,
+        textPostVal,
+        date,
+        postVal,
+        user.photoURL,
+        '',
+        '',
+      );
+    }
   });
-
-  const btnlogOut = viewHome.querySelector('#btn-log-out');
-  btnlogOut.addEventListener('click', () => {
-    homeLogOut();
-  });
-
   // Send each publication to postTemplate
   posts.forEach((publication) => {
     const messagePost = viewHome.querySelector('#message-post');
     messagePost.appendChild(postTemplate(publication));
-
-  // Previsualize image
-  const uploadImg = viewHome.querySelector('#upload-img');
-  uploadImg.addEventListener('change', (event) => {
-    console.log(uploadImg);
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    console.log(reader);
-    //
-    reader.onload = () => {
-      const preview = viewHome.querySelector('#show-img');
-      const etiquetteImage = document.createElement('img');
-      etiquetteImage.src = reader.result;
-      console.log(etiquetteImage);
-      preview.innerHTML = '';
-      preview.append(etiquetteImage);
-    };
-
+  });
+  const btnlogOut = viewHome.querySelector('#btn-log-out');
+  btnlogOut.addEventListener('click', () => {
+    homeLogOut();
   });
 
   return viewHome;

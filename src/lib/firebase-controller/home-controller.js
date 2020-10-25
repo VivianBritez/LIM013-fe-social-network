@@ -14,8 +14,8 @@ export const homeLogOut = () => {
     });
 };
 
-export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, photoUser) => {
-  addNotesToDB(userID, name, createNote, datePost, userMode, photoUser)
+export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, photoUser, imgName, imgURL) => {
+  addNotesToDB(userID, name, createNote, datePost, userMode, photoUser, imgName, imgURL)
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
     })
