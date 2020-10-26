@@ -244,19 +244,7 @@ export const homeTemplate = (posts) => {
   const uploadImg = viewHome.querySelector('#upload-img');
   const preview = viewHome.querySelector('#show-img');
   const etiquetteImage = viewHome.querySelector('#imageSendToStorage');
-  /*
-  const upload = () => {
-    uploadImg.addEventListener('change', (event) => {
-      console.log(uploadImg);
-      const reader = new FileReader();
-      files = event.target.files;
-      console.log(files);
-      reader.readAsDataURL(event.target.files[0]);
-      console.log(reader);
-      return files;
-    });
-  };
-  */
+
   uploadImg.addEventListener('change', (event) => {
     console.log(uploadImg);
     const reader = new FileReader();
@@ -271,25 +259,7 @@ export const homeTemplate = (posts) => {
       preview.innerHTML = '';
       preview.append(etiquetteImage);
     };
-
-  console.log(etiquetteImage.src);
-/*
-    btnShare.addEventListener('click', () => {
-      const textPostVal = textPost.value;
-      const postVal = post.value;
-      // console.log(postVal, 'probando valor');
-      const date = new Date();
-      uploadImgPost(
-        user.uid,
-        files[0],
-        user.displayName,
-        textPostVal,
-        date,
-        postVal,
-        user.photoURL,
-      );
-    });
-    */
+    console.log(etiquetteImage.src);
   });
 
   // Share post
@@ -299,8 +269,6 @@ export const homeTemplate = (posts) => {
     // console.log(postVal, 'probando valor');
     const date = new Date();
     if (files[0] !== undefined) {
-      console.log(files[0]);
-
       uploadImgPost(
         user.uid,
         files[0],
