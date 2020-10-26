@@ -13,6 +13,7 @@ import {
 } from "../firebase/firestore.js";
 import { getUser } from "../firebase/auth.js";
 import { uploadImgPost } from "../firebase/storage.js";
+
 /*
 const formatoFecha = (fecha) => {
   const fechaFin = `${fecha.getDate()} - ${fecha.getMonth() + 1} - ${fecha.getFullYear()}  ${fecha.getHours()}:${fecha.getMinutes()}`;
@@ -274,8 +275,18 @@ export const homeTemplate = (posts) => {
         btnRemoveImg.classList.add('hidden')
         btnImg.classList.add('show')
       });
+      btnShare.addEventListener('click', ()=>{
+        btnRemoveImg.classList.add('hidden');
+      });
     };
+     const btnProfile= viewHome.querySelector("#btn-profile")
+    btnProfile.addEventListener('click', ()=>{
+      console.log("evento change-profile")
+      window.location.hash = '#/profile';
+    })
+    
   });
+ 
   
 
   return viewHome;

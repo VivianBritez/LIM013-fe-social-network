@@ -6,6 +6,7 @@ import {
   readUserDB,
   addCommentToPost,
 } from '../firebase/firestore.js';
+import { uploadImgPost } from '../firebase/storage.js';
 
 export const homeLogOut = () => {
   logOut()
@@ -72,3 +73,5 @@ export const addCommentToDB = (docID, userID, name, userComment, dateComment, ph
       console.error('Error send comment:', error);
     });
 };
+
+

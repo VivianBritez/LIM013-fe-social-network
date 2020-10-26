@@ -1,3 +1,5 @@
+import { getUser } from "../firebase/auth.js";
+
 export const profileTemplate = () => {
     const user = getUser();
     console.log(user);
