@@ -17,6 +17,8 @@ const changeTemplate = (hash) => {
     { return container.appendChild(components.loginTemplateProp()); }
     case '#/signup':
     { return container.appendChild(components.signUpTemplateProp()); }
+    case '#/profile':
+    { return container.appendChild(components.profileTemplateProp()); }
     case '#/home':
     { return readAddNotesToDB((data) => {
       container.innerHTML = '';
