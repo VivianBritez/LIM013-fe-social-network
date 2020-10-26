@@ -10,6 +10,7 @@ import {
   getCount,
   incrementCounter,
   likesCounter,
+  likeToPost,
 } from '../firebase/firestore.js';
 import { uploadImgPost, getImgURL } from '../firebase/storage.js';
 import { getUser } from '../firebase/auth.js';
@@ -241,6 +242,9 @@ export const homeTemplate = (posts) => {
   let files = [];
   // Previsualize image
   const uploadImg = viewHome.querySelector('#upload-img');
+  const preview = viewHome.querySelector('#show-img');
+  const etiquetteImage = viewHome.querySelector('#imageSendToStorage');
+  /*
   const upload = () => {
     uploadImg.addEventListener('change', (event) => {
       console.log(uploadImg);
@@ -252,7 +256,7 @@ export const homeTemplate = (posts) => {
       return files;
     });
   };
-  const x = upload();
+  */
   uploadImg.addEventListener('change', (event) => {
     console.log(uploadImg);
     const reader = new FileReader();
@@ -262,13 +266,13 @@ export const homeTemplate = (posts) => {
     console.log(reader);
     //
     reader.onload = () => {
-      const preview = viewHome.querySelector('#show-img');
-      const etiquetteImage = viewHome.querySelector('#imageSendToStorage');
       etiquetteImage.src = reader.result;
       console.log(etiquetteImage);
       preview.innerHTML = '';
       preview.append(etiquetteImage);
     };
+
+  console.log(etiquetteImage.src);
 /*
     btnShare.addEventListener('click', () => {
       const textPostVal = textPost.value;
@@ -294,7 +298,9 @@ export const homeTemplate = (posts) => {
     const postVal = post.value;
     // console.log(postVal, 'probando valor');
     const date = new Date();
-    if (x === undefined) {
+    if (files[0] !== undefined) {
+      console.log(files[0]);
+
       uploadImgPost(
         user.uid,
         files[0],
@@ -305,7 +311,8 @@ export const homeTemplate = (posts) => {
         user.photoURL,
       );
     }
-    if (textPostVal !== '') {
+    if (textPostVal !== '' && files[0] === undefined) {
+      console.log(etiquetteImage.src);
       createAddNoteToDB(
         user.uid,
         user.displayName,
