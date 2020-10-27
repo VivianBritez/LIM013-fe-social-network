@@ -5,15 +5,8 @@ import {
   deletePostToDB,
   addCommentToDB,
 } from '../firebase-controller/home-controller.js';
-import {
-  getCommentToDB,
-  getCount,
-  incrementCounter,
-  likesCounter,
-  likeToPost,
-  count,
-} from '../firebase/firestore.js';
-import { uploadImgPost, getImgURL } from '../firebase/storage.js';
+import { getCommentToDB, count } from '../firebase/firestore.js';
+import { uploadImgPost } from '../firebase/storage.js';
 import { getUser } from '../firebase/auth.js';
 /*
 const formatoFecha = (fecha) => {
@@ -163,15 +156,6 @@ const postTemplate = (doc) => {
     console.log('Like a post');
     */
   });
-  /*
-  like.addEventListener('click', () => {
-    likesCounter(doc.id, 10).then(() => {
-      return incrementCounter(doc.id, 10);
-    }).then(() => {
-      return getCount(doc.id);
-    });
-  });
-*/
   return div;
 };
 

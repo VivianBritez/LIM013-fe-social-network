@@ -1,7 +1,9 @@
 import { createAddNoteToDB } from '../firebase-controller/home-controller.js';
+import { storage } from './firebase-init.js';
+
 // Create storage ref
 export const uploadImgPost = (uid, file, username, textPostVal, date, postVal, photoURL) => {
-  const storageRef = firebase.storage().ref(`shared_images/${uid}/${file.name}`);
+  const storageRef = storage.ref(`shared_images/${uid}/${file.name}`);
   // Upload file
   const uploadTask = storageRef.put(file);
   uploadTask.on('state_changed', (snapshot) => {
@@ -29,16 +31,4 @@ export const uploadImgPost = (uid, file, username, textPostVal, date, postVal, p
       );
     });
   });
-};
-
-export const getImgURL = (uid, file) => {
-  const storageRef = firebase.storage().ref(`shared_images/${uid}/`).child(`${file.name}`);
-  const geturl = () => {
-    storageRef.getDownloadURL().then((url) => {
-      const imgURL = url;
-      console.log(imgURL);
-      return imgURL;
-    });
-  };
-  geturl();
 };

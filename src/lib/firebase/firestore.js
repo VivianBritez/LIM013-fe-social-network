@@ -49,58 +49,10 @@ export const editTextPost = (docID, changeNote, newDate) => db.collection('publi
 export const deletePost = (docID) => db.collection('publications')
   .doc(docID).delete();
 
-// Initializes a distributed counter
-export const likesCounter = (docID, numShards) => {
-  let ref = db
-    .collection('publications').doc(docID).collection('counters')
-    .doc();
-  let batch = db.batch();
-
-  // Initialize the counter document
-  batch.set(ref, { numberShards: numShards });
-
-  // Initialize each shard with count=0
-  for (let i = 0; i < numShards; i += 1) {
-    let shardRef = ref.collection('shards').doc(i.toString());
-    batch.set(shardRef, { count: 0 });
-  }
-
-  // Commit the write batch
-  return batch.commit();
-};
-
-// Increment counter
-export const incrementCounter = (docID, numShards) => {
-  let ref = db
-    .collection('publications').doc(docID).collection('counters')
-    .doc();
-  // Select a shard of the counter at random
-  const shardId = Math.floor(Math.random() * numShards).toString();
-  const shardRef = ref.collection('shards').doc(shardId);
-
-  // Update count
-  return shardRef.update('count', firebase.firestore.FieldValue.increment(1));
-};
-
-// To get the total count
-export const getCount = (docID) => {
-  let ref = db
-    .collection('publications').doc(docID).collection('counters')
-    .doc();
-  // Sum the count of each shard in the subcollection
-  return ref.collection('shards').get().then((snapshot) => {
-    let totalCount = 0;
-    snapshot.forEach((doc) => {
-      totalCount += doc.data().count;
-    });
-    return totalCount;
-  });
-};
 //-----------------------------------------------------------------------------------------------
 // Like function
-
-export const likeToPost = (docID, userID) => firebase
-  .firestore().collection('publications').doc(docID).collection('likes')
+export const likeToPost = (docID, userID) => db.collection('publications')
+  .doc(docID).collection('likes')
   .doc(userID)
   .set({
     uid: userID,
@@ -135,12 +87,6 @@ export const count = (docID, userID) => {
     });
   });
 };
-
-export const getLikeToPost = (postID) => firebase
-  .firestore().collection('likes').doc().collection('like')
-  .doc()
-  .where('postId', '==', postID)
-  .get();
 
 //----------------------------------------------------------------------------------------------
 // Add comments to "comments" collection in each post
