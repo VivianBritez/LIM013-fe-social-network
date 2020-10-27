@@ -31,7 +31,8 @@ margin: 5px;
   margin-top: 7px;
   margin-left: 10px;
 }
-.reading-logo-mobile{
+
+.reading-logo-mobile {
   margin: auto;
   display: none;
 }
@@ -39,11 +40,7 @@ margin: 5px;
   display: flex;
 }
 
-h3 {
-  text-align: center;
-  padding-top: 7%;
-  color: #583101;
-}
+
 #alert-txt-email,
 #alert-txt-password {
   color: red;

@@ -95,7 +95,20 @@ export const getCount = (docID) => {
   });
 };
 //-----------------------------------------------------------------------------------------------
+// Like function
+export const likeToPost = (userID, postID) => firebase
+  .firestore().collection('likes').doc(userID).collection('like')
+  .doc(postID)
+  .set({
+    postId: true,
+  });
 
+export const getLikeToPost = (postID) => firebase
+  .firestore().collection('likes').doc().collection('like')
+  .doc()
+  .where('postId', '==', postID)
+  .get();
+//----------------------------------------------------------------------------------------------
 // Add comments to "comments" collection in each post
 export const addCommentToPost = (docID, userID, name, userComment, dateComment, photoUser) => firebase
   .firestore()

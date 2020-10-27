@@ -10,8 +10,8 @@ export default () => {
     <img src="img/Leaders-are-Readers.png" class="reading-logo-mobile" alt="icono">
     </figure>
     <section class="login-style">
-      <h1>Leaders are Readers</h1>
-      <h3>¡Bienvenid@, reading lover!</h3>
+      <h1 class="main-title">Leaders are Readers</h1>
+      <h3 clas="subtitle-login">¡Bienvenid@, reading lover!</h3>
       <form id="login-form" class="login-form">
         <input type="text" id="txt-email" class="input" placeholder="Nombre de usuario o Email">
         <p id="alert-txt-email"></p>
