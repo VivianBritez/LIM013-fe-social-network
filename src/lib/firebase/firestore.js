@@ -98,6 +98,7 @@ export const getCount = (docID) => {
 };
 //-----------------------------------------------------------------------------------------------
 // Like function
+
 export const likeToPost = (docID, userID) => firebase
   .firestore().collection('publications').doc(docID).collection('likes')
   .doc(userID)
@@ -111,30 +112,36 @@ export const unlikeToPost = (docID, userID) => db.collection('publications')
   .where('uid', '==', userID)
   .get();
 
-
 export const count = (docID, userID) => {
   let publicationsRef = db.collection('publications').doc(docID);
-  let counterRef = publicationsRef.collection('likes').doc();
+  let counterRef = publicationsRef.collection('likes').doc(userID);
 
   return db.runTransaction((transaction) => {
     return transaction.get(publicationsRef).then((res) => {
       if (!res.exists) {
         throw 'Document does not exist!';
       }
-      let newNumLikes = res.data().likesCount + 1;
-
-      transaction.update(publicationsRef, {
-        likesCount: newNumLikes,
-      });
       transaction.set(counterRef, { uid: userID });
+      unlikeToPost(docID, userID).then((doc) => {
+        console.log(doc);
+        if (!doc.exists) {
+          let newNumLikes = res.data().likesCount + 1;
+
+          transaction.update(publicationsRef, {
+            likesCount: newNumLikes,
+          });
+        }
+      });
     });
   });
 };
+
 export const getLikeToPost = (postID) => firebase
   .firestore().collection('likes').doc().collection('like')
   .doc()
   .where('postId', '==', postID)
   .get();
+
 //----------------------------------------------------------------------------------------------
 // Add comments to "comments" collection in each post
 export const addCommentToPost = (docID, userID, name, userComment, dateComment, photoUser) => firebase
