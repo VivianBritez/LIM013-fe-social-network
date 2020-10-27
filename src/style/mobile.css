@@ -95,6 +95,12 @@ form {
   border: transparent;
   background: none;
 }
+
+.back-arrow{
+  border: transparent;
+  background: none;
+}
+
 p {
   text-align: center;
   padding-top: 2%;
