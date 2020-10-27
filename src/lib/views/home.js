@@ -5,12 +5,7 @@ import {
   deletePostToDB,
   addCommentToDB,
 } from "../firebase-controller/home-controller.js";
-import {
-  getCommentToDB,
-  getCount,
-  incrementCounter,
-  likesCounter,
-} from "../firebase/firestore.js";
+import { getCommentToDB } from "../firebase/firestore.js";
 import { getUser } from "../firebase/auth.js";
 import { uploadImgPost } from "../firebase/storage.js";
 
@@ -218,14 +213,14 @@ export const homeTemplate = (posts) => {
     });
   });
   */
-  
+
   // Previsualize image
-  let files= [];
+  let files = [];
   const uploadImg = viewHome.querySelector("#upload-img");
   uploadImg.addEventListener("change", (event) => {
     console.log(uploadImg);
     const reader = new FileReader();
-    files= event.target.files;
+    files = event.target.files;
     reader.readAsDataURL(event.target.files[0]);
     console.log(reader);
     console.log(files);
@@ -239,7 +234,6 @@ export const homeTemplate = (posts) => {
       btnImg.classList.remove("show");
       const url = reader.result;
       etiquetteImage.src = url;
-      localStorage.setItem("image", url);
       console.log(etiquetteImage);
       preview.innerHTML = "";
       preview.append(etiquetteImage);
@@ -247,40 +241,46 @@ export const homeTemplate = (posts) => {
       btnRemoveImg.classList.add("show");
       //btn remove all
       btnRemoveImg.addEventListener("click", () => {
-        localStorage.removeItem('image');
         etiquetteImage.src = "";
         uploadImg.value = "";
         btnRemoveImg.classList.remove("show");
         btnRemoveImg.classList.add("hidden");
         btnImg.classList.add("show");
       });
-      
     };
   });
 
-  
   // Share post
   btnShare.addEventListener("click", () => {
     btnRemoveImg.classList.add("hidden");
     const userPost = firebase.auth().currentUser;
-    if(files[0] !== undefined){
-    uploadImgPost(files[0], userPost.uid);
-    }
     const textPostVal = textPost.value;
     const postVal = post.value;
     // console.log(postVal, 'probando valor');
-     const date = new Date();
-    if(textPostVal !== ''){
-     createAddNoteToDB(
-      user.uid,
-      user.displayName,
-      textPostVal,
-      date,
-      postVal,
-      user.photoURL,
-      '',
-    );
-    };
+    const date = new Date();
+    if (files[0] !== undefined) {
+      uploadImgPost(
+        files[0],
+        userPost.uid,
+        user.displayName,
+        textPostVal,
+        date,
+        postVal,
+        user.photoURL
+      );
+    }
+ 
+    if (textPostVal !== "") {
+      createAddNoteToDB(
+        user.uid,
+        user.displayName,
+        textPostVal,
+        date,
+        postVal,
+        user.photoURL,
+        ""
+      );
+    }
   });
   // Send each publication to postTemplate
   posts.forEach((publication) => {
