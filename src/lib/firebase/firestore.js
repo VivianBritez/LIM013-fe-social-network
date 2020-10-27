@@ -13,7 +13,7 @@ export const readUserDB = (uid) => db.collection('users')
   .where('uid', '==', uid)
   .get();
 
-export const addNotesToDB = (userID, name, createNote, datePost, userMode, photoUser) => firebase
+export const addNotesToDB = (userID, name, createNote, datePost, userMode, photoUser, urlImg) => firebase
   .firestore()
   .collection('publications').add({
     creatorID: userID,
@@ -22,6 +22,7 @@ export const addNotesToDB = (userID, name, createNote, datePost, userMode, photo
     date: datePost,
     mode: userMode,
     photo: photoUser,
+    link: urlImg,
   });
 
 // callbackfn es un funcion como parametro lo mando

@@ -183,7 +183,7 @@ export const homeTemplate = (posts) => {
        <div id= 'show-img' class='show-img'></div>
        <button type='button' id='btn-remove-img' class='hidden'>cancel img</button>
     </div>
-    <label ><img src='./img/gallery.png' id='icon-img' class='show'>
+    <label for= 'upload-img'><img src='./img/gallery.png' id='icon-img' class='show'>
       <input class='file' id ='upload-img' type='file'></label>
     <select class='space hidden' id='mode-post'>
       <option value='' disabled selected>Modo</option>
@@ -202,6 +202,7 @@ export const homeTemplate = (posts) => {
   const btnShare = viewHome.querySelector("#btn-share");
   const btnImg = viewHome.querySelector("#icon-img");
   const btnRemoveImg = viewHome.querySelector("#btn-remove-img");
+
   // const modePost = viewHome.querySelector('#mode-post');
 
   /*
@@ -217,40 +218,17 @@ export const homeTemplate = (posts) => {
     });
   });
   */
-
-  // Share post
-  btnShare.addEventListener("click", () => {
-    const textPostVal = textPost.value;
-    const postVal = post.value;
-    // console.log(postVal, 'probando valor');
-    const date = new Date();
-    createAddNoteToDB(
-      user.uid,
-      user.displayName,
-      textPostVal,
-      date,
-      postVal,
-      user.photoURL
-    );
-  });
-
-  const btnlogOut = viewHome.querySelector("#btn-log-out");
-  btnlogOut.addEventListener("click", () => {
-    homeLogOut();
-  });
-
-  // Send each publication to postTemplate
-  posts.forEach((publication) => {
-    const messagePost = viewHome.querySelector("#message-post");
-    messagePost.appendChild(postTemplate(publication));
-  });
+  
   // Previsualize image
+  let files= [];
   const uploadImg = viewHome.querySelector("#upload-img");
   uploadImg.addEventListener("change", (event) => {
     console.log(uploadImg);
     const reader = new FileReader();
+    files= event.target.files;
     reader.readAsDataURL(event.target.files[0]);
     console.log(reader);
+    console.log(files);
 
     //
     reader.onload = () => {
@@ -261,33 +239,64 @@ export const homeTemplate = (posts) => {
       btnImg.classList.remove("show");
       const url = reader.result;
       etiquetteImage.src = url;
-      localStorage.setItem('image', url);
+      localStorage.setItem("image", url);
       console.log(etiquetteImage);
       preview.innerHTML = "";
       preview.append(etiquetteImage);
       btnRemoveImg.classList.remove("hidden");
       btnRemoveImg.classList.add("show");
-      //btn remove all 
+      //btn remove all
       btnRemoveImg.addEventListener("click", () => {
+        localStorage.removeItem('image');
         etiquetteImage.src = "";
-        uploadImgPost.value = "";
+        uploadImg.value = "";
         btnRemoveImg.classList.remove("show");
-        btnRemoveImg.classList.add('hidden')
-        btnImg.classList.add('show')
+        btnRemoveImg.classList.add("hidden");
+        btnImg.classList.add("show");
       });
-      btnShare.addEventListener('click', ()=>{
-        btnRemoveImg.classList.add('hidden');
-      });
+      
     };
-     const btnProfile= viewHome.querySelector("#btn-profile")
-    btnProfile.addEventListener('click', ()=>{
-      console.log("evento change-profile")
-      window.location.hash = '#/profile';
-    })
-    
   });
- 
+
   
+  // Share post
+  btnShare.addEventListener("click", () => {
+    btnRemoveImg.classList.add("hidden");
+    const userPost = firebase.auth().currentUser;
+    if(files[0] !== undefined){
+    uploadImgPost(files[0], userPost.uid);
+    }
+    const textPostVal = textPost.value;
+    const postVal = post.value;
+    // console.log(postVal, 'probando valor');
+     const date = new Date();
+    if(textPostVal !== ''){
+     createAddNoteToDB(
+      user.uid,
+      user.displayName,
+      textPostVal,
+      date,
+      postVal,
+      user.photoURL,
+      '',
+    );
+    };
+  });
+  // Send each publication to postTemplate
+  posts.forEach((publication) => {
+    const messagePost = viewHome.querySelector("#message-post");
+    messagePost.appendChild(postTemplate(publication));
+  });
+  const btnProfile = viewHome.querySelector("#btn-profile");
+  btnProfile.addEventListener("click", () => {
+    console.log("evento change-profile");
+    window.location.hash = "#/profile";
+  });
+
+  const btnlogOut = viewHome.querySelector("#btn-log-out");
+  btnlogOut.addEventListener("click", () => {
+    homeLogOut();
+  });
 
   return viewHome;
 };

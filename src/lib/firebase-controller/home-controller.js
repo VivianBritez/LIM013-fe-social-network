@@ -6,7 +6,6 @@ import {
   readUserDB,
   addCommentToPost,
 } from '../firebase/firestore.js';
-import { uploadImgPost } from '../firebase/storage.js';
 
 export const homeLogOut = () => {
   logOut()
@@ -15,8 +14,8 @@ export const homeLogOut = () => {
     });
 };
 
-export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, photoUser) => {
-  addNotesToDB(userID, name, createNote, datePost, userMode, photoUser)
+export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, photoUser, urlImg) => {
+  addNotesToDB(userID, name, createNote, datePost, userMode, photoUser, urlImg)
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
     })
