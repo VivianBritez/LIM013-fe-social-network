@@ -105,6 +105,31 @@ export const likeToPost = (docID, userID) => firebase
     uid: userID,
   });
 
+// Unlike function
+export const unlikeToPost = (docID, userID) => db.collection('publications')
+  .doc(docID).collection('likes')
+  .where('uid', '==', userID)
+  .get();
+
+
+export const count = (docID, userID) => {
+  let publicationsRef = db.collection('publications').doc(docID);
+  let counterRef = publicationsRef.collection('likes').doc();
+
+  return db.runTransaction((transaction) => {
+    return transaction.get(publicationsRef).then((res) => {
+      if (!res.exists) {
+        throw 'Document does not exist!';
+      }
+      let newNumLikes = res.data().likesCount + 1;
+
+      transaction.update(publicationsRef, {
+        likesCount: newNumLikes,
+      });
+      transaction.set(counterRef, { uid: userID });
+    });
+  });
+};
 export const getLikeToPost = (postID) => firebase
   .firestore().collection('likes').doc().collection('like')
   .doc()

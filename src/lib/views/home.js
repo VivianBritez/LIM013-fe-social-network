@@ -11,6 +11,7 @@ import {
   incrementCounter,
   likesCounter,
   likeToPost,
+  count,
 } from '../firebase/firestore.js';
 import { uploadImgPost, getImgURL } from '../firebase/storage.js';
 import { getUser } from '../firebase/auth.js';
@@ -155,8 +156,12 @@ const postTemplate = (doc) => {
   const like = div.querySelector('#like');
 
   like.addEventListener('click', () => {
+    console.log('contando');
+    count(doc.id, user.uid);
+    /*
     likeToPost(doc.id, user.uid);
     console.log('Like a post');
+    */
   });
   /*
   like.addEventListener('click', () => {
