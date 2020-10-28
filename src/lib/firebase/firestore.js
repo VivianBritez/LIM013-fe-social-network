@@ -69,6 +69,9 @@ export const unlikeToPost = (docID, userID) => {
   const pubRef = db
     .collection('publications')
     .doc(docID);
+    pubRef.collection('likes')
+    .doc(userID)
+    .delete();
 
   pubRef.get().then((doc) => {
     console.log(doc.data().likesCount);
@@ -79,9 +82,7 @@ export const unlikeToPost = (docID, userID) => {
       });
   });
 
-  pubRef.collection('likes')
-    .doc(userID)
-    .delete();
+  
 };
 
 // Count likes and dislikes

@@ -56,7 +56,7 @@ const postTemplate = (doc) => {
   </div>
   </div>
   <div id='text-post' class='show'><p class="post-text">${doc.note}</p></div>
-  <div id="img-div" class="hidden"><img src="${doc.link}"></div>
+  <div id="img-div" class="hidden"><img src="${doc.link}"class='image-div'></div>
   <div id='edit-option' class='hidden'>
   <textarea class='textarea' id='edit-text-post'>${doc.note}</textarea>
   <button type='button' id='accept'><i class='fas fa-check'></i></button>
@@ -209,16 +209,24 @@ export const homeTemplate = (posts) => {
     <div>
       <textarea id='box-post' class='textarea' placeholder='¿Qué quieres compartir?'></textarea>
     </div>
-    <div id="show-img">
+   
+    <div id= 'preview-img-post' class='preview-img-post'>
+    <div id= "show-img">
     <img id="imageSendToStorage"></div>
-    <label ><img src='./img/gallery.png' >
-      <input class='file' id ='upload-img' type='file'></label>
+    <p id='cross-mark' style="display: none"class="">❌</p>
+    </div>
+    
+    <div id= 'events-share' class='events-share'>
+    <label><img src='./img/gallery.png' id='icon-img' style="display: block" class=''>
+    <input class='file' id ='upload-img' type='file'></label>
+    <label><i id="btn-share" class="far fa-paper-plane"></i></label>
+    </div>
     <select class='space hidden' id='mode-post'>
       <option value='' disabled selected>Modo</option>
       <option id='private' value='private'>Privado</option>
       <option id='public' value='public'>Publico</option>
     </select>
-    <label><i id="btn-share" class="far fa-paper-plane"></i></label>
+    
   </div>
   <div id='message-post'> 
   </div>
@@ -227,6 +235,8 @@ export const homeTemplate = (posts) => {
   const textPost = viewHome.querySelector('#box-post');
   const post = viewHome.querySelector('#mode-post');
   const btnShare = viewHome.querySelector('#btn-share');
+  const crossMark= viewHome.querySelector('#cross-mark');
+  const iconGallery = viewHome.querySelector("#icon-img");
   // const modePost = viewHome.querySelector('#mode-post');
   /*
   modePost.addEventListener('change', (e) => {
@@ -244,9 +254,11 @@ export const homeTemplate = (posts) => {
   let files = [];
   // Previsualize image
   const uploadImg = viewHome.querySelector('#upload-img');
-  const preview = viewHome.querySelector('#show-img');
   const etiquetteImage = viewHome.querySelector('#imageSendToStorage');
+  etiquetteImage.setAttribute('class', 'img-post');
   uploadImg.addEventListener('change', (event) => {
+    uploadImg.classList.remove('show');
+    crossMark.removeAttribute('style');
     console.log(uploadImg);
     const reader = new FileReader();
     files = event.target.files;
@@ -257,11 +269,17 @@ export const homeTemplate = (posts) => {
     reader.onload = () => {
       etiquetteImage.src = reader.result;
       console.log(etiquetteImage);
-      preview.innerHTML = '';
-      preview.append(etiquetteImage);
+     etiquetteImage.innerHTML = '';
+     etiquetteImage.append(etiquetteImage);
     };
     console.log(etiquetteImage.src);
   });
+
+  crossMark.addEventListener('click', ()=>{
+    etiquetteImage.src = "";
+    uploadImg.value = "";
+    crossMark.style.display = 'none';
+  })
   // Share post
   btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
