@@ -19,9 +19,13 @@ const commentTemplate = (comData) => {
   // console.log('doc', doc);
   // commentList.classList = 'comment-share';
   commentList.innerHTML = `
+  <div id="comment-container">
   <span><img class='user-image-comment' src='${comData.photo}'></span>
+  <div class="name-comment">
   <h5 class='username-comment'>${comData.from}</h5>
-  <p>${comData.comment}</p>
+  <p class="comment-text">${comData.comment}</p>
+  </div>
+  </div>
   `;
   return commentList;
 };
@@ -51,20 +55,27 @@ const postTemplate = (doc) => {
   </select></label></h4>
   </div>
   </div>
-  <div id='text-post' class='show'><p>${doc.note}</p></div>
+  <div id='text-post' class='show'><p class="post-text">${doc.note}</p></div>
   <div id="img-div" class="hidden"><img src="${doc.link}"></div>
   <div id='edit-option' class='hidden'>
   <textarea class='textarea' id='edit-text-post'>${doc.note}</textarea>
   <button type='button' id='accept'><i class='fas fa-check'></i></button>
   </div>
+  <div id="icons-container">
+  <div id="heart-comment-icons">
   <label><i id='like' class='far fa-heart'></i></label>
   <label><i id='comment-icon' class='far fa-comment'></i></label>
+  </div>
+  <div id="close-icon" class='hidden'>
+  <label><img src="img/close-window.png" id="close-comments"></label>
+  </div>
+  </div>
   <div id='comment-box' class='hidden'>
   <span><img class='user-image-comment' src='${user.photoURL}'></span>
   <textarea id='comment-post' class='comment-post' placeholder='Añade un comentario...'></textarea>
   <button type='button' id='btn-send-comment' class='btn-send-comment'><img src='./img/icons8-paper-plane-30.png'></button>
   </div>
-  <div id='comment-show'>
+  <div id='comment-show' class="hidden">
   </div>
 `;
   if (doc.link !== '' && doc.link !== undefined) {
@@ -110,10 +121,16 @@ const postTemplate = (doc) => {
   const commentBox = div.querySelector('#comment-box');
   const commentPost = div.querySelector('#comment-post');
   const btnSend = div.querySelector('#btn-send-comment');
+  const closeIcon = div.querySelector('#close-icon');
+  const commentShow = div.querySelector('#comment-show');
   commentIcon.addEventListener('click', () => {
     console.log('Funciona');
     commentBox.classList.add('show');
     commentBox.classList.remove('hidden');
+    commentShow.classList.add('show');
+    commentShow.classList.remove('hidden');
+    closeIcon.classList.remove('hidden');
+    closeIcon.classList.add('show');
     btnSend.addEventListener('click', () => {
       const commentPostVal = commentPost.value;
       const dateComment = new Date();
@@ -125,11 +142,21 @@ const postTemplate = (doc) => {
         dateComment,
         user.photoURL,
       );
+      if (commentPostVal !== '') {
+        commentPost.value = '';
+      }
+    });
+    closeIcon.addEventListener('click', () => {
+      commentShow.classList.remove('show');
+      commentShow.classList.add('hidden');
+      commentBox.classList.add('hidden');
+      commentBox.classList.remove('show');
+      closeIcon.classList.remove('show');
+      closeIcon.classList.add('hidden');
     });
   });
   // Send each comments to commentTemplate
   getCommentToDB(doc.id, (comments) => {
-    const commentShow = div.querySelector('#comment-show');
     commentShow.innerHTML = '';
     comments.forEach((element) => {
       // console.log(element);
@@ -173,9 +200,9 @@ export const homeTemplate = (posts) => {
     <section class="container-profile">
       <h2>Perfil</h2>
       <img class="user-image" src="${user.photoURL}">
-      <p>${user.displayName}</p>
+      <p class="profile-text">${user.displayName}</p>
       <h3 class="text-email">Email</h3>
-      <p>${user.email}</p>
+      <p class="profile-text">${user.email}</p>
       </section>
     </section>
     <div id='post-container' class='post general-position'>

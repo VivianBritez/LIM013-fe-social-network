@@ -100,17 +100,19 @@ label #cross{
     width: 63%;
     height: 210px;
     background: #FFFFFF;
-    border: 2px solid rgba(118, 88, 52, 0.53);
+    border: 0.3rem outset rgba(118, 88, 52, 0.53);
+    /*border: 2px solid rgba(118, 88, 52, 0.53);*/
     padding: 10px;
     margin-left: 26%;
     margin-top: 4%;
     border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(118, 88, 52, 0.53);
     }
 
 .share-post{
     width:63%;
     background: #FFFFFF;
-    border: 2px solid rgba(118, 88, 52, 0.53);
+    border: 3px solid rgba(118, 88, 52, 0.53);
     margin-left: 26%;
     margin-top: 4%;;
     border-radius: 5px;
@@ -128,8 +130,8 @@ label #cross{
 }
 #text-post{
     outline:none;
-    border-top: 2px solid rgba(118, 88, 52, 0.53);
-    border-bottom: 2px solid rgba(118, 88, 52, 0.53); 
+    border-top: 3px solid rgba(118, 88, 52, 0.53);
+    border-bottom: 3px solid rgba(118, 88, 52, 0.53); 
     background:#FFFFFF;
     resize: none;
     position: relative;
@@ -146,6 +148,10 @@ i{
     margin-bottom: 1%;
 }
 
+#close-comments{
+    width: 40px;
+}
+
 .btn-send-comment{
     border: 0;
     background: none;
@@ -159,7 +165,7 @@ i{
     display: none;
 }
 .textarea{
-    border: 2px solid rgba(118, 88, 52, 0.53);
+    border: 3px solid rgba(118, 88, 52, 0.53);
     background: #FFFFFF;
     height: 110px;
     margin: 1%;
@@ -172,6 +178,20 @@ i{
     color: #765834;
     font-size: 20px;
 }
+#icons-container{
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+}
+
+#close-icon {
+    margin: 0px 0px 3px auto;
+}
+#comment-box{
+    border-top: 2px solid rgba(118, 88, 52, 0.53);
+    border-bottom: 2px solid rgba(118, 88, 52, 0.53);
+    box-sizing: border-box;
+}
 .comment-post{
     border: 0;
     outline: none;
@@ -182,6 +202,21 @@ i{
     margin-left: 10px;
     padding-top: 8px;
     padding-left: 5px;
+    font-size: 16px;
+}
+
+#comment-container{
+    display: flex;
+    padding: 5px 0px 10px 0px;
+}
+
+.name-comment{
+    margin: 5px 15px 0px 10px;
+    padding: 5px 10px 5px 10px;
+    background: rgba(255, 246, 236, 0.9);
+    border: 1px solid rgba(255, 246, 236, 0.76);
+    box-sizing: border-box;
+    border-radius: 12px;
 }
 .ellipsis{
     float: right;

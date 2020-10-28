@@ -101,12 +101,25 @@ form {
   background: none;
 }
 
-p {
+.post-text {
   text-align: center;
   padding-top: 2%;
   margin: revert;
   color: #583101;
   font-size: 20px;
+}
+
+.profile-text {
+  text-align: center;
+  padding-top: 2%;
+  margin: revert;
+  color: #583101;
+  font-size: 20px;
+}
+.comment-text{
+  color: #583101;
+  font-size: 16px;
+  text-align: start;
 }
 
 .btn-register {
