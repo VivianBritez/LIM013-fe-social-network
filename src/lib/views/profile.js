@@ -1,12 +1,14 @@
+import { getUser } from "../firebase/auth.js";
 
-export const profile = () => {
-  console.log('user', users);
+export const profile = (doc) => {
+  const user= getUser();
+  console.log('user', user);
   const editProfile = document.createElement('section');
   editProfile.innerHTML = ` 
       <header>
       <nav>
-      <div class='title-energy'>
-      <h4 class='title'>Energía Verde💡</h4></div>
+      <div class='title-leaders-readers'>
+      <h4 class='title'>Readers are Leaders 📖</h4></div>
       <input type='checkbox' id='check-and-uncheck'>
       <label for='check-and-uncheck'>
       <i class='fas fa-bars' id='hamburger'></i>
@@ -14,16 +16,15 @@ export const profile = () => {
       </label>
         <ul>
         <li>
-        <a id='btn-home' href='#/home'>Home</a>
+        <a id='btn-btn-home' href='#/home'>Home</a>
           </li>
       
         </ul>
       </nav>
       </header>
       <section class='container-profile'>
-        <h2 >Perfil creado por</h2>
-        <img class='user-image' src='${localStorage.getItem('userPhoto')}'>
-        <p>${localStorage.getItem('userName')}</p>
+        <h2>${user.displayName}</h2>
+      <img class='user-image' src='${user.photoURL}'>
         <h1 id="edit-profile">Editar</h1>
     <div id='form-profile' class= 'hidden'>
       <p>Editar nombre</p>
@@ -48,7 +49,7 @@ export const profile = () => {
   const editAbout = editProfile.querySelector('#user-about');
   const editPreferences = editProfile.querySelector('#user-preferences');
 
-  if (localStorage.getItem('userID')) {
+  if (user !== null) {
     btnEdit.addEventListener('click', () => {
       showForm.classList.remove('hidden');
       showForm.classList.add('show');

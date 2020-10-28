@@ -19,24 +19,28 @@ h2 {
   width: 100px;
 }
 .user-image-post{
-width: 65px;
+width: 50px;
 border-radius: 50%;
 float: left;
-margin: 1%;
+margin: 5px;
+}
+.user-image-comment {
+  width: 35px;
+  border-radius: 50%;
+  float: left;
+  margin-top: 7px;
+  margin-left: 10px;
 }
 
-.light-bulb-mobile {
+.reading-logo-mobile {
   margin: auto;
   display: none;
 }
-.bulb-mobile{
+.logo-mobile{
   display: flex;
 }
 
-h3 {
-  text-align: center;
-  padding-top: 7%;
-}
+
 #alert-txt-email,
 #alert-txt-password {
   color: red;
@@ -51,6 +55,7 @@ form {
 }
 
 .input {
+  color: #765834;
   display: block;
   padding: 10px;
   width: 100%;
@@ -58,7 +63,7 @@ form {
   text-align: center;
   border: 0;
   border-radius: 50px;
-  background: #f3f3f3;
+  background: #FFF6EC;
   font-size: 16px;
 }
 
@@ -70,7 +75,6 @@ form {
   color: #FFF6EC;
   border: 0;
   cursor: pointer;
-  opacity: 0.8;
   display: block;
   padding: 10px;
   width: 100%;
@@ -78,27 +82,38 @@ form {
   text-align: center;
   border-radius: 50px;
   background: #765834;
-  font-size: 16px;
+  font-size: 20px;
 }
 
-.btn-google-facebook {
+.btn-google {
   display: block;
   text-align: center;
   margin: auto;
 }
 
-.btn-image {
+.btn-image-google {
   border: transparent;
   background: none;
 }
+
+.back-arrow{
+  border: transparent;
+  background: none;
+}
+
 p {
   text-align: center;
   padding-top: 2%;
   margin: revert;
+  color: #583101;
+  font-size: 20px;
 }
 
 .btn-register {
   text-decoration: none;
+  color: #583101;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /*Register Template*/
@@ -111,14 +126,13 @@ p {
   text-align: center;
   border: 0;
   border-radius: 50px;
-  background: #f3f3f3;
+  background: #FFF6EC;
   font-size: 16px;
 }
 
 .submit-form {
-  color: black;
+  color: #FFF6EC;
   cursor: pointer;
-  opacity: 0.8;
   display: block;
   padding: 10px 0;
   width: 100%;
@@ -126,7 +140,8 @@ p {
   text-align: center;
   border: 0;
   border-radius: 50px;
-  background: #6fcf97;
-  font-size: 20px;
+  background: #765834;
+  font-size: 24px;
+  font-weight: bold;
 }
 

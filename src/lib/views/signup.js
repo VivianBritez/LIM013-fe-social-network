@@ -10,9 +10,9 @@ export default () => {
       <input type="email" id="signup-email" class="signup-form" placeholder="Email" required>
       <input type="text" id="signup-user-name" class="signup-form" placeholder="Nombre de usuario">
       <input type="password" id="signup-password" class="signup-form" placeholder="Contraseña">
-      <input type="password" id="signup-confirm-password" class="signup-form" placeholder="Confirmar contraseña" required>
+      <input type="password" id="signupbtn-go-back-confirm-password" class="signup-form" placeholder="Confirmar contraseña" required>
       <button type="submit" id="signup-submit" class="submit-form">Enviar</button>
-      <button type="button" id="btn-logout">Volver</button>
+      <button type="button" class="back-arrow" id="btn-go-back"><img src="./img/back-arrow.png"></button>
     </form>
     `;
 
@@ -20,7 +20,7 @@ export default () => {
   const signUpEmail = viewSignUp.querySelector('#signup-email');
   const signupConfirmPassword = viewSignUp.querySelector('#signup-confirm-password');
   const signUpForm = viewSignUp.querySelector('#signup-form');
-  const sigOut = viewSignUp.querySelector('#btn-logout');
+  const btnGoBack = viewSignUp.querySelector('#btn-go-back');
   const userName = viewSignUp.querySelector('#signup-user-name');
 
   // Event submit to create a user account
@@ -37,8 +37,7 @@ export default () => {
     signUpForm.reset();
   });
 
-
-  sigOut.addEventListener('click', () => {
+  btnGoBack.addEventListener('click', () => {
     logOut()
       .then(() => {
         window.location.hash = '#/login';

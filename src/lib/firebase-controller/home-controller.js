@@ -4,6 +4,7 @@ import {
   editTextPost,
   deletePost,
   readUserDB,
+  addCommentToPost,
 } from '../firebase/firestore.js';
 
 export const homeLogOut = () => {
@@ -13,8 +14,8 @@ export const homeLogOut = () => {
     });
 };
 
-export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, photoUser) => {
-  addNotesToDB(userID, name, createNote, datePost, userMode, photoUser)
+export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, photoUser, imgName, imgURL) => {
+  addNotesToDB(userID, name, createNote, datePost, userMode, photoUser, imgName, imgURL)
     .then((docRef) => {
       console.log('Document written with ID: ', docRef.id);
     })
@@ -24,6 +25,7 @@ export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, 
 };
 /*
 
+/*
 export const readNoteToDB = () => {
   readAddNotesToDB()
     .then((querySnapshot) => {
@@ -59,5 +61,14 @@ export const deletePostToDB = (docID) => {
       console.log('Document successfully deleted!');
     }).catch((error) => {
       console.error('Error removing document:', error);
+    });
+};
+
+export const addCommentToDB = (docID, userID, name, userComment, dateComment, photoUser) => {
+  addCommentToPost(docID, userID, name, userComment, dateComment, photoUser)
+    .then(() => {
+      console.log('Comment successfully!');
+    }).catch((error) => {
+      console.error('Error send comment:', error);
     });
 };

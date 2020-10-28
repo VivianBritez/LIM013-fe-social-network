@@ -1,35 +1,36 @@
-import { readAddNotesToDB } from '../firebase/firestore.js';
-import { components } from '../views/components.js';
+import { readAddNotesToDB } from "../firebase/firestore.js";
+import { components } from "../views/components.js";
 
 // Change Template
 
 const changeTemplate = (hash) => {
   // const id = hash.split('/')[1];
-  const container = document.getElementById('container');
-  container.innerHTML = '';
+  const container = document.getElementById("container");
+  container.innerHTML = "";
 
   switch (hash) {
-    case '':
-    case '#':
-    case '#/': {
+    case "":
+    case "#":
+    case "#/": {
       return container.appendChild(components.loginTemplateProp());
     }
-    case '#/login': {
+    case "#/login": {
       return container.appendChild(components.loginTemplateProp());
     }
-    case '#/signup': {
+    case "#/signup": {
       return container.appendChild(components.signUpTemplateProp());
     }
-    case '#/profile': {
-      container.appendChild(components.profilePro(data));
-    }
-    case '#/home': {
+    case "#/profile": {
       return readAddNotesToDB((data) => {
-        // console.log(data);
-        container.innerHTML = '';
-        container.appendChild(components.profileTemplateProp(data));
+        container.innerHTML = "";
+        container.appendChild(components.profilePro(data));
       });
-      break;
+    }
+    case "#/home": {
+      return readAddNotesToDB((data) => {
+        container.innerHTML = "";
+        container.appendChild(components.homeTemplateProp(data));
+      });
     }
     default:
       return container.appendChild(components.errorPageProp());
