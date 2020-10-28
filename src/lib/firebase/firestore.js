@@ -69,7 +69,6 @@ export const unlikeToPost = (docID, userID) => {
   const pubRef = db
     .collection('publications')
     .doc(docID);
-    
     pubRef.collection('likes')
     .doc(userID)
     .delete();
