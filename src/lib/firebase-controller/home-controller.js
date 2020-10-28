@@ -23,6 +23,7 @@ export const createAddNoteToDB = (userID, name, createNote, datePost, userMode, 
       console.error('Error adding document: ', error);
     });
 };
+/*
 
 /*
 export const readNoteToDB = () => {
@@ -37,7 +38,6 @@ export const readNoteToDB = () => {
     });
 };
 */
-
 export const readUser = (uid) => {
   readUserDB(uid)
     .then((querySnapshot) => {

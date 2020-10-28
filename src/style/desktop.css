@@ -158,16 +158,6 @@ i{
     position: absolute;
     display: none;
 }
-.space{
-    background: linear-gradient(30deg, #ADFF2F,#7FFF00, #7CFC00, #00FF00, #32CD32);
-    color: black;
-    padding: 4px;
-    width: 90px;
-    border-radius: 50px;
-    font-size: 13px;
-    box-shadow: 0 5px 25px rgba(0,0,0,.5);
-
-}
 .textarea{
     border: 2px solid rgba(118, 88, 52, 0.53);
     background: #FFFFFF;

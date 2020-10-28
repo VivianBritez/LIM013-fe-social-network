@@ -1,4 +1,3 @@
-import { logOut } from '../firebase/auth.js';
 import { createUser } from '../firebase-controller/signup-controller.js';
 
 export default () => {

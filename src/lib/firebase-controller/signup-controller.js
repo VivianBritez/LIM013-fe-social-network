@@ -2,7 +2,6 @@ import { createUserDB } from '../firebase/firestore.js';
 import { createUserAccount, getUser } from '../firebase/auth.js';
 
 const userProfilePicByDefault = '../img/userProfile.png';
-
 export const createUser = (email, password, name) => {
   createUserAccount(email, password)
     .then((res) => {
@@ -26,3 +25,4 @@ export const createUser = (email, password, name) => {
       }
     });
 };
+

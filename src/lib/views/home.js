@@ -67,20 +67,17 @@ const postTemplate = (doc) => {
   <div id='comment-show'>
   </div>
 `;
-
   if (doc.link !== '' && doc.link !== undefined) {
     const imgDiv = div.querySelector('#img-div');
     imgDiv.classList.remove('hidden');
     imgDiv.classList.add('show');
   }
-
   // Start grabbing our DOM Element
   const options = div.querySelector('#options');
   const showOptions = div.querySelector('#show-options');
   const textPost = div.querySelector('#text-post');
   const editOption = div.querySelector('#edit-option');
   const accept = div.querySelector('#accept');
-
   // Edit and delete post
   if (user.uid === doc.creatorID) {
     showOptions.classList.remove('hidden');
@@ -96,7 +93,6 @@ const postTemplate = (doc) => {
         textPost.classList.remove('show');
         editOption.classList.add('show');
         editOption.classList.remove('hidden');
-
         accept.addEventListener('click', () => {
           const editTextPostVal = div.querySelector('#edit-text-post').value;
           console.log(editTextPostVal);
@@ -109,18 +105,15 @@ const postTemplate = (doc) => {
       }
     });
   }
-
   // Add commments in a post
   const commentIcon = div.querySelector('#comment-icon');
   const commentBox = div.querySelector('#comment-box');
   const commentPost = div.querySelector('#comment-post');
   const btnSend = div.querySelector('#btn-send-comment');
-
   commentIcon.addEventListener('click', () => {
     console.log('Funciona');
     commentBox.classList.add('show');
     commentBox.classList.remove('hidden');
-
     btnSend.addEventListener('click', () => {
       const commentPostVal = commentPost.value;
       const dateComment = new Date();
@@ -134,7 +127,6 @@ const postTemplate = (doc) => {
       );
     });
   });
-
   // Send each comments to commentTemplate
   getCommentToDB(doc.id, (comments) => {
     const commentShow = div.querySelector('#comment-show');
@@ -144,10 +136,8 @@ const postTemplate = (doc) => {
       commentShow.appendChild(commentTemplate(element));
     });
   });
-
   // Likes counter
   const like = div.querySelector('#like');
-
   like.addEventListener('click', () => {
     console.log('contando');
     count(doc.id, user.uid);
@@ -158,7 +148,6 @@ const postTemplate = (doc) => {
   });
   return div;
 };
-
 export const homeTemplate = (posts) => {
   const user = getUser();
   console.log(user);
@@ -172,11 +161,11 @@ export const homeTemplate = (posts) => {
     <label for="check-and-uncheck">
     <i class="fas fa-bars" id="hamburger"></i>
     <i class="fas fa-times" id="cross"></i>
-
     </label>
       <ul>
         <li>
             <a id="btn-log-out">Salir</a>
+            <a id='btn-profile'>Profile</a>
         </li>
       </ul>
     </nav>
@@ -203,18 +192,15 @@ export const homeTemplate = (posts) => {
       <option id='public' value='public'>Publico</option>
     </select>
     <label><i id="btn-share" class="far fa-paper-plane"></i></label>
-
   </div>
   <div id='message-post'> 
   </div>
   `;
-
   // Start grabbing our DOM Element
   const textPost = viewHome.querySelector('#box-post');
   const post = viewHome.querySelector('#mode-post');
   const btnShare = viewHome.querySelector('#btn-share');
   // const modePost = viewHome.querySelector('#mode-post');
-
   /*
   modePost.addEventListener('change', (e) => {
     const selectedMode = e.target.value;
@@ -233,7 +219,6 @@ export const homeTemplate = (posts) => {
   const uploadImg = viewHome.querySelector('#upload-img');
   const preview = viewHome.querySelector('#show-img');
   const etiquetteImage = viewHome.querySelector('#imageSendToStorage');
-
   uploadImg.addEventListener('change', (event) => {
     console.log(uploadImg);
     const reader = new FileReader();
@@ -250,7 +235,6 @@ export const homeTemplate = (posts) => {
     };
     console.log(etiquetteImage.src);
   });
-
   // Share post
   btnShare.addEventListener('click', () => {
     const textPostVal = textPost.value;
@@ -287,10 +271,15 @@ export const homeTemplate = (posts) => {
     const messagePost = viewHome.querySelector('#message-post');
     messagePost.appendChild(postTemplate(publication));
   });
+
+  const btnProfile = viewHome.querySelector("#btn-profile");
+  btnProfile.addEventListener("click", () => {
+    console.log("evento change-profile");
+    window.location.hash = "#/profile";
+  });
   const btnlogOut = viewHome.querySelector('#btn-log-out');
   btnlogOut.addEventListener('click', () => {
     homeLogOut();
   });
-
   return viewHome;
 };

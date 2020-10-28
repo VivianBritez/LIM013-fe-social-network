@@ -1,6 +1,5 @@
 import { readUserDB, createUserDB } from '../firebase/firestore.js';
 import { singInGoogle, singInFacebook, loginUser } from '../firebase/auth.js';
-
 const readCreateUserDB = (useruid, emailUser, userPhotoUrl, username) => {
   readUserDB(useruid)
     .then((res) => {
@@ -15,7 +14,6 @@ const readCreateUserDB = (useruid, emailUser, userPhotoUrl, username) => {
       }
     });
 };
-
 export const loginWithEmailAndPassword = (txtEmailVal, txtpasswordVal) => {
   loginUser(txtEmailVal, txtpasswordVal)
     .then((res) => {
@@ -37,7 +35,6 @@ export const loginWithEmailAndPassword = (txtEmailVal, txtpasswordVal) => {
       }
     });
 };
-
 export const loginGoogle = () => {
   singInGoogle()
     .then((res) => {
@@ -50,7 +47,6 @@ export const loginGoogle = () => {
       if (error) throw error;
     });
 };
-
 export const loginFacebook = () => {
   singInFacebook()
     .then((res) => {
