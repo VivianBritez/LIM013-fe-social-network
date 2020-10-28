@@ -1,4 +1,5 @@
 import { createUser } from '../firebase-controller/signup-controller.js';
+import { logOut } from '../firebase/auth.js';
 
 export default () => {
   const viewSignUp = document.createElement('section');

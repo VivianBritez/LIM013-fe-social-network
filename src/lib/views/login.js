@@ -19,11 +19,11 @@ export default () => {
         <p id="alert-txt-password"></p>
         <button type="submit" class="btn-login" id="btn-login" >Iniciar Sesión</button>
       </form>
-      <p>O bien ingresa con..</p>
+      <p class="profile-text">O bien ingresa con..</p>
     <section class="btn-google">
       <button id="btn-google" class="btn-image-google"><img src="./img/icon-google.png"></button>
     </section>
-    <p>¿No tienes una cuenta?<a href="#/signup" id = "btn-register" class="btn-register">Regístrate</a></p>
+    <p class="profile-text">¿No tienes una cuenta?<a href="#/signup" id = "btn-register" class="btn-register">Regístrate</a></p>
     </section>
     `;
 
