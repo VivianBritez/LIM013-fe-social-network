@@ -43,37 +43,80 @@ export const deletePost = (docID) => db.collection('publications')
   .doc(docID).delete();
 //-----------------------------------------------------------------------------------------------
 // Like function
-export const likeToPost = (docID, userID) => db.collection('publications')
-  .doc(docID).collection('likes')
-  .doc(userID)
-  .set({
-    uid: userID,
+export const likeToPost = (docID, userID) => {
+  const pubRef = db
+    .collection('publications')
+    .doc(docID);
+
+  pubRef.collection('likes')
+    .doc(userID)
+    .set({
+      uid: userID,
+    });
+
+  pubRef.get().then((doc) => {
+    console.log(doc.data().likesCount);
+    const prevLikesCount = doc.data().likesCount;
+    return pubRef
+      .update({
+        likesCount: prevLikesCount + 1,
+      });
   });
+};
+
 // Unlike function
-export const unlikeToPost = (docID, userID) => db.collection('publications')
-  .doc(docID).collection('likes')
-  .where('uid', '==', userID)
-  .get();
+export const unlikeToPost = (docID, userID) => {
+  const pubRef = db
+    .collection('publications')
+    .doc(docID);
+
+  pubRef.get().then((doc) => {
+    console.log(doc.data().likesCount);
+    const prevLikesCount = doc.data().likesCount;
+    return pubRef
+      .update({
+        likesCount: prevLikesCount - 1,
+      });
+  });
+
+  pubRef.collection('likes')
+    .doc(userID)
+    .delete();
+};
+
+// Count likes and dislikes
 export const count = (docID, userID) => {
   let publicationsRef = db.collection('publications').doc(docID);
-  let counterRef = publicationsRef.collection('likes').doc(userID);
-  return db.runTransaction((transaction) => {
-    return transaction.get(publicationsRef).then((res) => {
-      if (!res.exists) {
-        throw 'Document does not exist!';
+  publicationsRef.get().then(() => {
+    let counterRef = publicationsRef.collection('likes').where('uid', '==', userID);
+
+    counterRef.get().then((likes) => {
+      if (likes.docs.length === 0) {
+        likeToPost(docID, userID);
+      } else {
+        // quitar like del user
+        unlikeToPost(docID, userID);
       }
-      transaction.set(counterRef, { uid: userID });
-      unlikeToPost(docID, userID).then((doc) => {
-        console.log(doc);
-        if (!doc.exists) {
-          let newNumLikes = res.data().likesCount + 1;
-          transaction.update(publicationsRef, {
-            likesCount: newNumLikes,
-          });
-        }
-      });
     });
   });
+
+  // return db.runTransaction((transaction) => {
+  //   return transaction.get(publicationsRef).then((res) => {
+  //     if (!res.exists) {
+  //       throw 'Document does not exist!';
+  //     }
+  //     transaction.set(counterRef, { uid: userID });
+  //     unlikeToPost(docID, userID).then((doc) => {
+  //       console.log(doc);
+  //       if (!doc.exists) {
+  //         let newNumLikes = res.data().likesCount + 1;
+  //         transaction.update(publicationsRef, {
+  //           likesCount: newNumLikes,
+  //         });
+  //       }
+  //     });
+  //   });
+  // });
 };
 //----------------------------------------------------------------------------------------------
 // Add comments to "comments" collection in each post
