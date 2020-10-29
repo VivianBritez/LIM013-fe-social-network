@@ -236,7 +236,6 @@ export const homeTemplate = (posts) => {
   const post = viewHome.querySelector('#mode-post');
   const btnShare = viewHome.querySelector('#btn-share');
   const crossMark= viewHome.querySelector('#cross-mark');
-  const iconGallery = viewHome.querySelector("#icon-img");
   // const modePost = viewHome.querySelector('#mode-post');
   /*
   modePost.addEventListener('change', (e) => {
@@ -268,9 +267,6 @@ export const homeTemplate = (posts) => {
     //
     reader.onload = () => {
       etiquetteImage.src = reader.result;
-      console.log(etiquetteImage);
-     etiquetteImage.innerHTML = '';
-     etiquetteImage.append(etiquetteImage);
     };
     console.log(etiquetteImage.src);
   });
@@ -327,4 +323,5 @@ export const homeTemplate = (posts) => {
     homeLogOut();
   });
   return viewHome;
+  
 };
