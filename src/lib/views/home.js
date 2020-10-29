@@ -212,7 +212,7 @@ export const homeTemplate = (posts) => {
    
     <div id= 'preview-img-post' class='preview-img-post'>
     <div id= "show-img">
-    <img id="imageSendToStorage"></div>
+    <img id="etiquette-image"></div>
     <p id='cross-mark' style="display: none"class="">❌</p>
     </div>
     
@@ -253,7 +253,7 @@ export const homeTemplate = (posts) => {
   let files = [];
   // Previsualize image
   const uploadImg = viewHome.querySelector('#upload-img');
-  const etiquetteImage = viewHome.querySelector('#imageSendToStorage');
+  const etiquetteImage = viewHome.querySelector('#etiquette-image');
   etiquetteImage.setAttribute('class', 'img-post');
   uploadImg.addEventListener('change', (event) => {
     uploadImg.classList.remove('show');
@@ -271,7 +271,7 @@ export const homeTemplate = (posts) => {
     console.log(etiquetteImage.src);
   });
 
-  crossMark.addEventListener('click', ()=>{
+  crossMark.addEventListener('click', () => {
     etiquetteImage.src = "";
     uploadImg.value = "";
     crossMark.style.display = 'none';

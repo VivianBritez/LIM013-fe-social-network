@@ -38,6 +38,7 @@ body {
   max-width: 300px;
   float: left;
 }
+
 nav {
   background: linear-gradient(
     30deg,
@@ -49,6 +50,7 @@ nav {
   );
   height: 80px;
   text-align: center;
+  width: 100%;
 }
 nav ul {
   float: right;

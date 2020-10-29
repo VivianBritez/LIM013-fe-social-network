@@ -10,7 +10,7 @@
 * [6. Entrega](#6-entrega)
 * [7. Pistas, tips y lecturas complementarias](#7-pistas-tips-y-lecturas-complementarias)
 
-## 1. Preámbulo
+## 1. Preámbulogit 
 
 Instagram, Snapchat, Twitter, Facebook, Twitch, Linkedin, etc. Las redes
 sociales han invadido nuestras vidas. Las amamos u odiamos, y muchos no podemos
