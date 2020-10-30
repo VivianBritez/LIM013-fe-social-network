@@ -47,23 +47,14 @@ describe('login with Google', () => {
   it('Should be able to login with Google', (done) => {
     myModule.singInGoogle()
       .then((user) => {
-        expect(user.providerData[0].providerId).toBe('google.com');
+        expect(myModule.getUser).not.toBe(null);
+        expect(user.isAnonymous).toBe(false);
+        expect(user.providerData).toEqual([{ providerId: 'google.com' }]);
         done();
       });
   });
 });
 
-// Sign in with Facebook
-describe('Should be a function ', () => {
-  it('function signin', () => expect(typeof myModule.singInFacebook).toBe('function'));
-});
-describe('logInFacebook', () => {
-  it('login with Facebook', () => myModule.singInFacebook().then((user) => {
-    expect(myModule.getUser).not.toBe(null);
-    expect(user.isAnonymous).toBe(false);
-    expect(user.providerData).toEqual([{ providerId: 'facebook.com' }]);
-  }));
-});
 
 // getUser
 describe('getUser', () => {

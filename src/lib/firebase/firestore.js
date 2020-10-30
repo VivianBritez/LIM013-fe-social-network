@@ -1,12 +1,11 @@
-import { db } from './firebase-init.js';
-export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => db
+export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => firebase.firestore()
   .collection('users').doc(useruid).set({
     name: username,
     email: emailUser,
     uid: useruid,
     photoUrl: userPhotoUrl,
   });
-export const readUserDB = (uid) => db.collection('users')
+export const readUserDB = (uid) => firebase.firestore().collection('users')
   .where('uid', '==', uid)
   .get();
 export const addNotesToDB = (userID, name, createNote, datePost, userMode, photoUser, imgName, imgURL) => firebase
@@ -23,7 +22,7 @@ export const addNotesToDB = (userID, name, createNote, datePost, userMode, photo
     link: imgURL,
   });
 // callbackfn es un funcion como parametro lo mando
-export const readAddNotesToDB = (callbackfn) => db
+export const readAddNotesToDB = (callbackfn) => firebase.firestore()
   .collection('publications').orderBy('date', 'desc').onSnapshot((querySnapShot) => {
     const data = [];
     querySnapShot.forEach((doc) => {
@@ -33,18 +32,18 @@ export const readAddNotesToDB = (callbackfn) => db
     callbackfn(data);
   });
 // Update post
-export const editTextPost = (docID, changeNote, newDate) => db.collection('publications')
+export const editTextPost = (docID, changeNote, newDate) => firebase.firestore().collection('publications')
   .doc(docID).update({
     note: changeNote,
     date: newDate,
   });
 // Delete post
-export const deletePost = (docID) => db.collection('publications')
+export const deletePost = (docID) => firebase.firestore().collection('publications')
   .doc(docID).delete();
 //-----------------------------------------------------------------------------------------------
 // Like function
 export const likeToPost = (docID, userID) => {
-  const pubRef = db
+  const pubRef = firebase.firestore()
     .collection('publications')
     .doc(docID);
 
@@ -66,7 +65,7 @@ export const likeToPost = (docID, userID) => {
 
 // Unlike function
 export const unlikeToPost = (docID, userID) => {
-  const pubRef = db
+  const pubRef = firebase.firestore()
     .collection('publications')
     .doc(docID);
     pubRef.collection('likes')
@@ -87,7 +86,7 @@ export const unlikeToPost = (docID, userID) => {
 
 // Count likes and dislikes
 export const count = (docID, userID) => {
-  let publicationsRef = db.collection('publications').doc(docID);
+  let publicationsRef = firebase.firestore().collection('publications').doc(docID);
   publicationsRef.get().then(() => {
     let counterRef = publicationsRef.collection('likes').where('uid', '==', userID);
 
@@ -121,7 +120,7 @@ export const count = (docID, userID) => {
 };
 //----------------------------------------------------------------------------------------------
 // Add comments to "comments" collection in each post
-export const addCommentToPost = (docID, userID, name, userComment, dateComment, photoUser) => db
+export const addCommentToPost = (docID, userID, name, userComment, dateComment, photoUser) => firebase.firestore()
   .collection('publications').doc(docID).collection('comments')
   .add({
     creatorID: userID,
@@ -131,7 +130,7 @@ export const addCommentToPost = (docID, userID, name, userComment, dateComment, 
     photo: photoUser,
   });
 // Get comments of "comments" collection in database
-export const getCommentToDB = (docID, callbackfn) => db
+export const getCommentToDB = (docID, callbackfn) => firebase.firestore()
   .collection('publications').doc(docID).collection('comments')
   .orderBy('date', 'desc')
   .onSnapshot((querySnapShot) => {

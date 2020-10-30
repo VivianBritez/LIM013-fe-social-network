@@ -52,14 +52,6 @@ export default () => {
     loginGoogle();
   });
 
-  /*
-  // Sign in with facebook
-  viewLogin.querySelector('#btn-facebook').addEventListener('click', (event) => {
-    event.preventDefault();
-    // console.log("Hola ingresaste a Facebook");
-    loginFacebook();
-  });
-  */
-
+  
   return viewLogin;
 };

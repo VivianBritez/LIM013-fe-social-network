@@ -1,4 +1,5 @@
-const firebaseConfig = {
+export const firebaseInit= () => {
+  const firebaseConfig = {
   apiKey: 'AIzaSyC7hn9h5GDqloEMz19oUJmD4xsur40Ygf4',
   authDomain: 'leaders-are-readers.firebaseapp.com',
   databaseURL: 'https://leaders-are-readers.firebaseio.com',
@@ -11,6 +12,4 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-export const auth = firebase.auth();
-export const db = firebase.firestore();
-export const storage = firebase.storage();
+};

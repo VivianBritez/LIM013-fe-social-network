@@ -1,5 +1,5 @@
 import { readUserDB, createUserDB } from '../firebase/firestore.js';
-import { singInGoogle, singInFacebook, loginUser } from '../firebase/auth.js';
+import { singInGoogle, loginUser } from '../firebase/auth.js';
 const readCreateUserDB = (useruid, emailUser, userPhotoUrl, username) => {
   readUserDB(useruid)
     .then((res) => {
@@ -40,16 +40,6 @@ export const loginGoogle = () => {
     .then((res) => {
       console.log(res);
       console.log('entro aqui');
-      window.location.hash = '#/home';
-      readCreateUserDB(res.user.uid, res.user.email, res.user.photoURL, res.user.displayName);
-    })
-    .catch((error) => {
-      if (error) throw error;
-    });
-};
-export const loginFacebook = () => {
-  singInFacebook()
-    .then((res) => {
       window.location.hash = '#/home';
       readCreateUserDB(res.user.uid, res.user.email, res.user.photoURL, res.user.displayName);
     })

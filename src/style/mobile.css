@@ -13,11 +13,43 @@ h2 {
   font-size: 30px;
 }
 .user-image {
+  margin-top: 20%;
+  margin-left: 30%;
   border-radius: 50%;
   display: block;
-  margin: auto;
-  width: 100px;
+  width: 200px;
 }
+.info-about-profile{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  border-radius: 10%;
+}
+
+.description-profile{
+  display: flex;
+  flex-flow: wrap row;
+  width: 100%;
+  margin-right: 30%;
+  height: 85%;
+  background:#FFF6EC;
+  border-radius: 10%;
+}
+
+.text-abput-user{
+  text-align: start;
+  font-size: 25px;
+  margin-left: 5%;
+  
+}
+.text-description-user{
+ text-align: start;
+ font-size: 18px;
+ margin-left: 5%;
+}
+
+
 .user-image-post{
 width: 50px;
 border-radius: 50%;
@@ -110,11 +142,14 @@ form {
 }
 
 .profile-text {
+  display: block;
+  margin-top: 20%;
+  margin-left: 50%;
   text-align: center;
   padding-top: 2%;
   margin: revert;
   color: #583101;
-  font-size: 20px;
+  font-size: 30px;
 }
 .comment-text{
   color: #583101;
