@@ -192,16 +192,20 @@ export const homeTemplate = (posts) => {
       <ul>
         <li>
             <a id="btn-log-out">Salir</a>
-            <a id='btn-profile'>Profile</a>
         </li>
       </ul>
+      <ul>
+      <li>
+          <a id='btn-profile'>Profile</a>
+      </li>
+    </ul>
+      
     </nav>
     </header>
     <section class="container-profile">
       <img class="user-image" src="${user.photoURL}">
       <p class="profile-text">${user.displayName}</p>
       <div class= "description-profile">
-      <div class= "info-about-profile">
       <h3 class="text-abput-user">Email</h3>
       <p class="text-description-user">${user.email}</p>
       <h3 class="text-abput-user">Dirección</h3>
@@ -212,7 +216,6 @@ export const homeTemplate = (posts) => {
       <p class="text-description-user">La teoria del todo de Stephen Hawking</p>
       <h3 class="text-abput-user">Sobre mi </h3>
       <p class="text-description-user"> Me encanta leer, caminar por la playa, ver peliculas.</p>
-      </div>
       </div>
       </section>
     </section>

@@ -1,7 +1,7 @@
- import MockFirebase from 'mock-cloud-firestore';
+import MockFirebase from 'mock-cloud-firestore';
 import {
   addNotesToDB,
-  readAddNotesToDB, editTextPost, deletePost,
+  readAddNotesToDB, editTextPost, deletePost, readUserDB,
 } from '../src/lib/firebase/firestore.js';
 
 
@@ -23,6 +23,7 @@ const fixtureData = {
     }
   }
 }
+
 global.firebase = new MockFirebase(fixtureData, { isNaiveSnapshotListenerEnabled: true });
 
 describe('add note', () => {
@@ -65,3 +66,4 @@ describe('Delete a post', () => {
       ));
   });
 });
+

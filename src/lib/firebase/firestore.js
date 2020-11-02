@@ -5,6 +5,8 @@ export const createUserDB = (useruid, emailUser, userPhotoUrl, username) => fire
     uid: useruid,
     photoUrl: userPhotoUrl,
   });
+
+
 export const readUserDB = (uid) => firebase.firestore().collection('users')
   .where('uid', '==', uid)
   .get();
@@ -99,24 +101,6 @@ export const count = (docID, userID) => {
       }
     });
   });
-
-  // return db.runTransaction((transaction) => {
-  //   return transaction.get(publicationsRef).then((res) => {
-  //     if (!res.exists) {
-  //       throw 'Document does not exist!';
-  //     }
-  //     transaction.set(counterRef, { uid: userID });
-  //     unlikeToPost(docID, userID).then((doc) => {
-  //       console.log(doc);
-  //       if (!doc.exists) {
-  //         let newNumLikes = res.data().likesCount + 1;
-  //         transaction.update(publicationsRef, {
-  //           likesCount: newNumLikes,
-  //         });
-  //       }
-  //     });
-  //   });
-  // });
 };
 //----------------------------------------------------------------------------------------------
 // Add comments to "comments" collection in each post

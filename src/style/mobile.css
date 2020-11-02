@@ -19,31 +19,25 @@ h2 {
   display: block;
   width: 200px;
 }
-.info-about-profile{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  border-radius: 10%;
-}
 
 .description-profile{
   display: flex;
-  flex-flow: wrap row;
+  flex-flow: wrap column;
   width: 100%;
   margin-right: 30%;
-  height: 85%;
   background:#FFF6EC;
   border-radius: 10%;
 }
 
 .text-abput-user{
+  flex-grow: 1;
   text-align: start;
   font-size: 25px;
   margin-left: 5%;
   
 }
 .text-description-user{
+flex-grow: 1;
  text-align: start;
  font-size: 18px;
  margin-left: 5%;
@@ -150,6 +144,10 @@ form {
   margin: revert;
   color: #583101;
   font-size: 30px;
+}
+
+#btn-profile{
+  text-align: start;
 }
 .comment-text{
   color: #583101;
