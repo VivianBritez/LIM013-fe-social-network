@@ -14,7 +14,7 @@ De acuerdo al análisis comparativo del comportamiento lector de la región, bas
 Leaders are Readers es una red social para lectores y recomendaciones de libros, que surge en respuesta a la necesidad de una comunidad de amantes de los libros y que anima a sus usuarios a compartir sus inclinaciones literarias y pasiones con el resto de las personas. Las personas pueden aportar sus opiniones con la finalidad de compartir experiencias y lecturas.
 <img src="https://i.ibb.co/r5bZRLq/statistics.png" alt="statistics" border="0">
 
-<center></centerFuente:><strong></spanFuente:>Fuente: Comportamiento lector y hábitos de lectura. Una comparación de resultados en  algunos países de América Latina - Cerlalc. (2018, December 5).</strong></center>
+<center></centerFuente:><strong></spanFuente:>Fuente: Comportamiento lector y hábitos de lectura. Una comparación de resultados en  algunos países de América Latina - Cerlalc. (2018, December-5).</strong></center>
 
 ## 2. Resumen del proyecto
 
