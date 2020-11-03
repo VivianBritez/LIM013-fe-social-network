@@ -8,6 +8,7 @@ h3 {
   padding-top: 7%;
   color: #583101;
   text-align: center;
+  font-size: 23px;
 }
 
 .reading-character {
@@ -33,10 +34,9 @@ h3 {
 body {
   margin: 0;
 }
-.container-profile {
+.container-home {
   width: 20%;
   height: 600px;
-  margin-left: 5%;
   float: left;
   border-radius: 10px;
   box-shadow: 10px;
@@ -209,22 +209,22 @@ i {
 
 
 .post{
-    width: 50%;
+    width: 63%;
     background: #FFFFFF;
     border: 0.3rem outset rgba(118, 88, 52, 0.53);
     /*border: 2px solid rgba(118, 88, 52, 0.53);*/
     padding: 10px;
-    margin-left: 30%;
+    margin-left: 20%;
     margin-top: 4%;
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgba(118, 88, 52, 0.53);
 }
 
 .share-post{
-    width:50%;
+    width:63%;
     background: #FFFFFF;
     border: 3px solid rgba(118, 88, 52, 0.53);
-    margin-left: 30%;
+    margin-left: 20%;
     margin-top: 4%;;
     border-radius: 5px;
     
@@ -245,6 +245,9 @@ i {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 5px;
+}
+#like-count{
+  font-size: 25px;
 }
 
 #close-icon {
@@ -308,14 +311,13 @@ i {
 .title {
   font-size: 30px;
   width: 400px;
-  margin-left: 90%;
-  padding-top: 4%;
+  padding-top: 3%;
   color: #fff6ec;
 }
 .title-leaders-readers {
   width: 49%;
   height: 0%;
-  margin-bottom: 10px;
+
 }
 .container-user {
   background: #fff6ec;

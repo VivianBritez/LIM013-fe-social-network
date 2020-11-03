@@ -19,7 +19,7 @@ export default () => {
 
   // Start grabbing our DOM Element
   const signUpEmail = viewSignUp.querySelector('#signup-email');
-  const signupConfirmPassword = viewSignUp.querySelector('#signup-confirm-password');
+  const signupConfirmPassword = viewSignUp.querySelector('#signupbtn-go-back-confirm-password');
   const signUpForm = viewSignUp.querySelector('#signup-form');
   const btnGoBack = viewSignUp.querySelector('#btn-go-back');
   const userName = viewSignUp.querySelector('#signup-user-name');

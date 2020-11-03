@@ -49,7 +49,7 @@
     #check-and-uncheck:checked ~ label #cross{
         display: block;
     }
-    .container-profile{
+    .container-home{
         display: contents;
     }
 

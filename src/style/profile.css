@@ -1,8 +1,33 @@
-.container-profile-user{
-    background: chartreuse;
+.cover-photo{
+    position: absolute;
+    left: 0;
     width: 100%;
+    min-height: 50%;
+    background-color: #3498db;
+    background-position: 10%;
+    background-size: 100%;
+    opacity: 0.4;
 }
-.img-cover-page{
-    width: 100%;
 
+div.position {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    z-index: 2;
+}
+div.circulo span img {
+    width: 200px;
+    border-radius: 50%;
+    opacity: 1;
+    cursor: pointer;
+   
+}
+.info-user-profile{
+    top: 50%;
+    left: 50%;
+}
+h4{
+    font-size: 20px;
 }

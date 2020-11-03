@@ -1,4 +1,7 @@
-import { loginGoogle, loginWithEmailAndPassword } from '../firebase-controller/login-controller.js';
+import {
+  loginGoogle,
+  loginWithEmailAndPassword,
+} from '../firebase-controller/login-controller.js';
 
 export default () => {
   const viewLogin = document.createElement('main');
@@ -38,7 +41,6 @@ export default () => {
 
     const txtEmailVal = txtEmail.value;
     const txtpasswordVal = txtpassword.value;
-    console.log('paso');
 
     loginWithEmailAndPassword(txtEmailVal, txtpasswordVal);
     // Clear the login form
@@ -46,12 +48,12 @@ export default () => {
   });
 
   // Sign in with google
-  viewLogin.querySelector('#btn-google').addEventListener('click', (event) => {
-    event.preventDefault();
-    // console.log('hola entre aqui');
-    loginGoogle();
-  });
+  viewLogin.querySelector('#btn-google')
+    .addEventListener('click', (event) => {
+      event.preventDefault();
+      // console.log('hola entre aqui');
+      loginGoogle();
+    });
 
-  
   return viewLogin;
 };

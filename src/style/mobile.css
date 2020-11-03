@@ -10,39 +10,17 @@ h2 {
   margin-top: 5%;
   text-align: center;
   color: #583101;
-  font-size: 30px;
+  font-size: 40px;
 }
-.user-image {
-  margin-top: 20%;
-  margin-left: 30%;
-  border-radius: 50%;
+.user-information {
+  border-radius: 30%;
   display: block;
+  margin-left: 30%;
   width: 200px;
+  margin-top: 10%;
+  text-align: center;
+  font-size: 20px;
 }
-
-.description-profile{
-  display: flex;
-  flex-flow: wrap column;
-  width: 100%;
-  margin-right: 30%;
-  background:#FFF6EC;
-  border-radius: 10%;
-}
-
-.text-abput-user{
-  flex-grow: 1;
-  text-align: start;
-  font-size: 25px;
-  margin-left: 5%;
-  
-}
-.text-description-user{
-flex-grow: 1;
- text-align: start;
- font-size: 18px;
- margin-left: 5%;
-}
-
 
 .user-image-post{
 width: 50px;
